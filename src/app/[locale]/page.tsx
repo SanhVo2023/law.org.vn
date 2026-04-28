@@ -1,5 +1,6 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getPayload } from '@/lib/payload'
+import { assertDb } from '@/lib/db-check'
 import { CATEGORIES } from '@/lib/site'
 import type { Locale } from '@/i18n/routing'
 import { buildPageMetadata, buildBreadcrumbJsonLd } from '@/lib/metadata'
@@ -10,6 +11,10 @@ import { ClustersGrid, type ClusterEntry } from '@/components/home/ClustersGrid'
 import { CLUSTER_GLYPH } from '@/lib/images'
 import { FeaturedEntries, type FeaturedEntryItem } from '@/components/home/FeaturedEntries'
 import { HowToUse } from '@/components/home/HowToUse'
+import { HistoryTimeline } from '@/components/home/HistoryTimeline'
+import { TrustedSources } from '@/components/home/TrustedSources'
+import { RecentUpdatesTeaser } from '@/components/home/RecentUpdatesTeaser'
+import { SectionFadeUp } from '@/components/animation/SectionFadeUp'
 import { Ornament } from '@/components/ui/Ornament'
 
 type Params = Promise<{ locale: string }>
@@ -78,34 +83,30 @@ export default async function HomePage({ params }: { params: Params }) {
     'when-to-hire-lawyer',
     'civil-procedure-terminology',
   ]
-  let featured: FeaturedEntryItem[] = []
-  try {
-    const payload = await getPayload()
-    const result = await payload.find({
-      collection: 'articles',
-      locale: locale as Locale,
-      limit: 12,
-      where: { slug: { in: FEATURED_SLUGS } },
-      depth: 1,
-    })
-    featured = result.docs.map((d: any) => {
-      const cat = typeof d.category === 'object' ? d.category?.slug : d.category
-      const catKey = (CATEGORIES.find((c) => c.slug === cat)?.nameKey ?? 'legalSystem') as string
-      return {
-        id: d.id,
-        slug: d.slug,
-        title: d.title,
-        excerpt: d.excerpt,
-        cluster: cat,
-        clusterLabel: t(`nav.${catKey}`),
-        updatedDate: d.updatedDate,
-        isDraft: d.status === 'draft',
-      }
-    })
-    featured.sort((a, b) => FEATURED_SLUGS.indexOf(a.slug) - FEATURED_SLUGS.indexOf(b.slug))
-  } catch {
-    featured = []
-  }
+  assertDb()
+  const payload = await getPayload()
+  const featuredResult = await payload.find({
+    collection: 'articles',
+    locale: locale as Locale,
+    limit: 12,
+    where: { slug: { in: FEATURED_SLUGS } },
+    depth: 1,
+  })
+  const featured: FeaturedEntryItem[] = featuredResult.docs.map((d: any) => {
+    const cat = typeof d.category === 'object' ? d.category?.slug : d.category
+    const catKey = (CATEGORIES.find((c) => c.slug === cat)?.nameKey ?? 'legalSystem') as string
+    return {
+      id: d.id,
+      slug: d.slug,
+      title: d.title,
+      excerpt: d.excerpt,
+      cluster: cat,
+      clusterLabel: t(`nav.${catKey}`),
+      updatedDate: d.updatedDate,
+      isDraft: d.status === 'draft',
+    }
+  })
+  featured.sort((a, b) => FEATURED_SLUGS.indexOf(a.slug) - FEATURED_SLUGS.indexOf(b.slug))
 
   const clusters: ClusterEntry[] = CATEGORIES.map((c) => {
     const glyph = CLUSTER_GLYPH[c.slug]
@@ -136,14 +137,28 @@ export default async function HomePage({ params }: { params: Params }) {
         disclaimer={t('footer.disclaimer')}
       />
 
-      <EncyclopediaStats
-        labels={{
-          entries: lng === 'vi' ? 'Mục tri thức' : 'Entries',
-          clusters: lng === 'vi' ? 'Cụm chủ đề' : 'Clusters',
-          terminologyAreas: lng === 'vi' ? 'Lĩnh vực thuật ngữ' : 'Terminology areas',
-          languages: lng === 'vi' ? 'Ngôn ngữ' : 'Languages',
-        }}
-      />
+      <SectionFadeUp>
+        <EncyclopediaStats
+          labels={{
+            entries: lng === 'vi' ? 'Mục tri thức' : 'Entries',
+            clusters: lng === 'vi' ? 'Cụm chủ đề' : 'Clusters',
+            terminologyAreas: lng === 'vi' ? 'Lĩnh vực thuật ngữ' : 'Terminology areas',
+            languages: lng === 'vi' ? 'Ngôn ngữ' : 'Languages',
+          }}
+        />
+      </SectionFadeUp>
+
+      <SectionFadeUp>
+        <HistoryTimeline
+          locale={lng}
+          labels={{
+            eyebrow: lng === 'vi' ? 'Cột mốc lịch sử' : 'Historical milestones',
+            title: t('timeline.title'),
+            lead: t('timeline.lead'),
+            scrollHint: t('timeline.scrollHint'),
+          }}
+        />
+      </SectionFadeUp>
 
       <ClustersGrid
         eyebrow={lng === 'vi' ? 'Bản đồ tri thức' : 'Knowledge map'}
@@ -157,22 +172,38 @@ export default async function HomePage({ params }: { params: Params }) {
         entriesLabel={lng === 'vi' ? 'mục' : 'entries'}
       />
 
-      <FeaturedEntries
-        eyebrow={lng === 'vi' ? 'Mục đề xuất' : 'Featured'}
-        title={t('home.featuredTitle')}
-        lead={
-          lng === 'vi'
-            ? 'Sáu mục cốt lõi để khởi đầu nếu bạn mới đến với hệ thống pháp luật Việt Nam.'
-            : "Six cornerstone entries to start with if you're new to Vietnam's legal system."
-        }
-        entries={featured}
-        locale={locale}
-        emptyMessage={
-          lng === 'vi'
-            ? 'Đang chuẩn bị các mục đề xuất.'
-            : 'Featured entries coming soon.'
-        }
-      />
+      <SectionFadeUp>
+        <FeaturedEntries
+          eyebrow={lng === 'vi' ? 'Mục đề xuất' : 'Featured'}
+          title={t('home.featuredTitle')}
+          lead={
+            lng === 'vi'
+              ? 'Sáu mục cốt lõi để khởi đầu nếu bạn mới đến với hệ thống pháp luật Việt Nam.'
+              : "Six cornerstone entries to start with if you're new to Vietnam's legal system."
+          }
+          entries={featured}
+          locale={locale}
+          emptyMessage={
+            lng === 'vi'
+              ? 'Đang chuẩn bị các mục đề xuất.'
+              : 'Featured entries coming soon.'
+          }
+        />
+      </SectionFadeUp>
+
+      <SectionFadeUp>
+        <RecentUpdatesTeaser
+          locale={lng}
+          labels={{
+            eyebrow: t('recentUpdates.eyebrow'),
+            title: t('recentUpdates.title'),
+            lead: t('recentUpdates.lead'),
+            viewAll: t('recentUpdates.viewAll'),
+            issued: lng === 'vi' ? 'Ban hành' : 'Issued',
+            issuingBody: lng === 'vi' ? 'Cơ quan ban hành' : 'Issuing body',
+          }}
+        />
+      </SectionFadeUp>
 
       <HowToUse
         eyebrow={lng === 'vi' ? 'Hướng dẫn sử dụng' : 'How to use'}
@@ -226,6 +257,14 @@ export default async function HomePage({ params }: { params: Params }) {
               ]
         }
       />
+
+      <SectionFadeUp>
+        <TrustedSources
+          caption={t('trustedSources.caption')}
+          subcaption={t('trustedSources.subcaption')}
+          locale={lng}
+        />
+      </SectionFadeUp>
 
       <div className="py-12">
         <Ornament />

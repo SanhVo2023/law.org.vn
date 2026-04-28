@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import { setRequestLocale, getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
 import { getPayload } from '@/lib/payload'
+import { assertDb } from '@/lib/db-check'
 import { CATEGORIES } from '@/lib/site'
 import { SITE_URL } from '@/lib/site'
 import {
@@ -28,46 +29,40 @@ type Params = Promise<{ locale: string; category: string; slug: string }>
 export const revalidate = 3600
 
 async function loadArticle(locale: string, category: string, slug: string) {
-  try {
-    const payload = await getPayload()
-    const result = await payload.find({
-      collection: 'articles',
-      locale: locale as Locale,
-      limit: 1,
-      where: {
-        and: [
-          { slug: { equals: slug } },
-          { 'category.slug': { equals: category } },
-        ],
-      },
-      depth: 2,
-    })
-    return result.docs[0] ?? null
-  } catch {
-    return null
-  }
+  assertDb()
+  const payload = await getPayload()
+  const result = await payload.find({
+    collection: 'articles',
+    locale: locale as Locale,
+    limit: 1,
+    where: {
+      and: [
+        { slug: { equals: slug } },
+        { 'category.slug': { equals: category } },
+      ],
+    },
+    depth: 2,
+  })
+  return result.docs[0] ?? null
 }
 
 async function loadSiblings(locale: string, category: string, currentSlug: string) {
-  try {
-    const payload = await getPayload()
-    const result = await payload.find({
-      collection: 'articles',
-      locale: locale as Locale,
-      limit: 6,
-      where: {
-        and: [
-          { 'category.slug': { equals: category } },
-          { slug: { not_equals: currentSlug } },
-        ],
-      },
-      sort: 'slug',
-      depth: 0,
-    })
-    return result.docs
-  } catch {
-    return []
-  }
+  assertDb()
+  const payload = await getPayload()
+  const result = await payload.find({
+    collection: 'articles',
+    locale: locale as Locale,
+    limit: 6,
+    where: {
+      and: [
+        { 'category.slug': { equals: category } },
+        { slug: { not_equals: currentSlug } },
+      ],
+    },
+    sort: 'slug',
+    depth: 0,
+  })
+  return result.docs
 }
 
 export async function generateMetadata({ params }: { params: Params }) {

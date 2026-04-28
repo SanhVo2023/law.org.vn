@@ -11,6 +11,7 @@
     "rights": "Quyền công dân",
     "terminology": "Thuật ngữ pháp lý",
     "updates": "Cập nhật pháp luật",
+    "blog": "Bài viết",
     "faq": "Câu hỏi thường gặp",
     "about": "Giới thiệu"
   },
@@ -43,6 +44,38 @@
   "footer": {
     "ecosystemTitle": "Hệ sinh thái",
     "disclaimer": "Nội dung chỉ mang tính thông tin và không thay thế tư vấn pháp lý cá nhân."
+  },
+  "blog": {
+    "title": "Bài viết biên tập",
+    "lead": "Bình luận, phân tích vụ việc, cập nhật thực tiễn và ghi chú chính sách về hệ thống pháp luật Việt Nam — do Apolo Editorial biên soạn.",
+    "filterAll": "Tất cả",
+    "filterCommentary": "Bình luận",
+    "filterCaseAnalysis": "Phân tích vụ việc",
+    "filterPracticeUpdate": "Cập nhật thực tiễn",
+    "filterPolicy": "Chính sách",
+    "filterCompliance": "Tuân thủ",
+    "readingMin": "phút đọc",
+    "readArticle": "Đọc bài",
+    "publishedOn": "Đăng ngày",
+    "byAuthor": "bởi",
+    "relatedTitle": "Bài liên quan",
+    "noResults": "Không có bài viết nào trùng bộ lọc.",
+    "rssFeed": "Đăng ký RSS"
+  },
+  "timeline": {
+    "title": "Tám thập kỷ pháp điển hóa",
+    "lead": "Từ Hiến pháp 1946 đến Luật Bảo vệ dữ liệu cá nhân 2026 — bộ xương sống của pháp luật Việt Nam đương đại, từng cột mốc một.",
+    "scrollHint": "Cuộn ngang để xem"
+  },
+  "trustedSources": {
+    "caption": "Theo nguồn chính thức",
+    "subcaption": "Mỗi mục đều dẫn về một cổng thông tin nhà nước có thẩm quyền."
+  },
+  "recentUpdates": {
+    "eyebrow": "Văn bản pháp luật mới",
+    "title": "Quý này có gì",
+    "lead": "Các luật, nghị định, thông tư và nghị quyết mới ban hành — trích nguyên văn từ vbpl.vn / thuvienphapluat.vn.",
+    "viewAll": "Xem toàn bộ"
   },
   "notFound": {
     "title": "Không tìm thấy trang",

@@ -1,7 +1,29 @@
 import type { CollectionConfig } from 'payload'
+import { makeRevalidateHook } from '@/lib/revalidate-hook'
 
 export const Articles: CollectionConfig = {
   slug: 'articles',
+  hooks: {
+    afterChange: [
+      makeRevalidateHook({
+        pathsFromDoc: (doc) => {
+          const slug = typeof doc.slug === 'string' ? doc.slug : null
+          const cat = typeof doc.category === 'object' && doc.category && 'slug' in doc.category
+            ? (doc.category as { slug?: string }).slug
+            : typeof doc.category === 'string' ? doc.category : null
+          if (!slug || !cat) return []
+          return [
+            `/${cat}`,
+            `/en/${cat}`,
+            `/${cat}/${slug}`,
+            `/en/${cat}/${slug}`,
+            '/',
+            '/en',
+          ]
+        },
+      }),
+    ],
+  },
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'category', 'status', 'publishedDate'],

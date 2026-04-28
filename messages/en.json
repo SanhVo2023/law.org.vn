@@ -11,6 +11,7 @@
     "rights": "Rights",
     "terminology": "Terminology",
     "updates": "Legal updates",
+    "blog": "Blog",
     "faq": "FAQ",
     "about": "About"
   },
@@ -43,6 +44,38 @@
   "footer": {
     "ecosystemTitle": "Ecosystem",
     "disclaimer": "Content is informational only and does not substitute for individualized legal advice."
+  },
+  "blog": {
+    "title": "Editorial blog",
+    "lead": "Commentary, case analysis, practice updates, and policy notes on the Vietnamese legal system — written by Apolo Editorial.",
+    "filterAll": "All posts",
+    "filterCommentary": "Commentary",
+    "filterCaseAnalysis": "Case analysis",
+    "filterPracticeUpdate": "Practice update",
+    "filterPolicy": "Policy",
+    "filterCompliance": "Compliance",
+    "readingMin": "min read",
+    "readArticle": "Read article",
+    "publishedOn": "Published",
+    "byAuthor": "by",
+    "relatedTitle": "Related posts",
+    "noResults": "No posts match the current filter.",
+    "rssFeed": "Subscribe via RSS"
+  },
+  "timeline": {
+    "title": "Eight decades of Vietnamese codification",
+    "lead": "From the 1946 Constitution to the 2026 Personal Data Protection Law — the spine of modern Vietnamese statute, milestone by milestone.",
+    "scrollHint": "Scroll horizontally"
+  },
+  "trustedSources": {
+    "caption": "Drawn from primary sources",
+    "subcaption": "Every entry traces back to an authoritative state portal."
+  },
+  "recentUpdates": {
+    "eyebrow": "Recent legal instruments",
+    "title": "What was issued this quarter",
+    "lead": "The newest Vietnamese laws, decrees, circulars, and resolutions — sourced verbatim from vbpl.vn / thuvienphapluat.vn.",
+    "viewAll": "View all updates"
   },
   "notFound": {
     "title": "Page not found",

@@ -28,6 +28,12 @@ export async function SiteHeader() {
         <nav className="hidden lg:flex items-center gap-7 text-sm">
           <TopicsMenu label={`${t('nav.legalSystem').split(' ')[0] === 'Hệ' ? 'Cụm chủ đề' : 'Topics'}`} items={topics} />
           <Link
+            href="/blog"
+            className="text-[var(--fg-muted)] hover:text-[var(--fg)] transition uppercase tracking-[0.14em] text-xs"
+          >
+            {t('nav.blog')}
+          </Link>
+          <Link
             href="/updates"
             className="text-[var(--fg-muted)] hover:text-[var(--fg)] transition uppercase tracking-[0.14em] text-xs"
           >

@@ -32,6 +32,7 @@ import { Users } from './collections/Users'
 import { Articles } from './collections/Articles'
 import { Categories } from './collections/Categories'
 import { LegalUpdates } from './collections/LegalUpdates'
+import { BlogPosts } from './collections/BlogPosts'
 
 // Globals
 import { SiteSettings } from './globals/SiteSettings'
@@ -77,6 +78,7 @@ export default buildConfig({
     Users,
     Categories,
     Articles,
+    BlogPosts,
     LegalUpdates,
   ],
 
@@ -90,7 +92,7 @@ export default buildConfig({
     features: () => [
       HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
       BlockquoteFeature(),
-      LinkFeature({ enabledCollections: ['articles'] }),
+      LinkFeature({ enabledCollections: ['articles', 'blog-posts'] }),
       UnorderedListFeature(),
       OrderedListFeature(),
       BoldFeature(),
@@ -116,7 +118,7 @@ export default buildConfig({
 
   plugins: [
     seoPlugin({
-      collections: ['articles'],
+      collections: ['articles', 'blog-posts'],
       uploadsCollection: 'media',
       generateTitle: ({ doc }) =>
         `${typeof doc?.title === 'string' ? doc.title : 'law.org.vn'} | Vietnam Legal Knowledge Portal`,

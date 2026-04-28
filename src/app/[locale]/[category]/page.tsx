@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import { setRequestLocale, getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
 import { getPayload } from '@/lib/payload'
+import { assertDb } from '@/lib/db-check'
 import { CATEGORIES } from '@/lib/site'
 import { buildPageMetadata, buildBreadcrumbJsonLd } from '@/lib/metadata'
 import { JsonLd } from '@/components/JsonLd'
@@ -75,21 +76,17 @@ export default async function CategoryPage({ params }: { params: Params }) {
   const label = t(`nav.${cat.nameKey}`)
   const intro = CLUSTER_INTROS[category]?.[lng] ?? ''
 
-  let articles: Array<any> = []
-  try {
-    const payload = await getPayload()
-    const result = await payload.find({
-      collection: 'articles',
-      locale: locale as Locale,
-      limit: 100,
-      where: { 'category.slug': { equals: category } },
-      sort: 'slug',
-      depth: 1,
-    })
-    articles = result.docs
-  } catch {
-    articles = []
-  }
+  assertDb()
+  const payload = await getPayload()
+  const result = await payload.find({
+    collection: 'articles',
+    locale: locale as Locale,
+    limit: 100,
+    where: { 'category.slug': { equals: category } },
+    sort: 'slug',
+    depth: 1,
+  })
+  const articles: Array<any> = result.docs
 
   const totalCount = articles.length
   const draftCount = articles.filter((a) => a.status === 'draft').length

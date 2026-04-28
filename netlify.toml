@@ -1,0 +1,41 @@
+# law.org.vn — Netlify build config
+#
+# REQUIRED ENV VARS (set under Site settings → Environment variables, or via
+#   `netlify env:import .env.netlify` from the project root):
+#
+#   DATABASE_URI                       Supabase Session Pooler URI (port 5432, IPv4)
+#   PAYLOAD_SECRET                     32+ random chars
+#   NEXT_PUBLIC_SITE_URL               e.g. https://law.org.vn
+#   NEXT_PUBLIC_DEFAULT_LOCALE         vi
+#   NEXT_PUBLIC_SUPABASE_URL           https://<ref>.supabase.co
+#   NEXT_PUBLIC_SUPABASE_ANON_KEY      Supabase anon JWT
+#   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY  sb_publishable_...
+#   REVALIDATE_TOKEN                   Random secret to authorize on-demand ISR (also set on Payload server)
+#   REVALIDATE_URL                     https://law.org.vn/api/revalidate (used by afterChange hooks)
+#   SEED_ADMIN_EMAIL / SEED_ADMIN_PASSWORD  Optional, only used by scripts/seed-admin.mjs
+#
+# Build will fail loudly via src/lib/db-check.ts if DATABASE_URI is missing or invalid.
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+  NPM_FLAGS = "--legacy-peer-deps"
+  # Forces Node to prefer IPv4 for Supabase Session Pooler resolution.
+  NODE_OPTIONS = "--dns-result-order=ipv4first"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Long-lived caching for static R2-served images (Next image optimizer handles its own cache)
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/favicon.ico"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"

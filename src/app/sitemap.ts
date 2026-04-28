@@ -9,6 +9,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const staticPaths = [
     { path: '/', changeFrequency: 'weekly' as const, priority: 1.0 },
+    { path: '/blog', changeFrequency: 'daily' as const, priority: 0.9 },
     { path: '/updates', changeFrequency: 'daily' as const, priority: 0.9 },
     ...CATEGORIES.map((c) => ({
       path: `/${c.slug}`,
@@ -61,6 +62,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
       }
     })
+
+    const blogPosts = await payload.find({
+      collection: 'blog-posts',
+      locale: 'vi',
+      limit: 500,
+      where: { status: { equals: 'published' } },
+      depth: 0,
+    })
+    const blogEntries: MetadataRoute.Sitemap = blogPosts.docs.map((p: any) => {
+      const path = `/blog/${p.slug}`
+      return {
+        url: `${SITE_URL}${path}`,
+        lastModified: p.publishedAt ? new Date(p.publishedAt) : now,
+        changeFrequency: 'monthly' as const,
+        priority: 0.6,
+        alternates: {
+          languages: {
+            vi: `${SITE_URL}${path}`,
+            en: `${SITE_URL}/en${path}`,
+          },
+        },
+      }
+    })
+    dynamicEntries = [...dynamicEntries, ...blogEntries]
   } catch {
     // Tolerate DB outage during build — at least static routes are in the sitemap.
     dynamicEntries = []
