@@ -1,0 +1,52 @@
+{
+  "site": {
+    "name": "law.org.vn",
+    "tagline": "Cổng tri thức pháp luật Việt Nam"
+  },
+  "nav": {
+    "home": "Trang chủ",
+    "legalSystem": "Hệ thống pháp luật",
+    "courtSystem": "Hệ thống tòa án",
+    "litigation": "Tố tụng",
+    "rights": "Quyền công dân",
+    "terminology": "Thuật ngữ pháp lý",
+    "updates": "Cập nhật pháp luật",
+    "faq": "Câu hỏi thường gặp",
+    "about": "Giới thiệu"
+  },
+  "home": {
+    "heroEyebrow": "Tri thức pháp lý — minh bạch, có hệ thống",
+    "heroTitle": "Hiểu pháp luật Việt Nam",
+    "heroLead": "Bộ tri thức bách khoa về Hiến pháp, các bộ luật, hệ thống tòa án và quy trình tố tụng Việt Nam — viết rõ ràng, có dẫn chiếu, phi thương mại, song ngữ Việt–Anh.",
+    "exploreCta": "Khám phá bộ tri thức",
+    "categoriesTitle": "Bản đồ tri thức",
+    "featuredTitle": "Mục đề xuất khởi đầu",
+    "glossaryCta": "Cập nhật pháp luật",
+    "browseCta": "Duyệt bộ bách khoa"
+  },
+  "article": {
+    "updatedOn": "Cập nhật ngày",
+    "publishedOn": "Đăng ngày",
+    "tocTitle": "Mục lục",
+    "relatedTitle": "Bài viết liên quan",
+    "termsTitle": "Thuật ngữ liên quan",
+    "draftBadge": "Bản thảo AI — chờ thẩm định",
+    "reviewBadge": "Đang thẩm định",
+    "printBtn": "In trang"
+  },
+  "updates": {
+    "title": "Cập nhật pháp luật Việt Nam",
+    "lead": "Danh mục các văn bản pháp luật mới được công bố tại Việt Nam — pháp lệnh, luật, bộ luật, nghị định, thông tư, nghị quyết, quyết định, chỉ thị, công văn và quy chuẩn kỹ thuật. Mỗi mục dẫn trực tiếp tới bản gốc trên thuvienphapluat.vn (phản chiếu Cổng VBPL — vbpl.vn).",
+    "attribution": "Nguồn: thuvienphapluat.vn / vbpl.vn (Cổng thông tin văn bản quy phạm pháp luật của Bộ Tư pháp). Tiêu đề được giữ nguyên văn theo bản gốc; phần dịch tiếng Anh chỉ là dịch tiêu đề, không phải tóm tắt nội dung.",
+    "lastSync": "Cập nhật mới nhất:"
+  },
+  "footer": {
+    "ecosystemTitle": "Hệ sinh thái",
+    "disclaimer": "Nội dung chỉ mang tính thông tin và không thay thế tư vấn pháp lý cá nhân."
+  },
+  "notFound": {
+    "title": "Không tìm thấy trang",
+    "lead": "Trang bạn yêu cầu không tồn tại hoặc đã được di chuyển.",
+    "backHome": "Về trang chủ"
+  }
+}

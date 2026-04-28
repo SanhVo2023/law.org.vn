@@ -1,0 +1,52 @@
+{
+  "site": {
+    "name": "law.org.vn",
+    "tagline": "Vietnam Legal Knowledge Portal"
+  },
+  "nav": {
+    "home": "Home",
+    "legalSystem": "Legal System",
+    "courtSystem": "Court System",
+    "litigation": "Litigation",
+    "rights": "Rights",
+    "terminology": "Terminology",
+    "updates": "Legal updates",
+    "faq": "FAQ",
+    "about": "About"
+  },
+  "home": {
+    "heroEyebrow": "Legal knowledge — transparent, systematic",
+    "heroTitle": "Understand Vietnamese law",
+    "heroLead": "An encyclopedic, non-commercial reference on Vietnam's Constitution, codes, court system, and litigation procedure — clearly written, cited, bilingual (Vietnamese + English).",
+    "exploreCta": "Explore the encyclopedia",
+    "categoriesTitle": "Knowledge map",
+    "featuredTitle": "Cornerstone entries",
+    "glossaryCta": "Recent legal updates",
+    "browseCta": "Browse the encyclopedia"
+  },
+  "article": {
+    "updatedOn": "Updated",
+    "publishedOn": "Published",
+    "tocTitle": "On this page",
+    "relatedTitle": "Related articles",
+    "termsTitle": "Related terms",
+    "draftBadge": "AI draft — pending SME review",
+    "reviewBadge": "Under review",
+    "printBtn": "Print page"
+  },
+  "updates": {
+    "title": "Recent Vietnamese legal instruments",
+    "lead": "Recently issued Vietnamese legal instruments — laws, codes, decrees, circulars, resolutions, decisions, directives, official letters, and technical standards. Every entry links straight to the original on thuvienphapluat.vn (which mirrors the official Cổng VBPL — vbpl.vn).",
+    "attribution": "Source: thuvienphapluat.vn / vbpl.vn (the Ministry of Justice's official normative-document portal). Titles are reproduced verbatim from the original; the English line is a literal translation of the title only — not a content summary.",
+    "lastSync": "Most recent update:"
+  },
+  "footer": {
+    "ecosystemTitle": "Ecosystem",
+    "disclaimer": "Content is informational only and does not substitute for individualized legal advice."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "lead": "The page you requested does not exist or has been moved.",
+    "backHome": "Back to home"
+  }
+}

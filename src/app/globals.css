@@ -1,0 +1,62 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* ============================================================
+   law.org.vn design tokens
+   Loaded everywhere (root layout). KEEP MINIMAL — admin and public both pick it up.
+   Site-specific rules live in public.css and are imported only inside [locale]/layout.tsx.
+   ============================================================ */
+
+@theme {
+  --color-navy-50:  #f2f4f8;
+  --color-navy-100: #d9dee8;
+  --color-navy-200: #b3bed1;
+  --color-navy-300: #8693ad;
+  --color-navy-400: #506079;
+  --color-navy-500: #2f3f5a;
+  --color-navy-600: #243048;
+  --color-navy-700: #1B2A4A;
+  --color-navy-800: #141f38;
+  --color-navy-900: #0c1426;
+
+  --color-slate-brand: #475569;
+
+  --color-gold-400: #d4a43c;
+  --color-gold-500: #B8860B;
+  --color-gold-600: #936b08;
+
+  --color-paper:    #F8F7F4;
+  --color-paper-deep: #eeece7;
+
+  --color-ink-900: #0d1424;
+  --color-ink-700: #2a3142;
+  --color-ink-500: #4a5060;
+  --color-ink-300: #8b93a4;
+
+  --font-body: var(--font-body);
+  --font-heading: var(--font-heading);
+  --font-mono: var(--font-mono);
+
+  --spacing-prose: 40rem;
+}
+
+/* Boot-time CSS variable defaults — do not touch admin DOM. */
+:root {
+  color-scheme: light;
+  --bg: var(--color-paper);
+  --fg: var(--color-ink-900);
+  --fg-muted: var(--color-ink-500);
+  --rule: rgba(27, 42, 74, 0.12);
+  --accent: var(--color-gold-500);
+  --link: var(--color-navy-700);
+}
+
+:root.dark {
+  color-scheme: dark;
+  --bg: #0a1224;
+  --fg: #eef1f6;
+  --fg-muted: #a6afc0;
+  --rule: rgba(230, 233, 240, 0.14);
+  --accent: var(--color-gold-400);
+  --link: #e6d7a6;
+}

@@ -1,0 +1,50 @@
+{
+  "name": "law.org.vn",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "payload:types": "payload generate:types",
+    "payload:migrate": "payload migrate",
+    "payload:migrate:status": "payload migrate:status",
+    "payload:migrate:create": "payload migrate:create",
+    "content:generate": "node scripts/generate-seo-content.mjs",
+    "seed:admin": "node scripts/seed-admin.mjs",
+    "seed:categories": "node scripts/seed-categories.mjs",
+    "import:content": "node scripts/import-content.mjs",
+    "smoke:test": "node scripts/smoke-test.mjs",
+    "implement:assets": "node scripts/implement-assets.mjs"
+  },
+  "dependencies": {
+    "@payloadcms/db-postgres": "^3.81.0",
+    "@payloadcms/next": "^3.81.0",
+    "@payloadcms/plugin-seo": "^3.81.0",
+    "@payloadcms/richtext-lexical": "^3.81.0",
+    "@payloadcms/ui": "^3.81.0",
+    "framer-motion": "^12.38.0",
+    "graphql": "^16.13.2",
+    "gsap": "^3.14.2",
+    "next": "16.2.2",
+    "next-intl": "^4.3.13",
+    "payload": "^3.81.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "schema-dts": "^2.0.0",
+    "sharp": "^0.34.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@tailwindcss/typography": "^0.5.15",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "dotenv": "^17.4.1",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.2",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
