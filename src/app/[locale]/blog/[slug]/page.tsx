@@ -17,6 +17,7 @@ import { Eyebrow } from '@/components/ui/Eyebrow'
 import { Ornament } from '@/components/ui/Ornament'
 import { RelatedPosts } from '@/components/blog/RelatedPosts'
 import type { BlogCardItem } from '@/components/blog/BlogCard'
+import { BLOG_IMAGE } from '@/lib/images'
 import type { Locale } from '@/i18n/routing'
 
 type Params = Promise<{ locale: string; slug: string }>
@@ -104,19 +105,29 @@ export default async function BlogPostPage({ params }: { params: Params }) {
     { label: p.title },
   ]
 
-  const featured = p.featuredImage && typeof p.featuredImage === 'object' ? p.featuredImage : null
+  const fallbackBlog = BLOG_IMAGE[slug]
+  const featured: { url: string; alt?: string | null } | null =
+    p.featuredImage && typeof p.featuredImage === 'object' && p.featuredImage.url
+      ? { url: p.featuredImage.url, alt: p.featuredImage.alt }
+      : fallbackBlog
+        ? { url: fallbackBlog.src, alt: fallbackBlog.alt }
+        : null
 
   const relatedRaw = await loadRelated(locale, p.category, slug)
-  const related: BlogCardItem[] = relatedRaw.map((d: any) => ({
-    id: d.id,
-    slug: d.slug,
-    title: d.title,
-    excerpt: d.excerpt,
-    category: d.category,
-    categoryLabel: t(CATEGORY_LABEL_KEYS[d.category] ?? 'blog.filterCommentary'),
-    publishedAt: d.publishedAt,
-    readingTimeMin: d.readingTimeMin,
-  }))
+  const related: BlogCardItem[] = relatedRaw.map((d: any) => {
+    const fallback = BLOG_IMAGE[d.slug as string]
+    return {
+      id: d.id,
+      slug: d.slug,
+      title: d.title,
+      excerpt: d.excerpt,
+      category: d.category,
+      categoryLabel: t(CATEGORY_LABEL_KEYS[d.category] ?? 'blog.filterCommentary'),
+      publishedAt: d.publishedAt,
+      readingTimeMin: d.readingTimeMin,
+      featuredImage: fallback ? { url: fallback.src, alt: fallback.alt } : null,
+    }
+  })
 
   return (
     <>

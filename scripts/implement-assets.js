@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Auto-generated asset implementation script for law.org.vn
- * Generated: 2026-04-27T15:57:58.529Z
+ * Generated: 2026-04-28T12:57:01.638Z
  *
  * This script copies all generated images into public/images/
  * and outputs a mapping file the site code can import.
@@ -372,6 +372,166 @@ const ASSETS = [
     "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/og/og-card-en-cb90bcd5.webp",
     "local_path": "assets/og/og-card-en.webp",
     "alt": "OG Card — English - law.org.vn"
+  },
+  {
+    "id": "crest-quoc-hoi",
+    "name": "Trusted source crest — National Assembly",
+    "category": "icon",
+    "width": 256,
+    "aspect": "1:1",
+    "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/crest-quoc-hoi-4637e185.webp",
+    "local_path": "assets/icon/crest-quoc-hoi.webp",
+    "alt": "Trusted source crest — National Assembly - law.org.vn"
+  },
+  {
+    "id": "crest-chinh-phu",
+    "name": "Trusted source crest — Government Portal",
+    "category": "icon",
+    "width": 256,
+    "aspect": "1:1",
+    "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/crest-chinh-phu-a755e3bc.webp",
+    "local_path": "assets/icon/crest-chinh-phu.webp",
+    "alt": "Trusted source crest — Government Portal - law.org.vn"
+  },
+  {
+    "id": "crest-tandtc",
+    "name": "Trusted source crest — Supreme People's Court",
+    "category": "icon",
+    "width": 256,
+    "aspect": "1:1",
+    "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/crest-tandtc-110091a8.webp",
+    "local_path": "assets/icon/crest-tandtc.webp",
+    "alt": "Trusted source crest — Supreme People's Court - law.org.vn"
+  },
+  {
+    "id": "crest-vksndtc",
+    "name": "Trusted source crest — Supreme People's Procuracy",
+    "category": "icon",
+    "width": 256,
+    "aspect": "1:1",
+    "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/crest-vksndtc-52640177.webp",
+    "local_path": "assets/icon/crest-vksndtc.webp",
+    "alt": "Trusted source crest — Supreme People's Procuracy - law.org.vn"
+  },
+  {
+    "id": "crest-bo-tu-phap",
+    "name": "Trusted source crest — Ministry of Justice",
+    "category": "icon",
+    "width": 256,
+    "aspect": "1:1",
+    "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/crest-bo-tu-phap-045ef851.webp",
+    "local_path": "assets/icon/crest-bo-tu-phap.webp",
+    "alt": "Trusted source crest — Ministry of Justice - law.org.vn"
+  },
+  {
+    "id": "crest-vbpl",
+    "name": "Trusted source crest — Legal Documents Portal",
+    "category": "icon",
+    "width": 256,
+    "aspect": "1:1",
+    "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/crest-vbpl-59dd2d31.webp",
+    "local_path": "assets/icon/crest-vbpl.webp",
+    "alt": "Trusted source crest — Legal Documents Portal - law.org.vn"
+  },
+  {
+    "id": "crest-thuvienphapluat",
+    "name": "Trusted source crest — Law Library",
+    "category": "icon",
+    "width": 256,
+    "aspect": "1:1",
+    "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/crest-thuvienphapluat-460cab8f.webp",
+    "local_path": "assets/icon/crest-thuvienphapluat.webp",
+    "alt": "Trusted source crest — Law Library - law.org.vn"
+  },
+  {
+    "id": "crest-viac",
+    "name": "Trusted source crest — VIAC arbitration",
+    "category": "icon",
+    "width": 256,
+    "aspect": "1:1",
+    "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/crest-viac-d4e26dc7.webp",
+    "local_path": "assets/icon/crest-viac.webp",
+    "alt": "Trusted source crest — VIAC arbitration - law.org.vn"
+  },
+  {
+    "id": "blog-reading-decree",
+    "name": "Blog featured — Reading a Vietnamese decree",
+    "category": "content",
+    "width": 1600,
+    "aspect": "16:9",
+    "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/content/blog-reading-decree-c96b8491.webp",
+    "local_path": "assets/content/blog-reading-decree.webp",
+    "alt": "Blog featured — Reading a Vietnamese decree - law.org.vn"
+  },
+  {
+    "id": "blog-pdpl-saas",
+    "name": "Blog featured — Vietnam's 2026 Personal Data Protection Law",
+    "category": "content",
+    "width": 1600,
+    "aspect": "16:9",
+    "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/content/blog-pdpl-saas-eb4440f9.webp",
+    "local_path": "assets/content/blog-pdpl-saas.webp",
+    "alt": "Blog featured — Vietnam's 2026 Personal Data Protection Law - law.org.vn"
+  },
+  {
+    "id": "blog-civil-code-shifts",
+    "name": "Blog featured — Civil Code 2015 vs 2005",
+    "category": "content",
+    "width": 1600,
+    "aspect": "16:9",
+    "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/content/blog-civil-code-shifts-613d4886.webp",
+    "local_path": "assets/content/blog-civil-code-shifts.webp",
+    "alt": "Blog featured — Civil Code 2015 vs 2005 - law.org.vn"
+  },
+  {
+    "id": "blog-severance",
+    "name": "Blog featured — Statutory severance",
+    "category": "content",
+    "width": 1600,
+    "aspect": "16:9",
+    "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/content/blog-severance-dd1db20c.webp",
+    "local_path": "assets/content/blog-severance.webp",
+    "alt": "Blog featured — Statutory severance - law.org.vn"
+  },
+  {
+    "id": "blog-limitations",
+    "name": "Blog featured — Statute-of-limitations traps",
+    "category": "content",
+    "width": 1600,
+    "aspect": "16:9",
+    "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/content/blog-limitations-8ca5b2a3.webp",
+    "local_path": "assets/content/blog-limitations.webp",
+    "alt": "Blog featured — Statute-of-limitations traps - law.org.vn"
+  },
+  {
+    "id": "blog-notarisation",
+    "name": "Blog featured — Notarisation vs authentication",
+    "category": "content",
+    "width": 1600,
+    "aspect": "16:9",
+    "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/content/blog-notarisation-b92ccc24.webp",
+    "local_path": "assets/content/blog-notarisation.webp",
+    "alt": "Blog featured — Notarisation vs authentication - law.org.vn"
+  },
+  {
+    "id": "blog-court-verdict",
+    "name": "Blog featured — Reading a Vietnamese court verdict",
+    "category": "content",
+    "width": 1600,
+    "aspect": "16:9",
+    "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/content/blog-court-verdict-d81570e2.webp",
+    "local_path": "assets/content/blog-court-verdict.webp",
+    "alt": "Blog featured — Reading a Vietnamese court verdict - law.org.vn"
+  },
+  {
+    "id": "blog-foreign-investment",
+    "name": "Blog featured — Foreign investment single window",
+    "category": "content",
+    "width": 1600,
+    "aspect": "16:9",
+    "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/content/blog-foreign-investment-f8a99531.webp",
+    "local_path": "assets/content/blog-foreign-investment.webp",
+    "alt": "Blog featured — Foreign investment single window - law.org.vn"
   }
 ];
 
@@ -404,7 +564,7 @@ function main() {
 
   // Generate TypeScript image map for the site code
   const tsMap = `// Auto-generated image asset map for law.org.vn
-// Generated: 2026-04-27T15:57:58.530Z
+// Generated: 2026-04-28T12:57:01.639Z
 // Usage: import { IMAGES } from "@/lib/images";
 //        <Image src={IMAGES.heroPortrait.cdn} alt={IMAGES.heroPortrait.alt} />
 

@@ -394,5 +394,181 @@
     "local_path": "assets/og/og-card-en.webp",
     "alt": "OG Card — English - law.org.vn",
     "description": "Open-graph social card: deep navy #1B2A4A background, fine antique-gold border frame, a single elegant scales-of-justice silhouette on the left third in antique gold. Right two-thirds is empty navy fi"
+  },
+  {
+    "id": "crest-quoc-hoi",
+    "name": "Trusted source crest — National Assembly",
+    "category": "icon",
+    "width": 256,
+    "aspect": "1:1",
+    "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/crest-quoc-hoi-4637e185.webp",
+    "local_path": "assets/icon/crest-quoc-hoi.webp",
+    "alt": "Trusted source crest — National Assembly - law.org.vn",
+    "description": "Heraldic crest, single-stroke gold linework on transparent background, geometric monogram representing the National Assembly of Vietnam (Quốc Hội). Stylised five-pointed star above a horizontal rule, "
+  },
+  {
+    "id": "crest-chinh-phu",
+    "name": "Trusted source crest — Government Portal",
+    "category": "icon",
+    "width": 256,
+    "aspect": "1:1",
+    "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/crest-chinh-phu-a755e3bc.webp",
+    "local_path": "assets/icon/crest-chinh-phu.webp",
+    "alt": "Trusted source crest — Government Portal - law.org.vn",
+    "description": "Heraldic crest, single-stroke gold linework on transparent background, geometric monogram representing the Government of Vietnam. Stylised laurel wreath enclosing a small classical column, circular bo"
+  },
+  {
+    "id": "crest-tandtc",
+    "name": "Trusted source crest — Supreme People's Court",
+    "category": "icon",
+    "width": 256,
+    "aspect": "1:1",
+    "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/crest-tandtc-110091a8.webp",
+    "local_path": "assets/icon/crest-tandtc.webp",
+    "alt": "Trusted source crest — Supreme People's Court - law.org.vn",
+    "description": "Heraldic crest, single-stroke gold linework on transparent background, geometric monogram representing the Supreme People's Court of Vietnam. Stylised balanced scale enclosed in a circular border. Eng"
+  },
+  {
+    "id": "crest-vksndtc",
+    "name": "Trusted source crest — Supreme People's Procuracy",
+    "category": "icon",
+    "width": 256,
+    "aspect": "1:1",
+    "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/crest-vksndtc-52640177.webp",
+    "local_path": "assets/icon/crest-vksndtc.webp",
+    "alt": "Trusted source crest — Supreme People's Procuracy - law.org.vn",
+    "description": "Heraldic crest, single-stroke gold linework on transparent background, geometric monogram representing the Supreme People's Procuracy of Vietnam. Stylised vertical sword crossed with a quill, circular"
+  },
+  {
+    "id": "crest-bo-tu-phap",
+    "name": "Trusted source crest — Ministry of Justice",
+    "category": "icon",
+    "width": 256,
+    "aspect": "1:1",
+    "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/crest-bo-tu-phap-045ef851.webp",
+    "local_path": "assets/icon/crest-bo-tu-phap.webp",
+    "alt": "Trusted source crest — Ministry of Justice - law.org.vn",
+    "description": "Heraldic crest, single-stroke gold linework on transparent background, geometric monogram representing the Ministry of Justice of Vietnam. Stylised open codex with a balance scale rising above, circul"
+  },
+  {
+    "id": "crest-vbpl",
+    "name": "Trusted source crest — Legal Documents Portal",
+    "category": "icon",
+    "width": 256,
+    "aspect": "1:1",
+    "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/crest-vbpl-59dd2d31.webp",
+    "local_path": "assets/icon/crest-vbpl.webp",
+    "alt": "Trusted source crest — Legal Documents Portal - law.org.vn",
+    "description": "Heraldic crest, single-stroke gold linework on transparent background, geometric monogram representing the official Legal Documents Portal (vbpl.vn). Stylised stack of three horizontal scrolls inside "
+  },
+  {
+    "id": "crest-thuvienphapluat",
+    "name": "Trusted source crest — Law Library",
+    "category": "icon",
+    "width": 256,
+    "aspect": "1:1",
+    "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/crest-thuvienphapluat-460cab8f.webp",
+    "local_path": "assets/icon/crest-thuvienphapluat.webp",
+    "alt": "Trusted source crest — Law Library - law.org.vn",
+    "description": "Heraldic crest, single-stroke gold linework on transparent background, geometric monogram representing thuvienphapluat.vn. Stylised three vertical book spines inside a circular border with a small fiv"
+  },
+  {
+    "id": "crest-viac",
+    "name": "Trusted source crest — VIAC arbitration",
+    "category": "icon",
+    "width": 256,
+    "aspect": "1:1",
+    "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/crest-viac-d4e26dc7.webp",
+    "local_path": "assets/icon/crest-viac.webp",
+    "alt": "Trusted source crest — VIAC arbitration - law.org.vn",
+    "description": "Heraldic crest, single-stroke gold linework on transparent background, geometric monogram representing the Vietnam International Arbitration Centre (VIAC). Stylised handshake symbol within a chevron, "
+  },
+  {
+    "id": "blog-reading-decree",
+    "name": "Blog featured — Reading a Vietnamese decree",
+    "category": "content",
+    "width": 1600,
+    "aspect": "16:9",
+    "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/content/blog-reading-decree-c96b8491.webp",
+    "local_path": "assets/content/blog-reading-decree.webp",
+    "alt": "Blog featured — Reading a Vietnamese decree - law.org.vn",
+    "description": "Editorial photograph: an open Vietnamese legal document on a dark wood desk, a fountain pen and reading glasses beside it, soft side lighting from a brass desk lamp, deep shadows. The document shows c"
+  },
+  {
+    "id": "blog-pdpl-saas",
+    "name": "Blog featured — Vietnam's 2026 Personal Data Protection Law",
+    "category": "content",
+    "width": 1600,
+    "aspect": "16:9",
+    "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/content/blog-pdpl-saas-eb4440f9.webp",
+    "local_path": "assets/content/blog-pdpl-saas.webp",
+    "alt": "Blog featured — Vietnam's 2026 Personal Data Protection Law - law.org.vn",
+    "description": "Editorial photograph: a server-room corridor with abstract Vietnamese ornamental motifs subtly etched into one of the metal racks. Cool blue and warm gold lighting mix, low-angle. Strong vertical line"
+  },
+  {
+    "id": "blog-civil-code-shifts",
+    "name": "Blog featured — Civil Code 2015 vs 2005",
+    "category": "content",
+    "width": 1600,
+    "aspect": "16:9",
+    "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/content/blog-civil-code-shifts-613d4886.webp",
+    "local_path": "assets/content/blog-civil-code-shifts.webp",
+    "alt": "Blog featured — Civil Code 2015 vs 2005 - law.org.vn",
+    "description": "Editorial photograph: two volumes of a Vietnamese Civil Code side by side on a polished dark-wood library shelf, each spine etched with subtle gold lettering (no readable text). Warm soft lighting, du"
+  },
+  {
+    "id": "blog-severance",
+    "name": "Blog featured — Statutory severance",
+    "category": "content",
+    "width": 1600,
+    "aspect": "16:9",
+    "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/content/blog-severance-dd1db20c.webp",
+    "local_path": "assets/content/blog-severance.webp",
+    "alt": "Blog featured — Statutory severance - law.org.vn",
+    "description": "Editorial photograph: an empty office chair beside a desk with a folded white envelope and a pair of reading glasses on it, late afternoon golden light spilling through tall windows. Quiet, restrained"
+  },
+  {
+    "id": "blog-limitations",
+    "name": "Blog featured — Statute-of-limitations traps",
+    "category": "content",
+    "width": 1600,
+    "aspect": "16:9",
+    "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/content/blog-limitations-8ca5b2a3.webp",
+    "local_path": "assets/content/blog-limitations.webp",
+    "alt": "Blog featured — Statute-of-limitations traps - law.org.vn",
+    "description": "Editorial photograph: an old hourglass on top of a stack of legal files, set on a dark wood desk, a single beam of warm light striking the sand. Deep shadows, archival mood. Composition: 16:9, dramati"
+  },
+  {
+    "id": "blog-notarisation",
+    "name": "Blog featured — Notarisation vs authentication",
+    "category": "content",
+    "width": 1600,
+    "aspect": "16:9",
+    "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/content/blog-notarisation-b92ccc24.webp",
+    "local_path": "assets/content/blog-notarisation.webp",
+    "alt": "Blog featured — Notarisation vs authentication - law.org.vn",
+    "description": "Editorial photograph: detail of a brass notary stamp pressed into deep red wax on parchment paper, a bottle of black ink and an old fountain pen beside. Top-down composition. Sharp focus on the wax se"
+  },
+  {
+    "id": "blog-court-verdict",
+    "name": "Blog featured — Reading a Vietnamese court verdict",
+    "category": "content",
+    "width": 1600,
+    "aspect": "16:9",
+    "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/content/blog-court-verdict-d81570e2.webp",
+    "local_path": "assets/content/blog-court-verdict.webp",
+    "alt": "Blog featured — Reading a Vietnamese court verdict - law.org.vn",
+    "description": "Editorial photograph: an empty Vietnamese courtroom seen from the petitioner's perspective — wide angle, deep symmetry, navy drapery, judge's bench at center, side-lit by tall windows. Quiet, weighty "
+  },
+  {
+    "id": "blog-foreign-investment",
+    "name": "Blog featured — Foreign investment single window",
+    "category": "content",
+    "width": 1600,
+    "aspect": "16:9",
+    "cdn_url": "https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/content/blog-foreign-investment-f8a99531.webp",
+    "local_path": "assets/content/blog-foreign-investment.webp",
+    "alt": "Blog featured — Foreign investment single window - law.org.vn",
+    "description": "Editorial photograph: a modern open-plan administrative service hall in Hanoi, glass partitions, a single counter visible at the far end with warm-lit ceiling fixtures, deep perspective. NO PEOPLE. Ar"
   }
 ]

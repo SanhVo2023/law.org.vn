@@ -236,6 +236,106 @@ export const images = {
     height: 630,
     alt: 'law.org.vn English social card',
   },
+
+  // Trusted-source crests (8 — engraved monogram on transparent)
+  crestQuocHoi: {
+    src: 'https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/crest-quoc-hoi-4637e185.webp',
+    width: 256,
+    height: 256,
+    alt: 'National Assembly of Vietnam crest',
+  },
+  crestChinhPhu: {
+    src: 'https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/crest-chinh-phu-a755e3bc.webp',
+    width: 256,
+    height: 256,
+    alt: 'Vietnam Government Portal crest',
+  },
+  crestTandtc: {
+    src: 'https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/crest-tandtc-110091a8.webp',
+    width: 256,
+    height: 256,
+    alt: "Supreme People's Court of Vietnam crest",
+  },
+  crestVksndtc: {
+    src: 'https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/crest-vksndtc-52640177.webp',
+    width: 256,
+    height: 256,
+    alt: "Supreme People's Procuracy of Vietnam crest",
+  },
+  crestBoTuPhap: {
+    src: 'https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/crest-bo-tu-phap-045ef851.webp',
+    width: 256,
+    height: 256,
+    alt: 'Ministry of Justice of Vietnam crest',
+  },
+  crestVbpl: {
+    src: 'https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/crest-vbpl-59dd2d31.webp',
+    width: 256,
+    height: 256,
+    alt: 'Legal Documents Portal (vbpl.vn) crest',
+  },
+  crestThuVienPhapLuat: {
+    src: 'https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/crest-thuvienphapluat-460cab8f.webp',
+    width: 256,
+    height: 256,
+    alt: 'thuvienphapluat.vn crest',
+  },
+  crestViac: {
+    src: 'https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/crest-viac-d4e26dc7.webp',
+    width: 256,
+    height: 256,
+    alt: 'Vietnam International Arbitration Centre (VIAC) crest',
+  },
+
+  // Blog featured photographs (8 — editorial-photo, 16:9)
+  blogReadingDecree: {
+    src: 'https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/content/blog-reading-decree-c96b8491.webp',
+    width: 1600,
+    height: 900,
+    alt: 'Open Vietnamese legal document on a dark wood desk under a brass lamp',
+  },
+  blogPdplSaas: {
+    src: 'https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/content/blog-pdpl-saas-eb4440f9.webp',
+    width: 1600,
+    height: 900,
+    alt: 'Server-room corridor with subtle Vietnamese ornamental motifs',
+  },
+  blogCivilCodeShifts: {
+    src: 'https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/content/blog-civil-code-shifts-613d4886.webp',
+    width: 1600,
+    height: 900,
+    alt: 'Two volumes of the Vietnamese Civil Code on a dark library shelf',
+  },
+  blogSeverance: {
+    src: 'https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/content/blog-severance-dd1db20c.webp',
+    width: 1600,
+    height: 900,
+    alt: 'Empty office chair beside a desk with a folded envelope at golden hour',
+  },
+  blogLimitations: {
+    src: 'https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/content/blog-limitations-8ca5b2a3.webp',
+    width: 1600,
+    height: 900,
+    alt: 'Hourglass on a stack of legal files in dramatic chiaroscuro',
+  },
+  blogNotarisation: {
+    src: 'https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/content/blog-notarisation-b92ccc24.webp',
+    width: 1600,
+    height: 900,
+    alt: 'Brass notary stamp pressed into red wax on parchment',
+  },
+  blogCourtVerdict: {
+    src: 'https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/content/blog-court-verdict-d81570e2.webp',
+    width: 1600,
+    height: 900,
+    alt: "Empty Vietnamese courtroom from petitioner's perspective",
+  },
+  blogForeignInvestment: {
+    src: 'https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/content/blog-foreign-investment-f8a99531.webp',
+    width: 1600,
+    height: 900,
+    alt: 'Modern administrative service hall in Hanoi',
+  },
 } satisfies Record<string, ImageEntry>
 
 export type ImageKey = keyof typeof images
@@ -269,6 +369,30 @@ export const ARTICLE_IMAGE: Record<string, ImageEntry> = {
   'civil-mediation': images.articleCivilMediation,
   'statutes-of-limitation': images.articleStatutesOfLimitation,
   notarization: images.articleNotarization,
+}
+
+// Trusted Sources rail — short-id → crest (used in TrustedSources.tsx)
+export const TRUSTED_SOURCE_CREST: Record<string, ImageEntry> = {
+  'quoc-hoi': images.crestQuocHoi,
+  'chinh-phu': images.crestChinhPhu,
+  tandtc: images.crestTandtc,
+  vksndtc: images.crestVksndtc,
+  'bo-tu-phap': images.crestBoTuPhap,
+  vbpl: images.crestVbpl,
+  thuvienphapluat: images.crestThuVienPhapLuat,
+  viac: images.crestViac,
+}
+
+// Blog featured-image lookup by post slug
+export const BLOG_IMAGE: Record<string, ImageEntry> = {
+  'reading-vietnamese-decree': images.blogReadingDecree,
+  'pdpl-2026-saas-startups': images.blogPdplSaas,
+  'civil-code-2015-vs-2005': images.blogCivilCodeShifts,
+  'severance-when-triggered': images.blogSeverance,
+  'limitations-commercial-disputes': images.blogLimitations,
+  'notarisation-vs-authentication': images.blogNotarisation,
+  'reading-court-verdict': images.blogCourtVerdict,
+  'foreign-investment-single-window': images.blogForeignInvestment,
 }
 
 export { R2_BASE }

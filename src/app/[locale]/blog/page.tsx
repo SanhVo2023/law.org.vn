@@ -8,6 +8,7 @@ import { Eyebrow } from '@/components/ui/Eyebrow'
 import { Ornament } from '@/components/ui/Ornament'
 import { BlogList } from '@/components/blog/BlogList'
 import type { BlogCardItem } from '@/components/blog/BlogCard'
+import { BLOG_IMAGE } from '@/lib/images'
 import type { Locale } from '@/i18n/routing'
 import { Link } from '@/i18n/navigation'
 
@@ -50,22 +51,28 @@ export default async function BlogIndexPage({ params }: { params: Params }) {
     depth: 1,
   })
 
-  const posts: BlogCardItem[] = result.docs.map((d: any) => ({
-    id: d.id,
-    slug: d.slug,
-    title: d.title,
-    excerpt: d.excerpt,
-    category: d.category,
-    categoryLabel: t(CATEGORY_LABEL_KEYS[d.category] ?? 'blog.filterCommentary'),
-    publishedAt: d.publishedAt,
-    readingTimeMin: d.readingTimeMin,
-    author: d.author,
-    isDraft: d.status === 'draft',
-    featuredImage:
+  const posts: BlogCardItem[] = result.docs.map((d: any) => {
+    const fallback = BLOG_IMAGE[d.slug as string]
+    const featuredImage =
       d.featuredImage && typeof d.featuredImage === 'object' && d.featuredImage.url
-        ? { url: d.featuredImage.url, alt: d.featuredImage.alt }
-        : null,
-  }))
+        ? { url: d.featuredImage.url as string, alt: (d.featuredImage.alt ?? null) as string | null }
+        : fallback
+          ? { url: fallback.src, alt: fallback.alt }
+          : null
+    return {
+      id: d.id,
+      slug: d.slug,
+      title: d.title,
+      excerpt: d.excerpt,
+      category: d.category,
+      categoryLabel: t(CATEGORY_LABEL_KEYS[d.category] ?? 'blog.filterCommentary'),
+      publishedAt: d.publishedAt,
+      readingTimeMin: d.readingTimeMin,
+      author: d.author,
+      isDraft: d.status === 'draft',
+      featuredImage,
+    }
+  })
 
   const crumbs = [{ label: t('nav.home'), href: '/' }, { label: t('blog.title') }]
 

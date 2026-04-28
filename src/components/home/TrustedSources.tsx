@@ -1,3 +1,6 @@
+import Image from 'next/image'
+import { TRUSTED_SOURCE_CREST } from '@/lib/images'
+
 interface TrustedSourcesProps {
   caption: string
   subcaption: string
@@ -5,7 +8,7 @@ interface TrustedSourcesProps {
 }
 
 interface Source {
-  short: string
+  id: string
   fullVi: string
   fullEn: string
   url: string
@@ -13,49 +16,49 @@ interface Source {
 
 const SOURCES: Source[] = [
   {
-    short: 'Quốc Hội',
+    id: 'quoc-hoi',
     fullVi: 'Quốc Hội Việt Nam',
     fullEn: 'National Assembly',
     url: 'https://quochoi.vn',
   },
   {
-    short: 'Chính phủ',
+    id: 'chinh-phu',
     fullVi: 'Cổng Thông tin Chính phủ',
     fullEn: 'Government Portal',
     url: 'https://chinhphu.vn',
   },
   {
-    short: 'TANDTC',
+    id: 'tandtc',
     fullVi: 'Tòa án Nhân dân Tối cao',
-    fullEn: 'Supreme People\'s Court',
+    fullEn: "Supreme People's Court",
     url: 'https://toaan.gov.vn',
   },
   {
-    short: 'VKSNDTC',
+    id: 'vksndtc',
     fullVi: 'Viện Kiểm sát Nhân dân Tối cao',
-    fullEn: 'Supreme People\'s Procuracy',
+    fullEn: "Supreme People's Procuracy",
     url: 'https://vksndtc.gov.vn',
   },
   {
-    short: 'Bộ Tư pháp',
+    id: 'bo-tu-phap',
     fullVi: 'Bộ Tư pháp',
     fullEn: 'Ministry of Justice',
     url: 'https://moj.gov.vn',
   },
   {
-    short: 'VBPL',
+    id: 'vbpl',
     fullVi: 'Cổng Văn bản Quy phạm Pháp luật',
     fullEn: 'Legal Documents Portal',
     url: 'https://vbpl.vn',
   },
   {
-    short: 'TVPL',
+    id: 'thuvienphapluat',
     fullVi: 'Thư viện Pháp luật',
     fullEn: 'Law Library',
     url: 'https://thuvienphapluat.vn',
   },
   {
-    short: 'VIAC',
+    id: 'viac',
     fullVi: 'Trung tâm Trọng tài Quốc tế Việt Nam',
     fullEn: 'Vietnam International Arbitration Centre',
     url: 'https://viac.vn',
@@ -73,26 +76,38 @@ export function TrustedSources({ caption, subcaption, locale }: TrustedSourcesPr
           <p className="mt-3 text-sm leading-relaxed text-[var(--fg-muted)]">{subcaption}</p>
         </div>
 
-        <ul className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-x-6 gap-y-8">
-          {SOURCES.map((s) => (
-            <li key={s.short} className="flex flex-col items-center text-center">
-              <a
-                href={s.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex flex-col items-center gap-3 opacity-60 hover:opacity-100 transition"
-              >
-                <div className="relative h-14 w-14 rounded-full border border-[var(--rule)] flex items-center justify-center bg-[var(--bg)] group-hover:border-[var(--color-gold-500)]/60 transition">
-                  <span className="font-heading font-bold text-sm tracking-tight text-[var(--color-gold-500)]">
-                    {s.short.split('').slice(0, 3).join('')}
+        <ul className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-x-6 gap-y-10">
+          {SOURCES.map((s) => {
+            const crest = TRUSTED_SOURCE_CREST[s.id]
+            return (
+              <li key={s.id} className="flex flex-col items-center text-center">
+                <a
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex flex-col items-center gap-3 opacity-70 hover:opacity-100 transition"
+                  aria-label={locale === 'vi' ? s.fullVi : s.fullEn}
+                >
+                  <div className="relative h-16 w-16 transition group-hover:scale-105">
+                    {crest ? (
+                      <Image
+                        src={crest.src}
+                        alt={crest.alt}
+                        fill
+                        sizes="64px"
+                        className="object-contain"
+                      />
+                    ) : (
+                      <div className="h-full w-full rounded-full border border-[var(--rule)]" />
+                    )}
+                  </div>
+                  <span className="font-mono text-[0.6rem] uppercase tracking-[0.14em] text-[var(--fg-muted)] leading-tight">
+                    {locale === 'vi' ? s.fullVi : s.fullEn}
                   </span>
-                </div>
-                <span className="font-mono text-[0.6rem] uppercase tracking-[0.14em] text-[var(--fg-muted)] leading-tight">
-                  {locale === 'vi' ? s.fullVi : s.fullEn}
-                </span>
-              </a>
-            </li>
-          ))}
+                </a>
+              </li>
+            )
+          })}
         </ul>
       </div>
     </section>
