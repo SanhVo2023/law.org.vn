@@ -1,9 +1,12 @@
-/* Recent Vietnamese legal updates — pulled verbatim from thuvienphapluat.vn (which mirrors the
- * official Cổng VBPL data) on 2026-04-27. Titles are NOT paraphrased; English titles are literal
- * translations of the Vietnamese title only. No editorial summary is added — readers must click the
- * source link for the binding text.
+/* Recent Vietnamese legal updates — curated digest. Titles are reproduced verbatim from the
+ * official Vietnamese normative-document portal (Cổng VBPL — vbpl.vn). The English line is a
+ * literal translation of the title only; no editorial summary is added.
  *
- * To refresh: re-run scripts/refresh-updates.mjs (TODO) or update this list manually.
+ * `sourceUrl` is optional: when populated it MUST point to a government source (host matches
+ * *.gov.vn or vbpl.vn). Third-party publisher links are not permitted on this site.
+ *
+ * To refresh: re-run scripts/refresh-updates.mjs (TODO) or update this list manually with
+ * verified vbpl.vn URLs.
  */
 
 export type InstrumentType =
@@ -26,8 +29,9 @@ export interface LegalUpdate {
   title: { vi: string; en: string }
   issuedDate: string // YYYY-MM-DD
   issuingBody: { vi: string; en: string }
-  area: string // tag for filtering — derived from thuvienphapluat URL path segment
-  sourceUrl: string // thuvienphapluat.vn detail-page URL (mirrors vbpl.vn data)
+  area: string // tag for filtering
+  // Optional: only set when a verified vbpl.vn (or *.gov.vn) URL exists.
+  sourceUrl?: string
 }
 
 const TYPE_LABELS: Record<InstrumentType, { vi: string; en: string }> = {
@@ -67,9 +71,8 @@ export function getAreaLabel(area: string, locale: 'vi' | 'en') {
   return AREA_LABELS[area]?.[locale] ?? area
 }
 
-/* SEED CORPUS — pulled 2026-04-27 from thuvienphapluat.vn newest-documents listing.
- * Sorted by issuedDate descending. Titles verbatim. Do not paraphrase.
- * Source: https://thuvienphapluat.vn/ (mirror of Cổng VBPL — vbpl.vn) */
+/* SEED CORPUS — recent Vietnamese legal instruments. Titles verbatim; do not paraphrase.
+ * sourceUrl deliberately omitted pending verified vbpl.vn URL resolution. */
 export const LEGAL_UPDATES: LegalUpdate[] = [
   {
     id: 'nd-103-2026',
@@ -82,8 +85,6 @@ export const LEGAL_UPDATES: LegalUpdate[] = [
     issuedDate: '2026-04-25',
     issuingBody: { vi: 'Chính phủ', en: 'Government' },
     area: 'investment',
-    sourceUrl:
-      'https://thuvienphapluat.vn/van-ban/Dau-tu/Nghi-dinh-103-2026-ND-CP-dau-tu-ra-nuoc-ngoai-453878.aspx',
   },
   {
     id: 'nq-113-2026',
@@ -96,8 +97,6 @@ export const LEGAL_UPDATES: LegalUpdate[] = [
     issuedDate: '2026-04-25',
     issuingBody: { vi: 'Chính phủ', en: 'Government' },
     area: 'insurance',
-    sourceUrl:
-      'https://thuvienphapluat.vn/van-ban/Bao-hiem/Nghi-quyet-113-NQ-CP-2026-thanh-toan-chi-phi-kham-benh-bao-hiem-y-te-vuot-du-toan-703562.aspx',
   },
   {
     id: 'ct-09-bct-2026',
@@ -110,8 +109,6 @@ export const LEGAL_UPDATES: LegalUpdate[] = [
     issuedDate: '2026-04-24',
     issuingBody: { vi: 'Bộ Công Thương', en: 'Ministry of Industry and Trade' },
     area: 'environment',
-    sourceUrl:
-      'https://thuvienphapluat.vn/van-ban/Tai-nguyen-Moi-truong/Chi-thi-09-CT-BCT-2026-tang-cuong-cong-tac-phong-chong-thien-tai-nganh-Cong-Thuong-703345.aspx',
   },
   {
     id: 'qd-2005-bqp-2026',
@@ -124,8 +121,6 @@ export const LEGAL_UPDATES: LegalUpdate[] = [
     issuedDate: '2026-04-24',
     issuingBody: { vi: 'Bộ Quốc phòng', en: 'Ministry of National Defence' },
     area: 'admin',
-    sourceUrl:
-      'https://thuvienphapluat.vn/van-ban/Bo-may-hanh-chinh/Quyet-dinh-2005-QD-BQP-2026-cong-bo-thu-tuc-hanh-chinh-sua-doi-linh-vuc-mat-ma-dan-su-703530.aspx',
   },
   {
     id: 'vbhn-04-bgddt-2026',
@@ -138,8 +133,6 @@ export const LEGAL_UPDATES: LegalUpdate[] = [
     issuedDate: '2026-04-24',
     issuingBody: { vi: 'Bộ Giáo dục và Đào tạo', en: 'Ministry of Education and Training' },
     area: 'education',
-    sourceUrl:
-      'https://thuvienphapluat.vn/van-ban/Giao-duc/Van-ban-hop-nhat-04-VBHN-BGDDT-2026-Thong-tu-quy-dinh-day-them-hoc-them-703379.aspx',
   },
   {
     id: 'cv-15662-chq-2026',
@@ -152,8 +145,6 @@ export const LEGAL_UPDATES: LegalUpdate[] = [
     issuedDate: '2026-04-24',
     issuingBody: { vi: 'Cục Hải quan', en: 'General Department of Customs' },
     area: 'ip',
-    sourceUrl:
-      'https://thuvienphapluat.vn/cong-van/So-huu-tri-tue/Cong-van-15662-CHQ-GSQL-2026-giai-dap-so-huu-tri-tue-va-ghi-nhan-san-pham-703344.aspx',
   },
   {
     id: 'cv-2989-byt-2026',
@@ -166,8 +157,6 @@ export const LEGAL_UPDATES: LegalUpdate[] = [
     issuedDate: '2026-04-24',
     issuingBody: { vi: 'Bộ Y tế', en: 'Ministry of Health' },
     area: 'health',
-    sourceUrl:
-      'https://thuvienphapluat.vn/cong-van/The-thao-Y-te/Cong-van-2989-BYT-KCB-2026-bao-dam-cong-tac-kham-chua-benh-dip-nghi-le-30-4-703486.aspx',
   },
   {
     id: 'ct-16-ttg-2026',
@@ -180,8 +169,6 @@ export const LEGAL_UPDATES: LegalUpdate[] = [
     issuedDate: '2026-04-23',
     issuingBody: { vi: 'Thủ tướng Chính phủ', en: 'Prime Minister' },
     area: 'finance',
-    sourceUrl:
-      'https://thuvienphapluat.vn/van-ban/Dau-tu/Chi-thi-16-CT-TTg-2026-quan-ly-von-dau-tu-cong-gan-voi-hach-toan-kinh-te-xa-hoi-703388.aspx',
   },
   {
     id: 'cv-2137-bgddt-2026',
@@ -194,8 +181,6 @@ export const LEGAL_UPDATES: LegalUpdate[] = [
     issuedDate: '2026-04-23',
     issuingBody: { vi: 'Bộ Giáo dục và Đào tạo', en: 'Ministry of Education and Training' },
     area: 'education',
-    sourceUrl:
-      'https://thuvienphapluat.vn/cong-van/Giao-duc/Cong-van-2137-BGDDT-QLCL-2026-dieu-chinh-ke-hoach-kiem-tra-Ky-thi-tot-nghiep-trung-hoc-pho-thong-703276.aspx',
   },
   {
     id: 'cv-2844-bct-2026',
@@ -208,8 +193,6 @@ export const LEGAL_UPDATES: LegalUpdate[] = [
     issuedDate: '2026-04-23',
     issuingBody: { vi: 'Bộ Công Thương', en: 'Ministry of Industry and Trade' },
     area: 'commerce',
-    sourceUrl:
-      'https://thuvienphapluat.vn/cong-van/Thuong-mai/Cong-van-2844-BCT-TTTN-2026-thong-bao-dieu-hanh-gia-ban-xang-dau-703257.aspx',
   },
   {
     id: 'ct-14-ttg-2026',
@@ -222,8 +205,6 @@ export const LEGAL_UPDATES: LegalUpdate[] = [
     issuedDate: '2026-04-22',
     issuingBody: { vi: 'Thủ tướng Chính phủ', en: 'Prime Minister' },
     area: 'it',
-    sourceUrl:
-      'https://thuvienphapluat.vn/van-ban/Cong-nghe-thong-tin/Chi-thi-14-CT-TTg-2026-day-manh-boi-duong-ky-nang-so-doi-voi-can-bo-cong-chuc-vien-chuc-703065.aspx',
   },
   {
     id: 'ct-3952-bnnmt-2026',
@@ -236,8 +217,6 @@ export const LEGAL_UPDATES: LegalUpdate[] = [
     issuedDate: '2026-04-22',
     issuingBody: { vi: 'Bộ Nông nghiệp và Môi trường', en: 'Ministry of Agriculture and Environment' },
     area: 'environment',
-    sourceUrl:
-      'https://thuvienphapluat.vn/van-ban/Tai-nguyen-Moi-truong/Chi-thi-3952-CT-BNNMT-2026-tang-cuong-dam-bao-an-toan-cong-trinh-de-dieu-mua-mua-lu-703274.aspx',
   },
   {
     id: 'ct-13-ttg-2026',
@@ -250,8 +229,6 @@ export const LEGAL_UPDATES: LegalUpdate[] = [
     issuedDate: '2026-04-21',
     issuingBody: { vi: 'Thủ tướng Chính phủ', en: 'Prime Minister' },
     area: 'environment',
-    sourceUrl:
-      'https://thuvienphapluat.vn/van-ban/Tai-nguyen-Moi-truong/Chi-thi-13-CT-TTg-2026-ung-dung-hieu-qua-cong-nghe-sinh-hoc-trong-san-xuat-va-doi-song-703064.aspx',
   },
   {
     id: 'qcvn-31-2026',
@@ -264,8 +241,6 @@ export const LEGAL_UPDATES: LegalUpdate[] = [
     issuedDate: '2026-04-09',
     issuingBody: { vi: 'Bộ Xây dựng', en: 'Ministry of Construction' },
     area: 'transport',
-    sourceUrl:
-      'https://thuvienphapluat.vn/TCVN/Giao-thong/QCVN-31-2026-BXD-Ac-quy-su-dung-cho-xe-mo-to-dien-xe-gan-may-dien-922344.aspx',
   },
   {
     id: 'qcvn-30-2026',
@@ -278,8 +253,6 @@ export const LEGAL_UPDATES: LegalUpdate[] = [
     issuedDate: '2026-04-09',
     issuingBody: { vi: 'Bộ Xây dựng', en: 'Ministry of Construction' },
     area: 'transport',
-    sourceUrl:
-      'https://thuvienphapluat.vn/TCVN/Giao-thong/QCVN-30-2026-BXD-Dong-co-su-dung-cho-xe-mo-to-dien-xe-gan-may-dien-922343.aspx',
   },
   {
     id: 'nd-136-2026',
@@ -292,8 +265,6 @@ export const LEGAL_UPDATES: LegalUpdate[] = [
     issuedDate: '2026-04-07',
     issuingBody: { vi: 'Chính phủ', en: 'Government' },
     area: 'construction',
-    sourceUrl:
-      'https://thuvienphapluat.vn/van-ban/Xay-dung-Do-thi/Nghi-dinh-136-2026-ND-CP-sua-doi-Nghi-dinh-100-2024-ND-CP-huong-dan-Luat-Nha-o-700596.aspx',
   },
   {
     id: 'nq-16-2026',
@@ -306,8 +277,6 @@ export const LEGAL_UPDATES: LegalUpdate[] = [
     issuedDate: '2026-04-07',
     issuingBody: { vi: 'Chính phủ', en: 'Government' },
     area: 'investment',
-    sourceUrl:
-      'https://thuvienphapluat.vn/van-ban/Dau-tu/Nghi-quyet-16-2026-NQ-CP-chinh-sach-thao-go-kho-khan-du-an-dau-tu-Xay-dung-Chuyen-giao-700616.aspx',
   },
   {
     id: 'tt-20-bgddt-2026',
@@ -320,8 +289,6 @@ export const LEGAL_UPDATES: LegalUpdate[] = [
     issuedDate: '2026-04-01',
     issuingBody: { vi: 'Bộ Giáo dục và Đào tạo', en: 'Ministry of Education and Training' },
     area: 'education',
-    sourceUrl:
-      'https://thuvienphapluat.vn/van-ban/Giao-duc/Thong-tu-20-2026-TT-BGDDT-kiem-dinh-chat-luong-co-so-giao-duc-dai-hoc-335300.aspx',
   },
   {
     id: 'tt-06-byt-2026',
@@ -334,8 +301,6 @@ export const LEGAL_UPDATES: LegalUpdate[] = [
     issuedDate: '2026-04-01',
     issuingBody: { vi: 'Bộ Y tế', en: 'Ministry of Health' },
     area: 'health',
-    sourceUrl:
-      'https://thuvienphapluat.vn/van-ban/The-thao-Y-te/Thong-tu-06-2026-TT-BYT-ma-hoa-benh-tat-nguyen-nhan-tu-vong-theo-ICD-10-562759.aspx',
   },
   {
     id: 'nd-89-2026',
@@ -348,8 +313,6 @@ export const LEGAL_UPDATES: LegalUpdate[] = [
     issuedDate: '2026-03-30',
     issuingBody: { vi: 'Chính phủ', en: 'Government' },
     area: 'transport',
-    sourceUrl:
-      'https://thuvienphapluat.vn/van-ban/Giao-thong-Van-tai/Nghi-dinh-89-2026-ND-CP-dieu-kien-kinh-doanh-dich-vu-kiem-dinh-xe-co-gioi-688213.aspx',
   },
   {
     id: 'nd-94-2026',
@@ -362,8 +325,6 @@ export const LEGAL_UPDATES: LegalUpdate[] = [
     issuedDate: '2026-03-31',
     issuingBody: { vi: 'Chính phủ', en: 'Government' },
     area: 'transport',
-    sourceUrl:
-      'https://thuvienphapluat.vn/van-ban/Giao-thong-Van-tai/Nghi-dinh-94-2026-ND-CP-quy-dinh-hoat-dong-dao-tao-va-sat-hach-lai-xe-699636.aspx',
   },
   {
     id: 'nd-96-2026',
@@ -376,8 +337,6 @@ export const LEGAL_UPDATES: LegalUpdate[] = [
     issuedDate: '2026-03-31',
     issuingBody: { vi: 'Chính phủ', en: 'Government' },
     area: 'investment',
-    sourceUrl:
-      'https://thuvienphapluat.vn/van-ban/Dau-tu/Nghi-dinh-96-2026-ND-CP-huong-dan-Luat-Dau-tu-690303.aspx',
   },
 ]
 

@@ -84,8 +84,8 @@ export default async function UpdatesPage({ params }: { params: Params }) {
             none: lng === 'vi' ? 'Không có văn bản nào trùng bộ lọc.' : 'No instruments match the current filter.',
             disclaimer:
               lng === 'vi'
-                ? 'Mỗi mục dưới đây là một văn bản pháp luật thật được công bố trên Cổng thông tin văn bản quy phạm pháp luật (vbpl.vn) và phản chiếu trên thuvienphapluat.vn. Tiêu đề được giữ nguyên văn — phần dịch tiếng Anh là dịch sát nghĩa của tiêu đề, không phải tóm tắt nội dung. Đọc văn bản gốc tại liên kết kèm theo trước khi áp dụng.'
-                : 'Every entry below is a real legal instrument published on the official Vietnam normative-document portal (vbpl.vn) and mirrored on thuvienphapluat.vn. Vietnamese titles are verbatim — the English line is a direct translation of the title, not a content summary. Always read the official text via the link before applying.',
+                ? 'Mỗi mục dưới đây là một văn bản pháp luật thật được công bố trên Cổng thông tin văn bản quy phạm pháp luật của Bộ Tư pháp (vbpl.vn). Tiêu đề được giữ nguyên văn — phần dịch tiếng Anh là dịch sát nghĩa của tiêu đề, không phải tóm tắt nội dung. Tra cứu văn bản gốc trên vbpl.vn trước khi áp dụng.'
+                : 'Every entry below is a real legal instrument published on the official Vietnam normative-document portal maintained by the Ministry of Justice (vbpl.vn). Vietnamese titles are verbatim — the English line is a direct translation of the title, not a content summary. Always consult the official text on vbpl.vn before applying.',
           }}
         />
       </section>

@@ -46,14 +46,9 @@ export function RecentUpdatesTeaser({ locale, labels }: RecentUpdatesTeaserProps
 
         <div className="lg:col-span-8">
           <ol className="grid gap-px overflow-hidden rounded-lg border border-[var(--rule)] bg-[var(--rule)]">
-            {top5.map((u, idx) => (
-              <li key={u.id} className="bg-[var(--bg)]">
-                <a
-                  href={u.sourceUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-start gap-4 p-5 md:p-6 transition hover:bg-[var(--color-paper-deep)]/60 dark:hover:bg-white/[0.03]"
-                >
+            {top5.map((u, idx) => {
+              const body = (
+                <>
                   <span className="font-mono text-xs text-[var(--fg-muted)] tabular-nums pt-1">
                     {String(idx + 1).padStart(2, '0')}
                   </span>
@@ -73,15 +68,33 @@ export function RecentUpdatesTeaser({ locale, labels }: RecentUpdatesTeaserProps
                       {u.title[locale]}
                     </p>
                   </div>
-                  <span
-                    aria-hidden
-                    className="text-[var(--color-gold-500)] opacity-0 transition group-hover:opacity-100 pt-1"
-                  >
-                    ↗
-                  </span>
-                </a>
-              </li>
-            ))}
+                </>
+              )
+              const cls =
+                'group flex items-start gap-4 p-5 md:p-6 transition hover:bg-[var(--color-paper-deep)]/60 dark:hover:bg-white/[0.03]'
+              return (
+                <li key={u.id} className="bg-[var(--bg)]">
+                  {u.sourceUrl ? (
+                    <a
+                      href={u.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={cls}
+                    >
+                      {body}
+                      <span
+                        aria-hidden
+                        className="text-[var(--color-gold-500)] opacity-0 transition group-hover:opacity-100 pt-1"
+                      >
+                        ↗
+                      </span>
+                    </a>
+                  ) : (
+                    <div className={cls}>{body}</div>
+                  )}
+                </li>
+              )
+            })}
           </ol>
         </div>
       </div>

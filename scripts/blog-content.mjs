@@ -7,7 +7,7 @@ export const SEED_POSTS = [
     slug: 'reading-vietnamese-decree',
     category: 'commentary',
     publishedAt: '2026-04-15',
-    author: 'Apolo Editorial',
+    author: 'Apolo Editorial Team',
     title: {
       vi: 'Đọc một Nghị định Việt Nam: hướng dẫn cho người không học luật',
       en: 'Reading a Vietnamese decree: a guide for non-lawyers',
@@ -49,7 +49,7 @@ export const SEED_POSTS = [
     slug: 'pdpl-2026-saas-startups',
     category: 'compliance',
     publishedAt: '2026-04-08',
-    author: 'Apolo Editorial',
+    author: 'Apolo Editorial Team',
     title: {
       vi: 'Luật Bảo vệ Dữ liệu Cá nhân 2026: SaaS startups cần làm gì',
       en: "Vietnam's 2026 Personal Data Protection Law: what changes for SaaS startups",
@@ -91,7 +91,7 @@ export const SEED_POSTS = [
     slug: 'civil-code-2015-vs-2005',
     category: 'commentary',
     publishedAt: '2026-03-25',
-    author: 'Apolo Editorial',
+    author: 'Apolo Editorial Team',
     title: {
       vi: 'Bộ luật Dân sự 2015 so với 2005: năm thay đổi lớn nhất về luật hợp đồng',
       en: 'Civil Code 2015 vs 2005: the five biggest contract-law shifts',
@@ -137,7 +137,7 @@ export const SEED_POSTS = [
     slug: 'severance-when-triggered',
     category: 'practice-update',
     publishedAt: '2026-03-12',
-    author: 'Apolo Editorial',
+    author: 'Apolo Editorial Team',
     title: {
       vi: 'Khi nào hợp đồng lao động Việt Nam phát sinh trợ cấp thôi việc?',
       en: 'When does a Vietnamese employment contract trigger statutory severance?',
@@ -179,7 +179,7 @@ export const SEED_POSTS = [
     slug: 'limitations-commercial-disputes',
     category: 'case-analysis',
     publishedAt: '2026-02-28',
-    author: 'Apolo Editorial',
+    author: 'Apolo Editorial Team',
     title: {
       vi: 'Bẫy thời hiệu trong tranh chấp thương mại Việt Nam',
       en: 'Statute-of-limitations traps in Vietnamese commercial disputes',
@@ -221,7 +221,7 @@ export const SEED_POSTS = [
     slug: 'notarisation-vs-authentication',
     category: 'practice-update',
     publishedAt: '2026-02-15',
-    author: 'Apolo Editorial',
+    author: 'Apolo Editorial Team',
     title: {
       vi: 'Công chứng và chứng thực: khác nhau ở đâu?',
       en: 'Notarisation vs authentication: when each is required under Vietnamese law',
@@ -267,7 +267,7 @@ export const SEED_POSTS = [
     slug: 'reading-court-verdict',
     category: 'commentary',
     publishedAt: '2026-02-01',
-    author: 'Apolo Editorial',
+    author: 'Apolo Editorial Team',
     title: {
       vi: 'Đọc bản án: cấu trúc một quyết định của tòa Việt Nam',
       en: 'Reading a court verdict: a primer on Vietnamese judgment structure',
@@ -309,7 +309,7 @@ export const SEED_POSTS = [
     slug: 'foreign-investment-single-window',
     category: 'policy',
     publishedAt: '2026-01-22',
-    author: 'Apolo Editorial',
+    author: 'Apolo Editorial Team',
     title: {
       vi: 'Đăng ký đầu tư nước ngoài: quy trình một cửa sau 2024',
       en: 'Foreign investment registration: the post-2024 single-window flow',

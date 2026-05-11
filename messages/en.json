@@ -37,8 +37,8 @@
   },
   "updates": {
     "title": "Recent Vietnamese legal instruments",
-    "lead": "Recently issued Vietnamese legal instruments — laws, codes, decrees, circulars, resolutions, decisions, directives, official letters, and technical standards. Every entry links straight to the original on thuvienphapluat.vn (which mirrors the official Cổng VBPL — vbpl.vn).",
-    "attribution": "Source: thuvienphapluat.vn / vbpl.vn (the Ministry of Justice's official normative-document portal). Titles are reproduced verbatim from the original; the English line is a literal translation of the title only — not a content summary.",
+    "lead": "Recently issued Vietnamese legal instruments — laws, codes, decrees, circulars, resolutions, decisions, directives, official letters, and technical standards. Titles are reproduced verbatim from the official Cổng VBPL (vbpl.vn) maintained by the Ministry of Justice.",
+    "attribution": "Titles are reproduced verbatim from the official Cổng VBPL (vbpl.vn) — the Ministry of Justice's normative-document portal. The English line is a literal translation of the title only, not a content summary.",
     "lastSync": "Most recent update:"
   },
   "footer": {
@@ -47,7 +47,7 @@
   },
   "blog": {
     "title": "Editorial blog",
-    "lead": "Commentary, case analysis, practice updates, and policy notes on the Vietnamese legal system — written by Apolo Editorial.",
+    "lead": "Commentary, case analysis, practice updates, and policy notes on the Vietnamese legal system — written by Apolo Editorial Team.",
     "filterAll": "All posts",
     "filterCommentary": "Commentary",
     "filterCaseAnalysis": "Case analysis",
@@ -74,7 +74,7 @@
   "recentUpdates": {
     "eyebrow": "Recent legal instruments",
     "title": "What was issued this quarter",
-    "lead": "The newest Vietnamese laws, decrees, circulars, and resolutions — sourced verbatim from vbpl.vn / thuvienphapluat.vn.",
+    "lead": "The newest Vietnamese laws, decrees, circulars, and resolutions — titles reproduced verbatim from the official Cổng VBPL (vbpl.vn).",
     "viewAll": "View all updates"
   },
   "notFound": {

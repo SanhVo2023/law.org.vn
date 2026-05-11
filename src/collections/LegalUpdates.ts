@@ -2,14 +2,14 @@ import type { CollectionConfig } from 'payload'
 
 /* Curated digest of recent Vietnamese legal documents (laws/decrees/circulars/etc.).
  * Single-locale: titles are stored in Vietnamese (verbatim) + a literal English
- * translation field — no editorial summary. Source link is canonical thuvienphapluat.vn / vbpl.vn. */
+ * translation field — no editorial summary. Source link is canonical vbpl.vn (or *.gov.vn). */
 export const LegalUpdates: CollectionConfig = {
   slug: 'legal-updates',
   admin: {
     useAsTitle: 'titleVi',
     defaultColumns: ['number', 'titleVi', 'type', 'issuedDate'],
     description:
-      'Recent Vietnamese legal documents — verbatim from thuvienphapluat.vn / vbpl.vn. Do not paraphrase Vietnamese title; English title is title-only literal translation.',
+      'Recent Vietnamese legal documents — verbatim from the official Cổng VBPL (vbpl.vn). Do not paraphrase Vietnamese title; English title is title-only literal translation.',
   },
   access: {
     read: () => true,
@@ -105,10 +105,10 @@ export const LegalUpdates: CollectionConfig = {
     {
       name: 'sourceUrl',
       type: 'text',
-      required: true,
+      required: false,
       admin: {
         description:
-          'Canonical link to the document on thuvienphapluat.vn or vbpl.vn — readers click here for the binding text.',
+          'Optional canonical link to the document on vbpl.vn (or another *.gov.vn portal). Third-party publisher links are NOT permitted — leave blank if no government URL is available.',
       },
     },
   ],

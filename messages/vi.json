@@ -37,8 +37,8 @@
   },
   "updates": {
     "title": "Cập nhật pháp luật Việt Nam",
-    "lead": "Danh mục các văn bản pháp luật mới được công bố tại Việt Nam — pháp lệnh, luật, bộ luật, nghị định, thông tư, nghị quyết, quyết định, chỉ thị, công văn và quy chuẩn kỹ thuật. Mỗi mục dẫn trực tiếp tới bản gốc trên thuvienphapluat.vn (phản chiếu Cổng VBPL — vbpl.vn).",
-    "attribution": "Nguồn: thuvienphapluat.vn / vbpl.vn (Cổng thông tin văn bản quy phạm pháp luật của Bộ Tư pháp). Tiêu đề được giữ nguyên văn theo bản gốc; phần dịch tiếng Anh chỉ là dịch tiêu đề, không phải tóm tắt nội dung.",
+    "lead": "Danh mục các văn bản pháp luật mới được công bố tại Việt Nam — pháp lệnh, luật, bộ luật, nghị định, thông tư, nghị quyết, quyết định, chỉ thị, công văn và quy chuẩn kỹ thuật. Tiêu đề được giữ nguyên văn theo Cổng Văn bản quy phạm pháp luật (vbpl.vn) của Bộ Tư pháp.",
+    "attribution": "Tiêu đề được giữ nguyên văn theo Cổng VBPL (vbpl.vn) — Cổng thông tin văn bản quy phạm pháp luật của Bộ Tư pháp. Phần dịch tiếng Anh chỉ là dịch tiêu đề, không phải tóm tắt nội dung.",
     "lastSync": "Cập nhật mới nhất:"
   },
   "footer": {
@@ -47,7 +47,7 @@
   },
   "blog": {
     "title": "Bài viết biên tập",
-    "lead": "Bình luận, phân tích vụ việc, cập nhật thực tiễn và ghi chú chính sách về hệ thống pháp luật Việt Nam — do Apolo Editorial biên soạn.",
+    "lead": "Bình luận, phân tích vụ việc, cập nhật thực tiễn và ghi chú chính sách về hệ thống pháp luật Việt Nam — do Apolo Editorial Team biên soạn.",
     "filterAll": "Tất cả",
     "filterCommentary": "Bình luận",
     "filterCaseAnalysis": "Phân tích vụ việc",
@@ -74,7 +74,7 @@
   "recentUpdates": {
     "eyebrow": "Văn bản pháp luật mới",
     "title": "Quý này có gì",
-    "lead": "Các luật, nghị định, thông tư và nghị quyết mới ban hành — trích nguyên văn từ vbpl.vn / thuvienphapluat.vn.",
+    "lead": "Các luật, nghị định, thông tư và nghị quyết mới ban hành — tiêu đề trích nguyên văn từ Cổng VBPL (vbpl.vn).",
     "viewAll": "Xem toàn bộ"
   },
   "notFound": {

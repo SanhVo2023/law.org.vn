@@ -379,7 +379,6 @@ export const TRUSTED_SOURCE_CREST: Record<string, ImageEntry> = {
   vksndtc: images.crestVksndtc,
   'bo-tu-phap': images.crestBoTuPhap,
   vbpl: images.crestVbpl,
-  thuvienphapluat: images.crestThuVienPhapLuat,
   viac: images.crestViac,
 }
 

@@ -1,11 +1,15 @@
 import { Link } from '@/i18n/navigation'
-import { getTranslations } from 'next-intl/server'
-import { CATEGORIES, ECOSYSTEM_LINKS } from '@/lib/site'
+import { getTranslations, getLocale } from 'next-intl/server'
+import { CATEGORIES, CONTACT_VN, CONTACT_EN, getEcosystemLinks } from '@/lib/site'
 import { Ornament } from '@/components/ui/Ornament'
 import { LEGAL_UPDATES, getTypeLabel } from '@/lib/updates'
 
 export async function SiteFooter() {
   const t = await getTranslations()
+  const locale = await getLocale()
+  const isEn = locale === 'en'
+  const contact = isEn ? CONTACT_EN : CONTACT_VN
+  const ecosystemLinks = getEcosystemLinks(locale)
 
   return (
     <footer className="mt-20 border-t border-[var(--rule)] bg-[var(--color-paper-deep)]/40 dark:bg-transparent no-print">
@@ -29,7 +33,7 @@ export async function SiteFooter() {
 
           <section className="md:col-span-3">
             <h4 className="text-[0.65rem] uppercase tracking-[0.18em] text-[var(--color-gold-500)] font-semibold">
-              {t('nav.legalSystem').toLowerCase().includes('hệ') ? 'Cụm chủ đề' : 'Topics'}
+              {isEn ? 'Topics' : 'Cụm chủ đề'}
             </h4>
             <ul className="mt-4 space-y-2.5 text-sm">
               {CATEGORIES.map((c) => (
@@ -47,16 +51,32 @@ export async function SiteFooter() {
               {t('nav.updates')}
             </h4>
             <ul className="mt-4 space-y-2.5 text-sm">
-              {LEGAL_UPDATES.slice(0, 4).map((u) => (
-                <li key={u.id}>
-                  <a href={u.sourceUrl} target="_blank" rel="noopener" className="block text-[var(--fg)] hover:text-[var(--color-gold-500)] transition">
+              {LEGAL_UPDATES.slice(0, 4).map((u) => {
+                const inner = (
+                  <>
                     <span className="font-mono text-[0.6rem] uppercase tracking-[0.14em] text-[var(--color-gold-500)]">
                       {getTypeLabel(u.type, 'vi')} · {u.number}
                     </span>
                     <span className="block text-xs text-[var(--fg-muted)] line-clamp-2 leading-tight mt-1">{u.title.vi}</span>
-                  </a>
-                </li>
-              ))}
+                  </>
+                )
+                return (
+                  <li key={u.id}>
+                    {u.sourceUrl ? (
+                      <a
+                        href={u.sourceUrl}
+                        target="_blank"
+                        rel="noopener"
+                        className="block text-[var(--fg)] hover:text-[var(--color-gold-500)] transition"
+                      >
+                        {inner}
+                      </a>
+                    ) : (
+                      <span className="block text-[var(--fg)]">{inner}</span>
+                    )}
+                  </li>
+                )
+              })}
               <li className="pt-2 border-t border-[var(--rule)]">
                 <Link href="/updates" className="text-xs uppercase tracking-[0.14em] text-[var(--color-gold-500)] hover:underline">
                   {t('nav.updates')} →
@@ -70,7 +90,7 @@ export async function SiteFooter() {
               {t('footer.ecosystemTitle')}
             </h4>
             <ul className="mt-4 space-y-2.5 text-sm">
-              {ECOSYSTEM_LINKS.map((link) => (
+              {ecosystemLinks.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
@@ -88,21 +108,73 @@ export async function SiteFooter() {
 
         <div className="mt-14 pt-8 border-t border-[var(--rule)]">
           <h4 className="text-[0.65rem] uppercase tracking-[0.18em] text-[var(--fg-muted)] font-semibold">
-            Apolo Lawyers
+            {contact.shortName}
           </h4>
+          <p className="mt-3 text-xs leading-relaxed text-[var(--fg-muted)] max-w-2xl">
+            {contact.companyName}
+          </p>
           <address className="mt-3 not-italic text-sm leading-relaxed text-[var(--fg)] max-w-md">
-            108 Trần Đình Xu, P. Nguyễn Cư Trinh, Q. 1<br />
-            TP. Hồ Chí Minh, Việt Nam<br />
-            <a href="tel:+84903419479" className="text-[var(--fg-muted)] hover:text-[var(--fg)]">+84 903 419 479</a>
-            <span className="mx-2 text-[var(--fg-muted)]">·</span>
-            <a href="mailto:contact@apolo.com.vn" className="text-[var(--fg-muted)] hover:text-[var(--fg)]">contact@apolo.com.vn</a>
+            {contact.addressLine}
+            <br />
+            {contact.phones.map((p, i) => (
+              <span key={p.tel}>
+                <a href={`tel:${p.tel}`} className="text-[var(--fg-muted)] hover:text-[var(--fg)]">
+                  {p.label}
+                </a>
+                {i < contact.phones.length - 1 ? <span className="mx-2 text-[var(--fg-muted)]">·</span> : null}
+              </span>
+            ))}
+            {isEn ? (
+              <>
+                <span className="mx-2 text-[var(--fg-muted)]">·</span>
+                <a
+                  href={`tel:${CONTACT_EN.hotline.tel}`}
+                  className="text-[var(--fg-muted)] hover:text-[var(--fg)]"
+                >
+                  Hotline {CONTACT_EN.hotline.label}
+                </a>
+              </>
+            ) : null}
+            <br />
+            <a href={`mailto:${contact.email}`} className="text-[var(--fg-muted)] hover:text-[var(--fg)]">
+              {contact.email}
+            </a>
           </address>
+
+          {isEn && CONTACT_EN.branch ? (
+            <div className="mt-8 pt-6 border-t border-[var(--rule)] max-w-2xl">
+              <h5 className="text-[0.6rem] uppercase tracking-[0.18em] text-[var(--fg-muted)] font-semibold">
+                {CONTACT_EN.branch.name}
+              </h5>
+              <address className="mt-2 not-italic text-sm leading-relaxed text-[var(--fg)]">
+                {CONTACT_EN.branch.addressLine}
+                <br />
+                {CONTACT_EN.branch.phones.map((p, i) => (
+                  <span key={p.tel}>
+                    <a href={`tel:${p.tel}`} className="text-[var(--fg-muted)] hover:text-[var(--fg)]">
+                      {p.label}
+                    </a>
+                    {i < CONTACT_EN.branch.phones.length - 1 ? (
+                      <span className="mx-2 text-[var(--fg-muted)]">·</span>
+                    ) : null}
+                  </span>
+                ))}
+                <span className="mx-2 text-[var(--fg-muted)]">·</span>
+                <a
+                  href={`tel:${CONTACT_EN.branch.hotline.tel}`}
+                  className="text-[var(--fg-muted)] hover:text-[var(--fg)]"
+                >
+                  Hotline {CONTACT_EN.branch.hotline.label}
+                </a>
+              </address>
+            </div>
+          ) : null}
         </div>
       </div>
 
       <div className="border-t border-[var(--rule)]">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 md:px-6 py-5 text-xs font-mono uppercase tracking-wider text-[var(--fg-muted)] md:flex-row md:items-center md:justify-between">
-          <span>© {new Date().getFullYear()} law.org.vn · Apolo Lawyers</span>
+          <span>© {new Date().getFullYear()} law.org.vn · {contact.shortName}</span>
           <span>Edition 2026.04 · Last reviewed {new Date().toISOString().slice(0, 10)}</span>
         </div>
       </div>

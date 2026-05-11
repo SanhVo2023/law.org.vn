@@ -71,10 +71,11 @@ export const BlogPosts: CollectionConfig = {
     {
       name: 'author',
       type: 'text',
-      defaultValue: 'Apolo Editorial',
+      defaultValue: 'Apolo Editorial Team',
       admin: {
         position: 'sidebar',
-        description: 'Display author byline.',
+        description:
+          'Display author byline. Canonical default per Mr Hien (2026-05-11): "Apolo Editorial Team". Use Mr Hien\'s name only when he personally authored the piece.',
       },
     },
     {

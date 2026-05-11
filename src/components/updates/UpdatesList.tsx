@@ -165,17 +165,19 @@ function UpdateRow({
               <dd className="text-[var(--fg)] truncate">{update.issuingBody[locale]}</dd>
             </div>
           </dl>
-          <a
-            href={update.sourceUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-[0.14em] text-[var(--fg-muted)] hover:text-[var(--color-gold-500)] transition"
-          >
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden>
-              <path d="M14 4h6v6M20 4l-9 9M19 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            {labels.sourceLabel}
-          </a>
+          {update.sourceUrl ? (
+            <a
+              href={update.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-[0.14em] text-[var(--fg-muted)] hover:text-[var(--color-gold-500)] transition"
+            >
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden>
+                <path d="M14 4h6v6M20 4l-9 9M19 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              {labels.sourceLabel}
+            </a>
+          ) : null}
         </div>
       </div>
     </article>

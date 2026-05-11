@@ -52,12 +52,6 @@ const SOURCES: Source[] = [
     url: 'https://vbpl.vn',
   },
   {
-    id: 'thuvienphapluat',
-    fullVi: 'Thư viện Pháp luật',
-    fullEn: 'Law Library',
-    url: 'https://thuvienphapluat.vn',
-  },
-  {
     id: 'viac',
     fullVi: 'Trung tâm Trọng tài Quốc tế Việt Nam',
     fullEn: 'Vietnam International Arbitration Centre',
@@ -76,7 +70,7 @@ export function TrustedSources({ caption, subcaption, locale }: TrustedSourcesPr
           <p className="mt-3 text-sm leading-relaxed text-[var(--fg-muted)]">{subcaption}</p>
         </div>
 
-        <ul className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-x-6 gap-y-10">
+        <ul className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-x-6 gap-y-10">
           {SOURCES.map((s) => {
             const crest = TRUSTED_SOURCE_CREST[s.id]
             return (
