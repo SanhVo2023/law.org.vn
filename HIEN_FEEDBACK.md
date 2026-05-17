@@ -132,6 +132,40 @@ Govt allowlist applied per Thach: `*.gov.vn` (any subdomain) + `vbpl.vn`. Intern
 
 ---
 
+## F-005: Section bodies cite statutes unrelated to the topic (random-hash bug)
+
+- **Date**: 2026-05-11
+- **Source**: Thach relaying Mr Hien (Phase 1 owner-review continuation)
+- **Severity**: high
+- **Category**: content accuracy
+- **Feedback (verbatim, translated if needed)**:
+  > "Tiêu đề lại nhầm với nội dung (có bài tiêu đề không đi với nội dung) — siết AI để viết cho đúng, cho nó kiểm tra lại kỹ, tiêu đề phải đi đôi với nội dung. VD: 'Background and drafting process' lại nói được điều chỉnh chủ yếu bởi 2015 Criminal Code. 'Document structure' lại nói 2015 Criminal Procedure Code là khung pháp lý cơ bản cho cấu trúc văn bản. 'Human rights and citizen rights' lại nói được điều chỉnh chủ yếu bởi 2014 Law on the People's Procuracy. 'Relationship with subordinate law' lại nói 2013 Land Law là khung pháp lý cơ bản."
+- **Evidence / reproduction**: The H2 sections of `/en/legal-system/constitution-2013` (Vietnamese title: "Hiến pháp 2013") cited four unrelated statutes — Criminal Code, Criminal Procedure Code, Law on the People's Procuracy, Land Law — none of which actually govern the Constitution. Same pattern across all 100 articles.
+- **Root cause**: `scripts/generate-seo-content.mjs:25-29` defined `pickFramework(locale, topicSlug, sectionIdx)` that hashed `(topicSlug + '-' + sectionIdx)` into a 13-statute pool (`FRAMEWORK_REFS` in `content-bank.mjs`). The hash had **zero correlation to the topic** — so a Constitution article's "Document structure" section landed on whatever index `('constitution-2013-1'.charCodeAt.sum % 13)` resolved to. Every article had this problem.
+- **Status**: fixed (2026-05-11)
+- **Generalizable?**: yes — the same generator pattern likely runs on law.pro.vn and other AI-content sites. PM should audit those.
+
+### Applied in (2026-05-11)
+
+Rejected approach: per-topic statute-frame override map. Too risky — 50 topics × 2 locales means 100 hand-picked citations and any miss in the lawyer-review pass would reintroduce a subtle wrongness.
+
+**Chosen approach**: strip ALL specific statute citations from generated section bodies. They are the lawyer-review pass's responsibility per the existing methodology note (already says: *"Specific statutory citations (article numbers and instrument designations) will be added in subsequent revisions"*). The lede still references the category-level intro (hand-written per cluster, always correct). The pull quote still attributes to Constitution 2013 Article 2/14/16 (universal to every legal topic).
+
+**Source changes**:
+- `scripts/content-bank.mjs` — removed `FRAMEWORK_REFS` (13-statute pool) entirely. Removed `frame` parameter from `LEDE_TEMPLATES` and all six `SECTION_TEMPLATES` `paraB` functions (3 VI + 3 EN). Each `paraB` rewritten to describe the legal architecture generically (e.g. "the rules touching on X typically fall into two groups: general norms…" / "specific article numbers and named instruments are added in the qualified-lawyer review pass"). Added a top-of-file comment block documenting the citation policy.
+- `scripts/generate-seo-content.mjs` — removed `pickFramework()` helper and all `frame` arguments to template builders. Reduced template variant count from 5→3 (was already 3 in code; comment was stale).
+
+**Re-import**:
+- `node scripts/generate-seo-content.mjs` → wrote 50 fresh drafts to `content/drafts/articles.json` (~999 words EN / ~1.5k VI per article).
+- New script `scripts/repatch-article-bodies.mjs` — direct-Postgres patcher that loads the drafts JSON, converts markdown → Lexical via the existing `markdown-to-lexical.mjs`, and `UPDATE lov.articles_locales SET content = $1 WHERE _parent_id = $2 AND _locale = $3` for all 100 rows. Dry-run + `--apply` modes.
+- `node scripts/repatch-article-bodies.mjs --apply` → `PATCHED 100 locale-rows, skipped 0`.
+
+**Verification**: temp `scripts/spot-check-content.mjs` (removed after use) regexed body text for 15 specific statute names (Bộ luật Dân sự, Bộ luật Hình sự, …, Civil Code, Criminal Code, Land Law, People's Procuracy, Enterprise Law, Labor Code, …) across 4 sample articles × 2 locales = 8 bodies. **Zero matches.** Section bodies no longer contain any specific statute name — the only specific citation site-wide is the pull-quote attribution ("2013 Constitution, Article 14") which is correct for every topic. Each section's prose now stays focused on its own heading.
+
+**Carryover**: the 50 topic outlines in `scripts/topics.mjs` are unchanged, so the `articles_toc_items` parent-table rows still match the new bodies. No TOC refresh needed.
+
+---
+
 ## F-004: Use the official post-merger address word-by-word
 
 - **Date**: 2026-05-04

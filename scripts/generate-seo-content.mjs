@@ -2,13 +2,17 @@
 /* Produce substantive markdown bodies for all 50 topics × 2 locales = 100 articles.
  * Each body is ~700-900 words with real prose, varied section templates, and a pull quote.
  * Output: content/drafts/articles.json — consumed by import-content.mjs.
+ *
+ * F-005 (Mr Hien 2026-05-11): generated bodies no longer cite specific statutes
+ * (the prior pickFramework() hash injected unrelated statute names per section,
+ * e.g. "2015 Criminal Code" in a Constitution article). Specific citations are
+ * the lawyer-review pass's responsibility.
  */
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { TOPICS } from './topics.mjs'
 import {
-  FRAMEWORK_REFS,
   DEFAULT_PULL_QUOTES,
   CATEGORY_FRAMES,
   SECTION_TEMPLATES,
@@ -20,13 +24,6 @@ import {
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const outDir = path.resolve(__dirname, '..', 'content', 'drafts')
 const outFile = path.join(outDir, 'articles.json')
-
-/* Pick a deterministic framework reference per topic+section to keep output stable across runs. */
-function pickFramework(locale, topicSlug, sectionIdx) {
-  const refs = FRAMEWORK_REFS[locale]
-  const hash = (topicSlug + '-' + sectionIdx).split('').reduce((a, c) => a + c.charCodeAt(0), 0)
-  return refs[hash % refs.length]
-}
 
 function pickPullQuote(locale, topicSlug) {
   const quotes = DEFAULT_PULL_QUOTES[locale]
@@ -42,7 +39,6 @@ function pickTemplate(locale, sectionIdx) {
 function buildSectionBlock(locale, topic, section, sectionIdx, allSections) {
   const heading = locale === 'vi' ? section.vi : section.en
   const topicTitle = locale === 'vi' ? topic.vi.title : topic.en.title
-  const frame = pickFramework(locale, topic.slug, sectionIdx)
   const tpl = pickTemplate(locale, sectionIdx)
 
   // For paraC's "related" reference, pick a different section's heading from the same article.
@@ -52,8 +48,8 @@ function buildSectionBlock(locale, topic, section, sectionIdx, allSections) {
     : allSections[otherIdx].en.toLowerCase()
 
   const paragraphs = [
-    tpl.paraA({ section: heading, topicTitle, frame }),
-    tpl.paraB({ section: heading, frame, topicTitle }),
+    tpl.paraA({ section: heading, topicTitle }),
+    tpl.paraB({ section: heading, topicTitle }),
     tpl.paraC({ section: heading, related, topicTitle }),
   ]
 
@@ -70,8 +66,7 @@ function getSiblings(topic, locale) {
 function buildBody(topic, locale) {
   const meta = locale === 'vi' ? topic.vi : topic.en
   const categoryFrame = CATEGORY_FRAMES[locale][topic.category] || ''
-  const frame = pickFramework(locale, topic.slug, 0)
-  const lede = LEDE_TEMPLATES[locale]({ topicTitle: meta.title, frame, categoryFrame })
+  const lede = LEDE_TEMPLATES[locale]({ topicTitle: meta.title, categoryFrame })
 
   // Section blocks
   const sectionBlocks = topic.outline.map((section, idx) =>
@@ -89,10 +84,7 @@ function buildBody(topic, locale) {
     ...sectionBlocks.slice(insertionPoint + 1),
   ]
 
-  const seeAlso = SEE_ALSO[locale]({
-    siblings: getSiblings(topic, locale),
-    glossarySlug: '/glossary',
-  })
+  const seeAlso = SEE_ALSO[locale]({ siblings: getSiblings(topic, locale) })
 
   const seeAlsoBlock =
     locale === 'vi' ? `## Đọc thêm\n\n${seeAlso}` : `## See also\n\n${seeAlso}`
