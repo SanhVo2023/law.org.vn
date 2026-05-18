@@ -17,8 +17,8 @@
   },
   "home": {
     "heroEyebrow": "Legal knowledge — transparent, systematic",
-    "heroTitle": "Understand Vietnamese law",
-    "heroLead": "An encyclopedic, non-commercial reference on Vietnam's Constitution, codes, court system, and litigation procedure — clearly written, cited, bilingual (Vietnamese + English).",
+    "heroTitle": "Understand Vietnamese Law Accurately",
+    "heroLead": "A bilingual Vietnamese English legal knowledge base, providing a clear and systematic overview of Vietnam's Constitution, courts, litigation procedures and legal system.",
     "exploreCta": "Explore the encyclopedia",
     "categoriesTitle": "Knowledge map",
     "featuredTitle": "Cornerstone entries",
@@ -37,17 +37,17 @@
   },
   "updates": {
     "title": "Recent Vietnamese legal instruments",
-    "lead": "Recently issued Vietnamese legal instruments — laws, codes, decrees, circulars, resolutions, decisions, directives, official letters, and technical standards. Titles are reproduced verbatim from the official Cổng VBPL (vbpl.vn) maintained by the Ministry of Justice.",
-    "attribution": "Titles are reproduced verbatim from the official Cổng VBPL (vbpl.vn) — the Ministry of Justice's normative-document portal. The English line is a literal translation of the title only, not a content summary.",
+    "lead": "Updates on newly issued legal instruments in Vietnam, including ordinances, laws, codes, decrees, circulars, resolutions, decisions, directives, official letters and technical regulations.",
+    "attribution": "Document titles are provided for reference and search purposes. The English version is for title identification only, and is not an official translation or content summary.",
     "lastSync": "Most recent update:"
   },
   "footer": {
     "ecosystemTitle": "Ecosystem",
-    "disclaimer": "Content is informational only and does not substitute for individualized legal advice."
+    "disclaimer": "The information on this website is provided for reference purposes only, does not constitute legal advice, and does not create an attorney client relationship."
   },
   "blog": {
     "title": "Editorial blog",
-    "lead": "Commentary, case analysis, practice updates, and policy notes on the Vietnamese legal system — written by Apolo Editorial Team.",
+    "lead": "Legal commentary, case analysis, practice updates and policy notes on Vietnam's legal system, prepared by the Apolo Editorial Team.",
     "filterAll": "All posts",
     "filterCommentary": "Commentary",
     "filterCaseAnalysis": "Case analysis",

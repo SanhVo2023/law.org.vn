@@ -91,9 +91,13 @@ Govt allowlist applied per Thach: `*.gov.vn` (any subdomain) + `vbpl.vn`. Intern
   - **Pass 1 (structural audit)**: Thach confirms the post-2025 judiciary topology (or PM researches & confirms with Hien — likely needs a citation to the Resolution / Law that effected the merger). Update `topics.mjs` first (it drives content seeding) → re-derive category structure → re-import affected articles via `scripts/import-content.mjs`.
   - **Pass 2 (article body fact-check)**: For every article under the "court-practice" / judiciary clusters, audit the body text for stale references (old province names, old district courts that no longer exist, addresses of merged-away tribunals). Either rewrite or mark `status: 'archived'` with a "pre-2025 reorganization" banner.
   - Hold sign-off on any article in `court-practice` cluster until both passes complete.
-- **Status**: open — blocked on Thach: (a) authoritative source for post-2025 court topology (Resolution number, official VBPL URL), (b) approval to mark draft articles archived if rewrite is too costly
+- **Status**: fixed (2026-05-18) — see F-012 for the applied restructure
 - **Generalizable?**: yes — every site in the ecosystem that mentions Vietnamese court hierarchy, province names, or government-office addresses needs a post-2025 audit. See `SITE_BUILD_FEEDBACK.md` Issue 12.
 - **PM action on sign-off**: _(PM fills)_
+
+### Resolution
+
+The post-2025 Resolution citation arrived in the 2026-05-17 CSV review (row 20): **Luật số 81/2025/QH15**, effective 01/07/2025. Both Tòa án nhân dân cấp cao (High Courts) and Tòa án nhân dân cấp huyện (District Courts) were abolished; a new tier `Tòa án nhân dân khu vực` (Regional People's Courts) was introduced. See F-012 below for the implementation log.
 
 ---
 
@@ -198,3 +202,152 @@ Canonical text lifted verbatim from workspace-root `address.txt` (post-2025 admi
 
 **Verification**: `npx tsc --noEmit` green. Visited the footer on `/vi` and `/en` (mental trace through SiteFooter logic): VN footer shows the verbatim VN address block + apolo.com.vn ecosystem link; EN footer shows the EN address block + East Saigon branch + apololawyers.com link. No string-drift between rendered output and `address.txt`.
 - **PM action on sign-off**: _(PM fills)_
+
+---
+
+# v4 — CSV review pass (2026-05-17/18)
+
+26-row CSV review from Mr Hien delivered 2026-05-17 (`Review 21 website - Hệ thống Apolo Lawyers - 1.-law.org.vn.csv`). Items F-006 through F-014 below.
+
+## F-006: SEO/technical re-audit (canonical, meta description, OG image, sitemaps, robots)
+
+- **Date**: 2026-05-17 (CSV row 1)
+- **Severity**: medium
+- **Category**: technical SEO
+
+### Applied in (2026-05-18)
+
+- `src/lib/metadata.ts` — every page now ships an `og:image` even when the route doesn't override it: new `DEFAULT_OG_IMAGE` constant points to the R2-hosted 1200×630 `og-default-1c1b0917.webp`, and `buildPageMetadata.openGraph.images` returns the override OR this default. Adds an `alt` field for the OG image.
+- `src/app/sitemap.ts` — added `/glossary` to the static-paths array (redirects to `/updates` but kept for backward compat). Verified all 6 categories + `/blog` + `/updates` + home are present with VI/EN alternates and `lastModified`. Dynamic entries (per-article + per-blog-post) still filter `status: 'published'` — intentionally excludes AI drafts from indexing.
+- `src/app/robots.ts` — verified: GPTBot, ChatGPT-User, PerplexityBot, Claude-Web, ClaudeBot, Google-Extended all allowed; `*` blocks `/admin` and `/api/`; sitemap URL linked. No changes needed.
+- Each page route under `src/app/[locale]/**/page.tsx` already exports `generateMetadata` — audited via grep and confirmed for home, [category], [category]/[slug], blog, blog/[slug], updates. Only `[locale]/glossary/page.tsx` lacks one and that's intentional (it's a redirect-only route).
+
+## F-007: Liability tone — softer/qualified language + no verbatim law text
+
+- **Date**: 2026-05-17 (CSV row 2)
+- **Severity**: high (legal liability)
+- **Category**: content tone / risk
+
+### Applied in (2026-05-18)
+
+- `scripts/content-bank.mjs` — section-template paragraphs rewritten with hedging language ("thường là" / "often", "có thể" / "may", "trong nhiều trường hợp" / "in many cases"). LEDE_TEMPLATES tail now includes "Nội dung chỉ có giá trị tham khảo và cần đối chiếu với nguồn chính thức" / "For reference only; please verify against official sources". METHODOLOGY_NOTE appended with explicit "Công ty Luật Apolo Lawyers không chịu trách nhiệm cho việc áp dụng nội dung này vào tình huống cụ thể" / "Apolo Lawyers disclaims liability for the application of this content to any specific situation".
+- `DEFAULT_PULL_QUOTES` — **verbatim Constitution quotes removed** per "Không chép nguyên xi văn bản luật". Replaced with editorial paraphrases attributed to "Apolo Editorial" / "Apolo Editorial". Eliminates the only remaining direct-statute citation in section bodies.
+- `messages/{vi,en}.json` `footer.disclaimer` — rewritten to the new long-form disclaimer per CSV row 8 (explicit attorney-client-relationship disclaimer).
+- All 46 articles × 2 locales regenerated via `node scripts/generate-seo-content.mjs && node scripts/repatch-article-bodies.mjs --apply`. Sample word count: 1.6k VN / 1k EN per article.
+
+## F-008: Vietnamese spelling normalization (5 rules)
+
+- **Date**: 2026-05-17 (CSV rows 3-7)
+- **Severity**: medium (consistency)
+- **Category**: copy quality
+
+### Applied in (2026-05-18)
+
+Rules:
+| Incorrect | Correct |
+|---|---|
+| hoá | hóa |
+| toà | tòa |
+| hoà | hòa |
+| hòan | hoàn |
+| tòan | toàn |
+
+- New `scripts/normalize-vn-spelling.mjs` — direct-Postgres + filesystem sweep. **Critical**: uses word-boundary negative lookahead for the 3-letter rules (`hoá`, `toà`, `hoà`) so compound words like `hoán`, `toàn`, `hoàng`, `hoài`, `hoành` aren't broken. First-pass also runs CLEANUP rules to revert any prior-pass breakage (e.g. `tòan → toàn`, `hòang → hoàng`).
+- Applied to: `messages/vi.json`, `scripts/blog-content.mjs`, `scripts/content-bank.mjs`, `scripts/topics.mjs`, `src/app/[locale]/[category]/page.tsx`, `src/lib/updates.ts`, `content/drafts/articles.json` (regenerated, so this was a transient touch).
+- DB applied to: 50 article-content rows (jsonb, vi only) + 3 blog-post body rows + various title/excerpt/description fields in articles_locales / blog_posts_locales / categories_locales.
+- Verification: second-pass dry-run reports **0 hits** site-wide.
+
+## F-009: Footer disclaimer + contact-block rewrite (CSV row 8-9)
+
+- **Date**: 2026-05-17 (CSV rows 8, 9)
+- **Severity**: high
+- **Category**: content
+
+### Applied in (2026-05-18) — overrides parts of `address.txt` for this site
+
+- `src/lib/site.ts`:
+  - `CONTACT_VN.companyName` — new: "Công ty Luật Apolo Lawyers, Là Tổ chức Hành nghề Luật sư thuộc Đoàn Luật sư Thành phố Hồ Chí Minh, trực thuộc Liên đoàn Luật sư Việt Nam"
+  - `CONTACT_VN.addressLine` — full "Thành phố Hồ Chí Minh" (no `TP.` abbreviation)
+  - `CONTACT_VN.phones` — 3 entries: `(028) 66.701.709`, `(028) 35.059.349`, `0903.419.479`
+  - `CONTACT_VN.callCenter` — REMOVED (merged into phones)
+  - `CONTACT_EN.companyName` — new: "APOLO LAWYERS - Solicitors & Litigators, a law practice organization affiliated with the Ho Chi Minh City Bar Association under the Vietnam Bar Federation"
+  - `CONTACT_EN.phones` — 3 entries: `(+8428) 66.701.709`, `(+8428) 35 059 349`, `(+84) 903.419.479`
+  - `CONTACT_EN.hotline` — REMOVED
+  - `CONTACT_EN.branch` — REMOVED entirely (East Saigon branch not surfaced on this site)
+- `src/components/layout/SiteFooter.tsx` — dropped branch + hotline render blocks; collapsed phones into a single dot-separated line; both locales now render the same structure (just different copy).
+- Footer disclaimer (`messages/{vi,en}.json` `footer.disclaimer`) — long-form text per CSV row 8.
+
+## F-010: Hero + cluster + page-lead copy rewrites (CSV rows 10-17, 19-21, 23-24)
+
+- **Date**: 2026-05-17
+- **Severity**: high
+- **Category**: copy
+
+### Applied in (2026-05-18)
+
+- `messages/{vi,en}.json` — verbatim rewrites for `home.heroEyebrow`, `home.heroTitle`, `home.heroLead`, `updates.lead`, `updates.attribution` (vbpl.vn no longer named in user-facing copy), `blog.lead`.
+- `src/app/[locale]/page.tsx` — `HowToUse.lead` prop text updated (both locales) per row 13.
+- `src/app/[locale]/[category]/page.tsx` `CLUSTER_INTROS` — rewrites for legal-system, court-system, litigation, rights, terminology, faq per rows 19-24.
+- `src/app/[locale]/page.tsx` `CLUSTER_DESCRIPTIONS` — home-page card descriptions updated (court-system now references Luật 81/2025/QH15; rights softened).
+- `scripts/seed-categories.mjs` + new `scripts/sync-category-descriptions.mjs` — DB `lov.categories_locales.description` UPDATEd for all 6 categories × 2 locales.
+
+## F-011: Image-background blend (CSS-only, no regeneration)
+
+- **Date**: 2026-05-17 (CSV rows 18, 22, 25)
+- **Severity**: medium (visual)
+- **Category**: design
+
+### Applied in (2026-05-18)
+
+CSS treatment to harmonize R2 image backgrounds with the parchment theme — no PM image regen this pass.
+
+- `src/components/home/ClustersGrid.tsx` — glyph icons now wrapped in a `12×12 rounded-lg` div with `bg-[var(--color-paper-deep)]/60` + `mix-blend-multiply` (light) / `mix-blend-screen` (dark). Glyph art now reads as inset on the parchment plate.
+- `src/app/[locale]/[category]/page.tsx` cluster-hero overlay — opacity bumped from `15/10` to `10/[0.07]` with `mix-blend-multiply dark:mix-blend-screen`. Background gradient strengthened (95/90/75 → 95/90/75 plus reduced cap).
+- `src/components/home/HomeHero.tsx` — hero image opacity reduced from `25/15` to `20/[0.12]` with `mix-blend-multiply dark:mix-blend-screen`. Bottom gradient stop strengthened (70 → 80).
+- `src/app/[locale]/blog/[slug]/page.tsx` — blog-post featured-image overlay matched to the cluster-hero treatment.
+
+## F-012: Court system restructure per Luật số 81/2025/QH15 (UNBLOCKS F-002)
+
+- **Date**: 2026-05-17 (CSV row 20)
+- **Severity**: blocker — now fixed
+- **Category**: legal accuracy
+
+### Applied in (2026-05-18)
+
+Per Luật số 81/2025/QH15 (effective 01/07/2025), Tòa án nhân dân cấp cao (High Courts) and Tòa án nhân dân cấp huyện (District Courts) are abolished; new tier Tòa án nhân dân khu vực (Regional People's Courts) is introduced. Per Hien's CSV note: "PHẦN BÀI VIẾT: chỉ viết về Tòa án" — Procuracy, Civil Judgment Enforcement, and Commercial Arbitration are off-topic and removed from this cluster.
+
+- `scripts/topics.mjs` — DELETED 5 court topics: `high-peoples-courts`, `district-peoples-courts`, `peoples-procuracy`, `civil-judgment-enforcement`, `commercial-arbitration`. ADDED 2 new: `regional-peoples-courts` (Tòa án nhân dân khu vực), `specialized-courts` (Tòa chuyên trách). REWROTE outlines for the 3 surviving (`court-system-overview`, `supreme-peoples-court`, `provincial-peoples-courts`) per the new 3-tier hierarchy. Final court-system cluster: 5 articles.
+- `scripts/content-bank.mjs` `CATEGORY_FRAMES.court-system` rewritten to reference Luật 81/2025/QH15 explicitly (overrides the F-005 "no specific statutes in section bodies" rule for this single intro line, since it's hand-written per-cluster — not random-hash).
+- `src/app/[locale]/page.tsx` `CLUSTER_DESCRIPTIONS.court-system` rewritten + `CLUSTER_COUNTS.court-system` 8 → 5.
+- DB cleanup via new `scripts/cleanup-deprecated-articles.mjs --apply`: deleted 6 article parent rows (5 court + 1 rights via F-013) plus 48 articles_toc_items child rows + 12 articles_locales child rows. Cleanly cascades.
+- DB insert via new `scripts/insert-new-court-articles.mjs --apply`: inserted parent rows for `regional-peoples-courts` (#51) and `specialized-courts` (#52) + 2 locale rows each.
+- `scripts/repatch-article-bodies.mjs` updated to also patch `title` and `excerpt` (not just `content`) so the new article rows get their proper metadata in a single `--apply` run.
+- All 46 articles × 2 locales now patched: `node scripts/generate-seo-content.mjs && node scripts/repatch-article-bodies.mjs --apply` → `PATCHED 92 locale-rows, skipped 0`.
+
+**Cross-reference**: this entry also marks F-002 as `fixed`.
+
+## F-013: Rights cluster — freedom-of-expression article removed
+
+- **Date**: 2026-05-17 (CSV row 23 — "An Ninh sẽ theo dõi")
+- **Severity**: high (compliance / security)
+- **Category**: sensitive content
+
+### Applied in (2026-05-18)
+
+- `scripts/topics.mjs` — `freedom-of-expression` topic block DELETED.
+- DB: article id #30 (and its 2 locale rows + toc_items children) deleted by the same `cleanup-deprecated-articles.mjs` run as F-012.
+- `src/app/[locale]/page.tsx` `CLUSTER_COUNTS.rights` 8 → 7.
+- Rights-cluster lead (per CSV row 23 fix) softened from the prior "freedom of expression to property…" enumeration to "selected rights, obligations, and common legal procedures" — removes any pretext to mention politically-sensitive sub-topics.
+
+## F-014: Multi-pass AI content review (verifier script)
+
+- **Date**: 2026-05-17 (CSV row 26)
+- **Severity**: medium (quality assurance)
+- **Category**: content QA
+
+### Applied in (2026-05-18)
+
+- New `scripts/verify-articles-with-ai.mjs` — for each article × locale, splits the Lexical body by H2 sections and sends `(title, heading, prose)` triples to Claude Haiku 4.5 (`claude-haiku-4-5-20251001`) with a system prompt that asks for a YES/NO verdict + one-sentence reason. Output: `content/audit/title-mismatch-report.json`. Read-only on DB.
+- Prompt caching used on the system prompt. Estimated cost on Haiku 4.5: ~$0.50 for the full 46 × 2 = 92 article corpus (~396 sections).
+- Dry-run output: `Would call API for 396 sections across 92 locale-rows`. Awaiting `ANTHROPIC_API_KEY` to run `--apply`.
+- Note: the F-005 + F-007 fixes already removed the random-citation mechanism that produced earlier mismatches. The verifier serves as a safety net for future regenerations.

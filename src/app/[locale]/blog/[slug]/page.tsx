@@ -164,10 +164,10 @@ export default async function BlogPostPage({ params }: { params: Params }) {
             fill
             priority
             sizes="100vw"
-            className="object-cover opacity-15 dark:opacity-10"
+            className="object-cover opacity-12 mix-blend-multiply dark:opacity-[0.08] dark:mix-blend-screen"
           />
         )}
-        <div className="absolute inset-0 bg-gradient-to-br from-[var(--bg)]/96 via-[var(--bg)]/90 to-[var(--bg)]/70" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[var(--bg)]/96 via-[var(--bg)]/92 to-[var(--bg)]/78" />
         <div className="parchment-overlay absolute inset-0" />
         <div className="relative mx-auto max-w-7xl px-4 md:px-6 pt-10 pb-12">
           <Breadcrumbs items={crumbs} />

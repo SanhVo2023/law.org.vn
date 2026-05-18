@@ -13,46 +13,38 @@ export type CategorySlug = (typeof CATEGORIES)[number]['slug']
 
 // =========================================================================
 // Apolo Lawyers — Official contact (post-2025 administrative-merger SSOT)
-// Source: workspace-root address.txt (Mr Hien 2026-05-11). Verbatim.
-// VN block renders on VI locale. EN block renders on EN locale.
-// East Saigon branch is EN-locale only per Mr Hien.
+// Source of truth: CSV review row 9 (Mr Hien 2026-05-17). Verbatim.
+// Notes:
+//  - Full "Thành phố Hồ Chí Minh" form (no "TP." abbreviation)
+//  - Three phones on both locales (main office + branch direct line + call center)
+//  - East Saigon branch NOT surfaced on this site (deferred to parent brand site)
+//  - Hotline removed from EN footer per the new spec
 // =========================================================================
 
 export const CONTACT_VN = {
   companyName:
-    'Công ty Luật Apolo Lawyers, thuộc Đoàn Luật sư TP. Hồ Chí Minh, trực thuộc Liên đoàn Luật sư Việt Nam',
+    'Công ty Luật Apolo Lawyers, Là Tổ chức Hành nghề Luật sư thuộc Đoàn Luật sư Thành phố Hồ Chí Minh, trực thuộc Liên đoàn Luật sư Việt Nam',
   shortName: 'Công ty Luật Apolo Lawyers',
-  addressLine: '108 Trần Đình Xu, Phường Cầu Ông Lãnh, TP. Hồ Chí Minh',
+  addressLine: '108 Trần Đình Xu, Phường Cầu Ông Lãnh, Thành phố Hồ Chí Minh',
   phones: [
     { label: '(028) 66.701.709', tel: '+842866701709' },
-    { label: '0908.043.086', tel: '+84908043086' },
+    { label: '(028) 35.059.349', tel: '+842835059349' },
+    { label: '0903.419.479', tel: '+84903419479' },
   ],
-  callCenter: { label: '0903.419.479', tel: '+84903419479' },
   email: 'contact@apolo.com.vn',
 } as const
 
 export const CONTACT_EN = {
   companyName:
-    'APOLO LAWYERS - Solicitors & Litigators, a law practice organization belonging to the Ho Chi Minh City Bar Association, under the Vietnam Bar Federation',
+    'APOLO LAWYERS - Solicitors & Litigators, a law practice organization affiliated with the Ho Chi Minh City Bar Association under the Vietnam Bar Federation',
   shortName: 'APOLO LAWYERS - Solicitors & Litigators',
   addressLine: '108 Tran Dinh Xu Street, Cau Ong Lanh Ward, Ho Chi Minh City, Vietnam',
   phones: [
     { label: '(+8428) 66.701.709', tel: '+842866701709' },
-    { label: '(+84) 908.043.086', tel: '+84908043086' },
+    { label: '(+8428) 35 059 349', tel: '+842835059349' },
+    { label: '(+84) 903.419.479', tel: '+84903419479' },
   ],
-  hotline: { label: '(+84) 903.600.347', tel: '+84903600347' },
-  callCenter: { label: '(+84) 903.419.479', tel: '+84903419479' },
   email: 'contact@apolo.com.vn',
-  branch: {
-    name: 'EAST SAI GON BRANCH - APOLO LAWYERS LAWFIRM',
-    addressLine:
-      '9th/F, Tower K&M Building, 33 Ung Van Khiem Street, Thanh My Tay Ward, Ho Chi Minh City, Vietnam',
-    phones: [
-      { label: '(+8428) 35.059.349', tel: '+842835059349' },
-      { label: '(+84) 908.097.068', tel: '+84908097068' },
-    ],
-    hotline: { label: '(+84) 979.48.98.79', tel: '+84979489879' },
-  },
 } as const
 
 // Parent brand link rule (Mr Hien 2026-05-11):

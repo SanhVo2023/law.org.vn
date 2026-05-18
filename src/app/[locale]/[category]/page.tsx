@@ -39,28 +39,28 @@ export async function generateMetadata({ params }: { params: Params }) {
 
 const CLUSTER_INTROS: Record<string, { vi: string; en: string }> = {
   'legal-system': {
-    vi: 'Cụm này lập bản đồ các nguồn pháp luật Việt Nam: từ Hiến pháp 2013 đến luật, bộ luật, nghị định, thông tư và nghị quyết — kèm cách chúng vận hành cùng nhau.',
-    en: "This cluster maps Vietnam's sources of law — from the 2013 Constitution down through statutes, codes, decrees, circulars, and resolutions — and how they operate together.",
+    vi: 'Hệ thống hóa các nguồn pháp luật Việt Nam, từ Hiến pháp đến luật, bộ luật, nghị định, thông tư và nghị quyết, cùng cách các văn bản này vận hành trong hệ thống pháp luật. Nội dung chỉ có giá trị tham khảo và cần đối chiếu với nguồn chính thức.',
+    en: 'An overview of Vietnamese legal sources, from the Constitution to laws, codes, decrees and circulars. For reference only; please verify against official sources in Vietnam.',
   },
   'court-system': {
-    vi: 'Bốn cấp tòa, Viện kiểm sát, thi hành án dân sự và trọng tài thương mại — toàn bộ kiến trúc tài phán của Việt Nam.',
-    en: "The four court tiers, the Procuracy, civil judgment enforcement, and commercial arbitration — the full architecture of Vietnam's adjudicative bodies.",
+    vi: 'Tổng quan về hệ thống tòa án Việt Nam, cơ cấu tổ chức, thẩm quyền xét xử và vai trò của các cấp tòa án trong hoạt động tư pháp.',
+    en: "An overview of Vietnam's court system, including its organizational structure, jurisdiction and the role of different court levels in judicial proceedings.",
   },
   litigation: {
-    vi: 'Quy trình tố tụng dân sự, hình sự, hành chính và lao động — từ khởi kiện và hòa giải đến phúc thẩm và giám đốc thẩm.',
-    en: 'Civil, criminal, administrative, and labor procedure — from filing and mediation through appeal and supervisory review.',
+    vi: 'Tổng quan về tố tụng tại Tòa án và tố tụng trọng tài tại Việt Nam, bao gồm tố tụng dân sự, hình sự, hành chính, lao động, kinh doanh thương mại và các thủ tục xem xét lại bản án, quyết định theo quy định pháp luật.',
+    en: "An overview of court and arbitration proceedings in Vietnam, including civil, criminal, administrative, labour, business and commercial proceedings, and procedures for reviewing judgments and decisions in accordance with law.",
   },
   rights: {
-    vi: 'Các quyền hiến định và thực tiễn bảo đảm — từ quyền tự do biểu đạt đến quyền tài sản, lao động, người tiêu dùng và khiếu nại tố cáo.',
-    en: 'Constitutional rights and how they are given practical effect — from freedom of expression through property, labor, consumer rights, and complaint procedures.',
+    vi: 'Thông tin tham khảo về một số quyền, nghĩa vụ và thủ tục pháp lý phổ biến của công dân theo pháp luật Việt Nam.',
+    en: 'Reference information on selected rights, obligations and common legal procedures for citizens under Vietnamese law.',
   },
   terminology: {
-    vi: 'Tám cụm thuật ngữ chuyên ngành — từ vựng cốt lõi giúp đọc văn bản pháp luật một cách chính xác.',
-    en: 'Eight specialised terminology clusters — the core vocabulary needed to read Vietnamese legal texts precisely.',
+    vi: 'Các thuật ngữ pháp lý chuyên ngành và từ vựng cốt lõi giúp người đọc tiếp cận văn bản pháp luật một cách chính xác hơn.',
+    en: 'Specialized legal terminology and core vocabulary for a more accurate understanding of legal documents.',
   },
   faq: {
-    vi: 'Sáu câu hỏi pháp lý phổ biến nhất — viết ngắn, trực tiếp, không thay thế tư vấn cá nhân.',
-    en: 'Six of the most frequently-asked legal questions — short, direct, and not a substitute for individualised advice.',
+    vi: 'Các câu hỏi pháp lý thường gặp, được trình bày ngắn gọn, trực tiếp và không thay thế cho ý kiến tư vấn pháp lý trong từng trường hợp cụ thể.',
+    en: 'Frequently asked legal questions, answered briefly and directly, without replacing legal advice for any specific case.',
   },
 }
 
@@ -117,10 +117,10 @@ export default async function CategoryPage({ params }: { params: Params }) {
             fill
             priority
             sizes="100vw"
-            className="object-cover opacity-15 dark:opacity-10"
+            className="object-cover opacity-10 mix-blend-multiply dark:opacity-[0.07] dark:mix-blend-screen"
           />
         )}
-        <div className="absolute inset-0 bg-gradient-to-br from-[var(--bg)]/95 via-[var(--bg)]/85 to-[var(--bg)]/55" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[var(--bg)]/95 via-[var(--bg)]/90 to-[var(--bg)]/75" />
         <div className="absolute inset-0 hero-grid opacity-40" />
         <div className="parchment-overlay absolute inset-0" />
         <div className="relative mx-auto max-w-7xl px-4 md:px-6 pt-10 pb-16 md:pt-12 md:pb-20">

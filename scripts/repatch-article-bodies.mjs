@@ -49,10 +49,12 @@ for (const draft of drafts) {
     }))
 
     if (APPLY) {
-      // Update content + tocItems on the locale row (tocItems lives on parent table — only content is localized here)
+      // Update content + title + excerpt on the locale row
+      const title = draft[locale].title
+      const excerpt = draft[locale].excerpt
       const r = await c.query(
-        `UPDATE lov.articles_locales SET content = $1 WHERE _parent_id = $2 AND _locale = $3`,
-        [JSON.stringify(lexical), articleId, locale],
+        `UPDATE lov.articles_locales SET content = $1, title = $2, excerpt = $3 WHERE _parent_id = $4 AND _locale = $5`,
+        [JSON.stringify(lexical), title, excerpt, articleId, locale],
       )
       if (r.rowCount === 0) {
         console.error(`  ! no locale row for ${draft.slug}/${locale}`)

@@ -27,9 +27,9 @@ export function HomeHero(p: HomeHeroProps) {
         fill
         priority
         sizes="100vw"
-        className="object-cover opacity-25 dark:opacity-15"
+        className="object-cover opacity-20 mix-blend-multiply dark:opacity-[0.12] dark:mix-blend-screen"
       />
-      <div className="absolute inset-0 bg-gradient-to-br from-[var(--bg)]/95 via-[var(--bg)]/90 to-[var(--bg)]/70" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[var(--bg)]/95 via-[var(--bg)]/90 to-[var(--bg)]/80" />
       <div className="absolute inset-0 hero-grid opacity-60" />
       <CornerMark className="absolute left-6 top-6 md:left-10 md:top-10" />
       <div aria-hidden className="absolute right-6 bottom-6 rotate-180 md:right-10 md:bottom-10">
@@ -89,7 +89,7 @@ export function HomeHero(p: HomeHeroProps) {
               </div>
               <div className="flex justify-between">
                 <dt className="text-[var(--fg-muted)]">Entries</dt>
-                <dd className="text-[var(--color-gold-500)]">100</dd>
+                <dd className="text-[var(--color-gold-500)]">46</dd>
               </div>
             </dl>
           </motion.div>

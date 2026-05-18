@@ -39,7 +39,7 @@ export function ClustersGrid({
                 {String(idx + 1).padStart(2, '0')}
               </span>
               {cluster.glyph && (
-                <div className="relative h-10 w-10 opacity-80 transition group-hover:opacity-100 group-hover:scale-105">
+                <div className="relative h-12 w-12 rounded-lg bg-[var(--color-paper-deep)]/60 p-1.5 opacity-90 mix-blend-multiply dark:bg-white/[0.04] dark:mix-blend-screen transition group-hover:opacity-100 group-hover:scale-105">
                   <Image src={cluster.glyph.src} alt={cluster.glyph.alt} fill className="object-contain" />
                 </div>
               )}

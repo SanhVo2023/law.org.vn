@@ -124,51 +124,11 @@ export async function SiteFooter() {
                 {i < contact.phones.length - 1 ? <span className="mx-2 text-[var(--fg-muted)]">·</span> : null}
               </span>
             ))}
-            {isEn ? (
-              <>
-                <span className="mx-2 text-[var(--fg-muted)]">·</span>
-                <a
-                  href={`tel:${CONTACT_EN.hotline.tel}`}
-                  className="text-[var(--fg-muted)] hover:text-[var(--fg)]"
-                >
-                  Hotline {CONTACT_EN.hotline.label}
-                </a>
-              </>
-            ) : null}
             <br />
             <a href={`mailto:${contact.email}`} className="text-[var(--fg-muted)] hover:text-[var(--fg)]">
               {contact.email}
             </a>
           </address>
-
-          {isEn && CONTACT_EN.branch ? (
-            <div className="mt-8 pt-6 border-t border-[var(--rule)] max-w-2xl">
-              <h5 className="text-[0.6rem] uppercase tracking-[0.18em] text-[var(--fg-muted)] font-semibold">
-                {CONTACT_EN.branch.name}
-              </h5>
-              <address className="mt-2 not-italic text-sm leading-relaxed text-[var(--fg)]">
-                {CONTACT_EN.branch.addressLine}
-                <br />
-                {CONTACT_EN.branch.phones.map((p, i) => (
-                  <span key={p.tel}>
-                    <a href={`tel:${p.tel}`} className="text-[var(--fg-muted)] hover:text-[var(--fg)]">
-                      {p.label}
-                    </a>
-                    {i < CONTACT_EN.branch.phones.length - 1 ? (
-                      <span className="mx-2 text-[var(--fg-muted)]">·</span>
-                    ) : null}
-                  </span>
-                ))}
-                <span className="mx-2 text-[var(--fg-muted)]">·</span>
-                <a
-                  href={`tel:${CONTACT_EN.branch.hotline.tel}`}
-                  className="text-[var(--fg-muted)] hover:text-[var(--fg)]"
-                >
-                  Hotline {CONTACT_EN.branch.hotline.label}
-                </a>
-              </address>
-            </div>
-          ) : null}
         </div>
       </div>
 

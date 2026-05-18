@@ -15,6 +15,10 @@ interface PageMetadataInput {
 
 const siteName = 'law.org.vn — Vietnam Legal Knowledge Portal'
 
+// Default OG image used when a page doesn't provide its own. R2-hosted, 1200×630.
+const DEFAULT_OG_IMAGE =
+  'https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/og/og-default-1c1b0917.webp'
+
 export function buildPageMetadata({
   title,
   description,
@@ -53,9 +57,7 @@ export function buildPageMetadata({
       type,
       ...(publishedTime ? { publishedTime } : {}),
       ...(modifiedTime ? { modifiedTime } : {}),
-      images: ogImage
-        ? [{ url: ogImage, width: 1200, height: 630 }]
-        : undefined,
+      images: [{ url: ogImage ?? DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: siteName }],
     },
     twitter: {
       card: 'summary_large_image',

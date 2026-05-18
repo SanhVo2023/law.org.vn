@@ -16,9 +16,9 @@
     "about": "Giới thiệu"
   },
   "home": {
-    "heroEyebrow": "Tri thức pháp lý — minh bạch, có hệ thống",
-    "heroTitle": "Hiểu pháp luật Việt Nam",
-    "heroLead": "Bộ tri thức bách khoa về Hiến pháp, các bộ luật, hệ thống tòa án và quy trình tố tụng Việt Nam — viết rõ ràng, có dẫn chiếu, phi thương mại, song ngữ Việt–Anh.",
+    "heroEyebrow": "Tri thức pháp luật - minh bạch, có hệ thống",
+    "heroTitle": "Hiểu đúng pháp luật Việt Nam",
+    "heroLead": "Bộ tri thức pháp luật song ngữ Việt - Anh, trình bày rõ ràng và có hệ thống về Hiến pháp, tòa án, tố tụng và hệ thống pháp luật Việt Nam.",
     "exploreCta": "Khám phá bộ tri thức",
     "categoriesTitle": "Bản đồ tri thức",
     "featuredTitle": "Mục đề xuất khởi đầu",
@@ -37,17 +37,17 @@
   },
   "updates": {
     "title": "Cập nhật pháp luật Việt Nam",
-    "lead": "Danh mục các văn bản pháp luật mới được công bố tại Việt Nam — pháp lệnh, luật, bộ luật, nghị định, thông tư, nghị quyết, quyết định, chỉ thị, công văn và quy chuẩn kỹ thuật. Tiêu đề được giữ nguyên văn theo Cổng Văn bản quy phạm pháp luật (vbpl.vn) của Bộ Tư pháp.",
-    "attribution": "Tiêu đề được giữ nguyên văn theo Cổng VBPL (vbpl.vn) — Cổng thông tin văn bản quy phạm pháp luật của Bộ Tư pháp. Phần dịch tiếng Anh chỉ là dịch tiêu đề, không phải tóm tắt nội dung.",
+    "lead": "Cập nhật các văn bản pháp luật mới được công bố tại Việt Nam, bao gồm pháp lệnh, luật, bộ luật, nghị định, thông tư, nghị quyết, quyết định, chỉ thị, công văn và quy chuẩn kỹ thuật.",
+    "attribution": "Tiêu đề văn bản được trình bày nhằm hỗ trợ tra cứu. Bản tiếng Anh chỉ hỗ trợ nhận diện tiêu đề, không phải bản dịch chính thức hoặc tóm tắt nội dung.",
     "lastSync": "Cập nhật mới nhất:"
   },
   "footer": {
     "ecosystemTitle": "Hệ sinh thái",
-    "disclaimer": "Nội dung chỉ mang tính thông tin và không thay thế tư vấn pháp lý cá nhân."
+    "disclaimer": "Thông tin trên website chỉ có giá trị tham khảo, không thay thế cho ý kiến tư vấn pháp lý và không làm phát sinh quan hệ tư vấn giữa luật sư và khách hàng."
   },
   "blog": {
     "title": "Bài viết biên tập",
-    "lead": "Bình luận, phân tích vụ việc, cập nhật thực tiễn và ghi chú chính sách về hệ thống pháp luật Việt Nam — do Apolo Editorial Team biên soạn.",
+    "lead": "Bình luận pháp lý, phân tích tình huống, cập nhật thực tiễn và ghi chú chính sách về hệ thống pháp luật Việt Nam do Apolo Editorial Team biên soạn.",
     "filterAll": "Tất cả",
     "filterCommentary": "Bình luận",
     "filterCaseAnalysis": "Phân tích vụ việc",

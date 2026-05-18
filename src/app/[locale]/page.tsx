@@ -34,20 +34,20 @@ export async function generateMetadata({ params }: { params: Params }) {
 
 const CLUSTER_DESCRIPTIONS: Record<string, { vi: string; en: string }> = {
   'legal-system': {
-    vi: 'Hiến pháp, luật, bộ luật, nghị định, thông tư, nghị quyết — kiến trúc chuẩn mực pháp lý Việt Nam.',
-    en: "Constitution, laws, codes, decrees, circulars, resolutions — the structural backbone of Vietnamese law.",
+    vi: 'Hiến pháp, luật, bộ luật, nghị định, thông tư, nghị quyết — kiến trúc nguồn pháp luật Việt Nam.',
+    en: 'Constitution, laws, codes, decrees, circulars, resolutions — the structural backbone of Vietnamese law.',
   },
   'court-system': {
-    vi: 'Tòa án Nhân dân Tối cao, tòa cấp cao, tòa tỉnh, tòa huyện, Viện kiểm sát, thi hành án.',
-    en: "Supreme People's Court, high courts, provincial and district courts, procuracy, enforcement, arbitration.",
+    vi: 'Tòa án nhân dân tối cao, tòa án nhân dân cấp tỉnh, tòa án nhân dân khu vực và các tòa chuyên trách theo Luật số 81/2025/QH15.',
+    en: "Supreme People's Court, provincial people's courts, regional people's courts, and specialized courts under Law No. 81/2025/QH15.",
   },
   litigation: {
-    vi: 'Tố tụng dân sự, hình sự, hành chính, lao động — từ khởi kiện đến thi hành.',
-    en: 'Civil, criminal, administrative, and labor procedure — from filing through enforcement.',
+    vi: 'Tố tụng dân sự, hình sự, hành chính, lao động, thương mại — từ khởi kiện đến phúc thẩm, giám đốc thẩm.',
+    en: 'Civil, criminal, administrative, labour, and commercial procedure — from filing through appeal and supervisory review.',
   },
   rights: {
-    vi: 'Quyền hiến định, sở hữu, lao động, tiêu dùng, khiếu nại tố cáo.',
-    en: 'Constitutional rights, property, labor, consumer rights, complaint and denunciation.',
+    vi: 'Một số quyền, nghĩa vụ và thủ tục pháp lý phổ biến của công dân theo pháp luật Việt Nam.',
+    en: 'Selected rights, obligations, and common legal procedures for citizens under Vietnamese law.',
   },
   terminology: {
     vi: 'Tám cụm thuật ngữ: dân sự, hình sự, doanh nghiệp, đất đai, hôn nhân gia đình, lao động, thương mại, hành chính.',
@@ -61,12 +61,12 @@ const CLUSTER_DESCRIPTIONS: Record<string, { vi: string; en: string }> = {
 
 const CLUSTER_COUNTS: Record<string, number> = {
   'legal-system': 10,
-  'court-system': 8,
+  'court-system': 5,
   litigation: 10,
-  rights: 8,
+  rights: 7,
   terminology: 8,
   faq: 6,
-}
+} // total 46 (down from 50 after Luật 81/2025/QH15 court restructure + freedom-of-expression removal)
 
 export default async function HomePage({ params }: { params: Params }) {
   const { locale } = await params
@@ -210,8 +210,8 @@ export default async function HomePage({ params }: { params: Params }) {
         title={lng === 'vi' ? 'Ba cách tiếp cận bộ tri thức này' : 'Three ways to use this encyclopedia'}
         lead={
           lng === 'vi'
-            ? 'Bạn có thể đọc tuần tự, tra cứu thuật ngữ, hoặc trích dẫn cho công việc học thuật và tư vấn.'
-            : 'Read sequentially, look up a term, or cite an entry for scholarly or advisory work.'
+            ? 'Bạn có thể đọc theo từng chủ đề, tra cứu thuật ngữ pháp luật hoặc tham khảo cho mục đích nghiên cứu, học thuật và tư vấn.'
+            : 'You may browse the content by topic, look up legal terminology, or use it as a reference for research, academic work and legal advisory purposes.'
         }
         steps={
           lng === 'vi'

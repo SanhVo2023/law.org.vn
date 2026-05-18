@@ -1,5 +1,6 @@
-/* The 50 topics × 2 locales = 100 page taxonomy for law.org.vn.
- * Structure matches PRD: Legal System 10 + Court System 8 + Litigation 10 + Rights 8 + Terminology 8 + FAQ 6 = 50.
+/* The 46 topics × 2 locales = 92 page taxonomy for law.org.vn.
+ * Structure: Legal System 10 + Court System 5 (post-Luật 81/2025/QH15) + Litigation 10 +
+ * Rights 7 (freedom-of-expression removed 2026-05-18) + Terminology 8 + FAQ 6 = 46.
  * Each topic: { slug, category, vi:{title,excerpt}, en:{title,excerpt}, outline: [{en,vi}, ...] }
  * `outline` is the list of H2 section titles for both locales — the generator builds structured draft bodies from it.
  */
@@ -59,7 +60,7 @@ export const TOPICS = [
   {
     slug: 'circulars-ministerial-guidance',
     category: 'legal-system',
-    vi: { title: 'Thông tư — hướng dẫn cấp bộ', excerpt: 'Vai trò của thông tư trong việc chi tiết hoá luật và nghị định, giới hạn hiệu lực và thẩm quyền ban hành.' },
+    vi: { title: 'Thông tư — hướng dẫn cấp bộ', excerpt: 'Vai trò của thông tư trong việc chi tiết hóa luật và nghị định, giới hạn hiệu lực và thẩm quyền ban hành.' },
     en: { title: 'Circulars — ministerial implementation guidance', excerpt: 'How circulars translate statutes and decrees into operational rules, their limits, and issuing authority.' },
     outline: [
       { vi: 'Ai ban hành thông tư?', en: 'Who issues circulars?' },
@@ -128,88 +129,62 @@ export const TOPICS = [
   {
     slug: 'court-system-overview',
     category: 'court-system',
-    vi: { title: 'Tổng quan hệ thống tòa án Việt Nam', excerpt: 'Bốn cấp tòa, phạm vi thẩm quyền và cách các vụ việc dịch chuyển trong hệ thống.' },
-    en: { title: 'Overview of Vietnam\'s court system', excerpt: 'The four tiers of courts, their jurisdictions, and how cases move through the system.' },
+    vi: { title: 'Tổng quan hệ thống tòa án Việt Nam', excerpt: 'Ba cấp tòa nhân dân cùng các tòa chuyên trách theo Luật số 81/2025/QH15, phạm vi thẩm quyền và cách các vụ việc dịch chuyển trong hệ thống.' },
+    en: { title: 'Overview of Vietnam\'s court system', excerpt: "The three-tier people's court hierarchy and specialized courts under Law No. 81/2025/QH15, their jurisdictions, and how cases move through the system." },
     outline: [
-      { vi: 'Bốn cấp tòa', en: 'The four tiers' },
-      { vi: 'Nguyên tắc hoạt động', en: 'Operating principles' },
-      { vi: 'Quan hệ với Viện kiểm sát', en: 'Relationship with the Procuracy' },
+      { vi: 'Cơ cấu ba cấp tòa nhân dân', en: 'Three-tier people\'s court structure' },
+      { vi: 'Tòa chuyên trách', en: 'Specialized courts' },
+      { vi: 'Nguyên tắc xét xử và hai cấp xét xử', en: 'Adjudication principles and two-level review' },
+      { vi: 'Thay đổi cơ cấu từ 01/7/2025', en: 'Structural changes effective 01/07/2025' },
     ],
   },
   {
     slug: 'supreme-peoples-court',
     category: 'court-system',
-    vi: { title: 'Tòa án Nhân dân Tối cao', excerpt: 'Chức năng giám đốc thẩm, tái thẩm và vai trò phát triển án lệ của Tòa án Nhân dân Tối cao.' },
-    en: { title: 'The Supreme People\'s Court', excerpt: 'Supervisory and re-opening review, and the SPC\'s role in developing precedent.' },
+    vi: { title: 'Tòa án nhân dân tối cao', excerpt: 'Chức năng giám đốc thẩm, tái thẩm và vai trò phát triển án lệ của Tòa án nhân dân tối cao theo Luật số 81/2025/QH15.' },
+    en: { title: "The Supreme People's Court", excerpt: "Supervisory and re-opening review, and the Supreme People's Court's role in developing precedent under Law No. 81/2025/QH15." },
     outline: [
+      { vi: 'Vị trí trong hệ thống tòa án', en: 'Position within the court system' },
       { vi: 'Chức năng cốt lõi', en: 'Core functions' },
       { vi: 'Giám đốc thẩm và tái thẩm', en: 'Supervisory and re-opening review' },
-      { vi: 'Án lệ', en: 'Precedent' },
-    ],
-  },
-  {
-    slug: 'high-peoples-courts',
-    category: 'court-system',
-    vi: { title: 'Tòa án Nhân dân cấp cao', excerpt: 'Ba tòa cấp cao theo khu vực, thẩm quyền phúc thẩm và quan hệ với tòa tỉnh.' },
-    en: { title: 'High People\'s Courts', excerpt: 'The three regional high courts, appellate jurisdiction, and their relationship with provincial courts.' },
-    outline: [
-      { vi: 'Phạm vi khu vực', en: 'Regional jurisdictions' },
-      { vi: 'Thẩm quyền phúc thẩm', en: 'Appellate authority' },
-      { vi: 'Thống kê điển hình', en: 'Typical caseload' },
+      { vi: 'Án lệ và hướng dẫn áp dụng pháp luật', en: 'Precedent and guidance on applying law' },
     ],
   },
   {
     slug: 'provincial-peoples-courts',
     category: 'court-system',
-    vi: { title: 'Tòa án Nhân dân cấp tỉnh', excerpt: 'Thẩm quyền sơ thẩm và phúc thẩm của tòa cấp tỉnh, khi nào vụ việc thuộc tòa tỉnh thay vì tòa huyện.' },
-    en: { title: 'Provincial People\'s Courts', excerpt: 'First-instance and appellate jurisdiction; when a matter belongs at provincial rather than district level.' },
+    vi: { title: 'Tòa án nhân dân cấp tỉnh', excerpt: 'Thẩm quyền sơ thẩm và phúc thẩm của tòa nhân dân cấp tỉnh, vai trò trong hệ thống ba cấp theo Luật số 81/2025/QH15.' },
+    en: { title: "Provincial People's Courts", excerpt: 'First-instance and appellate jurisdiction of provincial people\'s courts; their role in the three-tier hierarchy under Law No. 81/2025/QH15.' },
     outline: [
-      { vi: 'Thẩm quyền theo loại án', en: 'Jurisdiction by case type' },
-      { vi: 'Sơ thẩm so với phúc thẩm', en: 'First instance vs. appeals' },
-    ],
-  },
-  {
-    slug: 'district-peoples-courts',
-    category: 'court-system',
-    vi: { title: 'Tòa án Nhân dân cấp huyện', excerpt: 'Cửa vào của hầu hết các vụ việc dân sự — thẩm quyền, hạn chế và tần suất thực tiễn.' },
-    en: { title: 'District People\'s Courts', excerpt: 'The entry point for most civil matters — jurisdiction, limits, and practical frequency.' },
-    outline: [
+      { vi: 'Vị trí và phạm vi tổ chức', en: 'Position and organizational scope' },
       { vi: 'Thẩm quyền sơ thẩm', en: 'First-instance jurisdiction' },
-      { vi: 'Giới hạn tài phán', en: 'Jurisdictional limits' },
-      { vi: 'Quan hệ với tòa tỉnh', en: 'Relationship with the provincial court' },
+      { vi: 'Thẩm quyền phúc thẩm', en: 'Appellate jurisdiction' },
+      { vi: 'Quan hệ với tòa khu vực và Tòa án nhân dân tối cao', en: "Relationship with regional courts and the Supreme People's Court" },
     ],
   },
   {
-    slug: 'peoples-procuracy',
+    slug: 'regional-peoples-courts',
     category: 'court-system',
-    vi: { title: 'Viện kiểm sát Nhân dân', excerpt: 'Vai trò công tố, giám sát tư pháp và vị trí độc lập của Viện kiểm sát trong hệ thống tư pháp.' },
-    en: { title: 'The People\'s Procuracy', excerpt: 'Prosecution, judicial oversight, and the Procuracy\'s independent position in the justice system.' },
+    vi: { title: 'Tòa án nhân dân khu vực', excerpt: 'Tòa án nhân dân khu vực — cấp tòa được hình thành theo Luật số 81/2025/QH15 từ 01/7/2025, thay thế tòa nhân dân cấp huyện.' },
+    en: { title: "Regional People's Courts", excerpt: 'Regional people\'s courts — the new court level established under Law No. 81/2025/QH15 effective 01/07/2025, replacing district people\'s courts.' },
     outline: [
-      { vi: 'Công tố', en: 'Prosecution' },
-      { vi: 'Giám sát tư pháp', en: 'Judicial oversight' },
-      { vi: 'Quan hệ với tòa án', en: 'Relationship with the courts' },
+      { vi: 'Định nghĩa và phạm vi', en: 'Definition and scope' },
+      { vi: 'Thẩm quyền sơ thẩm', en: 'First-instance jurisdiction' },
+      { vi: 'Tổ chức và biên chế', en: 'Organization and staffing' },
+      { vi: 'Quan hệ với tòa cấp tỉnh', en: "Relationship with the provincial court" },
+      { vi: 'Khác biệt so với tòa nhân dân cấp huyện trước 2025', en: 'Differences from pre-2025 district courts' },
     ],
   },
   {
-    slug: 'civil-judgment-enforcement',
+    slug: 'specialized-courts',
     category: 'court-system',
-    vi: { title: 'Thi hành án dân sự', excerpt: 'Sau khi bản án có hiệu lực: cơ quan thi hành án, các biện pháp cưỡng chế và thời hiệu thi hành.' },
-    en: { title: 'Civil judgment enforcement', excerpt: 'After judgment: the enforcement authority, coercive measures, and time limits.' },
+    vi: { title: 'Tòa chuyên trách', excerpt: 'Các tòa chuyên trách theo từng lĩnh vực — gia đình, lao động, hành chính, kinh tế, sở hữu trí tuệ — được tổ chức trong hệ thống tòa nhân dân.' },
+    en: { title: 'Specialized courts', excerpt: 'Specialized courts organized by subject matter — family, labour, administrative, economic, intellectual property — within the people\'s court system.' },
     outline: [
-      { vi: 'Cơ quan thi hành án', en: 'The enforcement authority' },
-      { vi: 'Biện pháp cưỡng chế', en: 'Coercive measures' },
-      { vi: 'Thời hiệu thi hành', en: 'Enforcement time limits' },
-    ],
-  },
-  {
-    slug: 'commercial-arbitration',
-    category: 'court-system',
-    vi: { title: 'Trọng tài thương mại tại Việt Nam', excerpt: 'Khi nào chọn trọng tài thay vì toà án, các trung tâm trọng tài lớn và khả năng công nhận phán quyết nước ngoài.' },
-    en: { title: 'Commercial arbitration in Vietnam', excerpt: 'When to choose arbitration over courts, major arbitration centers, and recognition of foreign awards.' },
-    outline: [
-      { vi: 'Ưu điểm và hạn chế', en: 'Advantages and limits' },
-      { vi: 'Các trung tâm trọng tài chính', en: 'Major arbitration centers' },
-      { vi: 'Công nhận và thi hành phán quyết', en: 'Recognition and enforcement of awards' },
+      { vi: 'Khái niệm và cơ sở pháp lý', en: 'Concept and legal basis' },
+      { vi: 'Các loại tòa chuyên trách', en: 'Categories of specialized courts' },
+      { vi: 'Thẩm quyền theo lĩnh vực', en: 'Subject-matter jurisdiction' },
+      { vi: 'Tổ chức ở các cấp tòa', en: 'Organization across court tiers' },
     ],
   },
 
@@ -250,7 +225,7 @@ export const TOPICS = [
   {
     slug: 'first-instance-civil-trial',
     category: 'litigation',
-    vi: { title: 'Phiên toà sơ thẩm dân sự', excerpt: 'Trình tự một phiên toà sơ thẩm, vai trò của thẩm phán, đương sự và luật sư.' },
+    vi: { title: 'Phiên tòa sơ thẩm dân sự', excerpt: 'Trình tự một phiên tòa sơ thẩm, vai trò của thẩm phán, đương sự và luật sư.' },
     en: { title: 'First-instance civil trial', excerpt: 'Order of a first-instance trial; the judge\'s role, parties, and counsel.' },
     outline: [
       { vi: 'Trình tự phiên xử', en: 'Order of the proceeding' },
@@ -295,29 +270,29 @@ export const TOPICS = [
   {
     slug: 'administrative-litigation',
     category: 'litigation',
-    vi: { title: 'Tố tụng hành chính', excerpt: 'Khi công dân khởi kiện quyết định hành chính: đối tượng khởi kiện, thời hiệu và toà có thẩm quyền.' },
+    vi: { title: 'Tố tụng hành chính', excerpt: 'Khi công dân khởi kiện quyết định hành chính: đối tượng khởi kiện, thời hiệu và tòa có thẩm quyền.' },
     en: { title: 'Administrative litigation', excerpt: 'Citizens challenging administrative decisions: what can be challenged, time limits, and the competent court.' },
     outline: [
       { vi: 'Đối tượng khởi kiện', en: 'What decisions can be challenged' },
       { vi: 'Thời hiệu', en: 'Time limits' },
-      { vi: 'Toà có thẩm quyền', en: 'The competent court' },
+      { vi: 'Tòa có thẩm quyền', en: 'The competent court' },
     ],
   },
   {
     slug: 'labor-dispute-resolution',
     category: 'litigation',
-    vi: { title: 'Giải quyết tranh chấp lao động', excerpt: 'Con đường từ hoà giải cơ sở đến trọng tài lao động và toà án — khi nào chọn con đường nào.' },
+    vi: { title: 'Giải quyết tranh chấp lao động', excerpt: 'Con đường từ hòa giải cơ sở đến trọng tài lao động và tòa án — khi nào chọn con đường nào.' },
     en: { title: 'Labor dispute resolution', excerpt: 'From workplace conciliation to labor arbitration and courts — when to use each path.' },
     outline: [
-      { vi: 'Hoà giải cơ sở', en: 'Workplace conciliation' },
+      { vi: 'Hòa giải cơ sở', en: 'Workplace conciliation' },
       { vi: 'Trọng tài lao động', en: 'Labor arbitration' },
-      { vi: 'Khởi kiện tại toà', en: 'Filing in court' },
+      { vi: 'Khởi kiện tại tòa', en: 'Filing in court' },
     ],
   },
   {
     slug: 'evidence-rules',
     category: 'litigation',
-    vi: { title: 'Quy tắc chứng cứ tại toà án Việt Nam', excerpt: 'Các loại chứng cứ được thừa nhận, nghĩa vụ cung cấp chứng cứ và giá trị của chứng cứ điện tử.' },
+    vi: { title: 'Quy tắc chứng cứ tại tòa án Việt Nam', excerpt: 'Các loại chứng cứ được thừa nhận, nghĩa vụ cung cấp chứng cứ và giá trị của chứng cứ điện tử.' },
     en: { title: 'Evidence rules in Vietnamese courts', excerpt: 'Accepted categories of evidence, each party\'s duty to produce, and the standing of digital evidence.' },
     outline: [
       { vi: 'Các loại chứng cứ', en: 'Categories of evidence' },
@@ -334,19 +309,8 @@ export const TOPICS = [
     en: { title: 'Constitutional rights — overview', excerpt: 'Fundamental rights recognised by the 2013 Constitution and how they are given effect by statute.' },
     outline: [
       { vi: 'Nhóm quyền dân sự và chính trị', en: 'Civil and political rights' },
-      { vi: 'Nhóm quyền kinh tế, xã hội, văn hoá', en: 'Economic, social and cultural rights' },
+      { vi: 'Nhóm quyền kinh tế, xã hội, văn hóa', en: 'Economic, social and cultural rights' },
       { vi: 'Giới hạn quyền', en: 'Limits on rights' },
-    ],
-  },
-  {
-    slug: 'freedom-of-expression',
-    category: 'rights',
-    vi: { title: 'Quyền tự do ngôn luận', excerpt: 'Phạm vi, giới hạn và các loại hình biểu đạt được điều chỉnh bởi luật chuyên ngành.' },
-    en: { title: 'Freedom of expression', excerpt: 'Scope, limits, and the specialised statutes that regulate particular forms of expression.' },
-    outline: [
-      { vi: 'Cơ sở hiến định', en: 'Constitutional basis' },
-      { vi: 'Giới hạn theo pháp luật', en: 'Statutory limits' },
-      { vi: 'Thực tiễn trên không gian mạng', en: 'Online practice' },
     ],
   },
   {
@@ -489,7 +453,7 @@ export const TOPICS = [
     vi: { title: 'Thuật ngữ thương mại', excerpt: 'Mua bán, đại lý, phân phối, nhượng quyền và các thuật ngữ thương mại phổ biến.' },
     en: { title: 'Commercial terminology', excerpt: 'Sale, agency, distribution, franchising, and other common commercial terms.' },
     outline: [
-      { vi: 'Mua bán hàng hoá', en: 'Sale of goods' },
+      { vi: 'Mua bán hàng hóa', en: 'Sale of goods' },
       { vi: 'Đại lý và phân phối', en: 'Agency and distribution' },
       { vi: 'Nhượng quyền thương mại', en: 'Franchising' },
     ],
