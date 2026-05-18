@@ -42,7 +42,22 @@ export const TOPICS = [
       { vi: 'Khác biệt giữa luật và bộ luật', en: 'Difference between a law and a code' },
       { vi: 'Cơ quan ban hành', en: 'Issuing bodies' },
       { vi: 'Quy tắc về thứ bậc hiệu lực', en: 'Hierarchy-of-force rules' },
-      { vi: 'Ví dụ minh hoạ', en: 'Illustrative examples' },
+      {
+        vi: 'Ví dụ minh hoạ',
+        en: 'Illustrative examples',
+        viItems: [
+          'Bộ luật Dân sự — văn bản pháp điển hóa nhóm quan hệ dân sự, do Quốc hội ban hành dưới hình thức "bộ luật"',
+          'Luật Doanh nghiệp — văn bản pháp luật chuyên ngành, do Quốc hội ban hành dưới hình thức "luật"',
+          'Bộ luật Hình sự — văn bản pháp điển hóa toàn diện chế độ tội phạm và hình phạt',
+          'Luật Đầu tư — văn bản chuyên ngành điều chỉnh hoạt động đầu tư trong nước và quốc tế',
+        ],
+        enItems: [
+          'The Civil Code — a codification of civil-relations rules issued by the National Assembly in "code" form',
+          'The Enterprise Law — a specialised statute issued by the National Assembly in "law" form',
+          'The Criminal Code — a comprehensive codification of offences and penalties',
+          'The Investment Law — a specialised statute regulating domestic and foreign investment activity',
+        ],
+      },
     ],
   },
   {
@@ -86,9 +101,9 @@ export const TOPICS = [
     en: { title: 'Vietnam\'s legislative process', excerpt: 'From proposal to passage of a statute: the bodies involved, the sequence of readings, and typical timelines.' },
     outline: [
       { vi: 'Đề xuất và soạn thảo', en: 'Proposal and drafting' },
+      { vi: 'Lấy ý kiến công chúng', en: 'Public consultation' },
       { vi: 'Thẩm tra và thảo luận', en: 'Examination and debate' },
       { vi: 'Biểu quyết và công bố', en: 'Vote and promulgation' },
-      { vi: 'Lấy ý kiến công chúng', en: 'Public consultation' },
     ],
   },
   {
@@ -125,7 +140,7 @@ export const TOPICS = [
     ],
   },
 
-  // ─── Court System (8) ─────────────────────────────────────────────────
+  // ─── Court System (5, post Luật 81/2025/QH15) ────────────────────────
   {
     slug: 'court-system-overview',
     category: 'court-system',
@@ -182,7 +197,28 @@ export const TOPICS = [
     en: { title: 'Specialized courts', excerpt: 'Specialized courts organized by subject matter — family, labour, administrative, economic, intellectual property — within the people\'s court system.' },
     outline: [
       { vi: 'Khái niệm và cơ sở pháp lý', en: 'Concept and legal basis' },
-      { vi: 'Các loại tòa chuyên trách', en: 'Categories of specialized courts' },
+      {
+        vi: 'Các loại tòa chuyên trách',
+        en: 'Categories of specialized courts',
+        viItems: [
+          'Tòa Hình sự — xét xử các vụ án hình sự',
+          'Tòa Dân sự — xét xử các vụ việc dân sự',
+          'Tòa Kinh tế — xét xử các tranh chấp kinh doanh, thương mại',
+          'Tòa Lao động — xét xử các tranh chấp lao động',
+          'Tòa Hành chính — xét xử các vụ án hành chính',
+          'Tòa Gia đình và Người chưa thành niên — xét xử các vụ việc liên quan đến hôn nhân, gia đình và người chưa thành niên',
+          'Tòa Sở hữu trí tuệ (tại một số tòa cấp tỉnh) — xét xử các tranh chấp về quyền sở hữu trí tuệ',
+        ],
+        enItems: [
+          'Criminal Court — hears criminal cases',
+          'Civil Court — hears civil matters',
+          'Economic Court — hears commercial and business disputes',
+          'Labour Court — hears labour disputes',
+          'Administrative Court — hears administrative challenges',
+          'Family and Juvenile Court — hears marriage, family, and juvenile matters',
+          "Intellectual-Property Court (at selected provincial courts) — hears IP disputes",
+        ],
+      },
       { vi: 'Thẩm quyền theo lĩnh vực', en: 'Subject-matter jurisdiction' },
       { vi: 'Tổ chức ở các cấp tòa', en: 'Organization across court tiers' },
     ],
@@ -295,13 +331,32 @@ export const TOPICS = [
     vi: { title: 'Quy tắc chứng cứ tại tòa án Việt Nam', excerpt: 'Các loại chứng cứ được thừa nhận, nghĩa vụ cung cấp chứng cứ và giá trị của chứng cứ điện tử.' },
     en: { title: 'Evidence rules in Vietnamese courts', excerpt: 'Accepted categories of evidence, each party\'s duty to produce, and the standing of digital evidence.' },
     outline: [
-      { vi: 'Các loại chứng cứ', en: 'Categories of evidence' },
+      {
+        vi: 'Các loại chứng cứ',
+        en: 'Categories of evidence',
+        viItems: [
+          'Tài liệu, văn bản — hợp đồng, biên bản, thư điện tử có thể được in ra hoặc trình bày',
+          'Vật chứng — đồ vật, tang vật liên quan trực tiếp đến vụ việc',
+          'Lời khai của đương sự, người làm chứng — ghi lại trong biên bản hoặc tại phiên tòa',
+          'Kết luận giám định — của các tổ chức giám định tư pháp được công nhận',
+          'Biên bản ghi nhận của cơ quan có thẩm quyền',
+          'Dữ liệu điện tử — email, tin nhắn, ghi âm, ghi hình (xem mục dưới)',
+        ],
+        enItems: [
+          'Documentary evidence — contracts, minutes, emails reduced to writing or print',
+          'Physical evidence — objects directly connected to the dispute',
+          "Witness or party testimony — recorded in minutes or at trial",
+          "Expert findings — issued by recognised forensic-examination bodies",
+          "Records made by competent authorities",
+          'Electronic data — emails, messages, audio, video (see the section below)',
+        ],
+      },
       { vi: 'Nghĩa vụ cung cấp chứng cứ', en: 'Duty to produce evidence' },
       { vi: 'Chứng cứ điện tử', en: 'Digital evidence' },
     ],
   },
 
-  // ─── Rights (8) ───────────────────────────────────────────────────────
+  // ─── Rights (7, freedom-of-expression removed 2026-05-18) ────────────
   {
     slug: 'constitutional-rights-overview',
     category: 'rights',
@@ -409,7 +464,24 @@ export const TOPICS = [
     vi: { title: 'Thuật ngữ doanh nghiệp', excerpt: 'Các thuật ngữ cốt lõi về loại hình doanh nghiệp, vốn, cổ đông và quản trị.' },
     en: { title: 'Corporate terminology', excerpt: 'Core vocabulary for company forms, capital, shareholders, and governance.' },
     outline: [
-      { vi: 'Loại hình doanh nghiệp', en: 'Company forms' },
+      {
+        vi: 'Loại hình doanh nghiệp',
+        en: 'Company forms',
+        viItems: [
+          'Doanh nghiệp tư nhân — do một cá nhân làm chủ và chịu trách nhiệm bằng toàn bộ tài sản',
+          'Công ty trách nhiệm hữu hạn một thành viên (TNHH một thành viên)',
+          'Công ty trách nhiệm hữu hạn hai thành viên trở lên (TNHH hai thành viên trở lên)',
+          'Công ty cổ phần — có vốn được chia thành cổ phần, có thể phát hành cổ phiếu',
+          'Công ty hợp danh — có ít nhất hai thành viên hợp danh, chịu trách nhiệm bằng toàn bộ tài sản',
+        ],
+        enItems: [
+          'Sole proprietorship — owned by one individual who is personally liable to the full extent of their assets',
+          'Single-member limited-liability company (one-member LLC)',
+          'Two-or-more-member limited-liability company (multi-member LLC)',
+          "Joint-stock company — capital is divided into shares; may issue stock",
+          'Partnership — at least two general partners with unlimited personal liability',
+        ],
+      },
       { vi: 'Vốn và cổ đông', en: 'Capital and shareholders' },
       { vi: 'Quản trị', en: 'Governance' },
     ],
@@ -431,7 +503,24 @@ export const TOPICS = [
     vi: { title: 'Thuật ngữ hôn nhân và gia đình', excerpt: 'Các thuật ngữ trong kết hôn, ly hôn, nuôi con và tài sản chung, tài sản riêng.' },
     en: { title: 'Family law terminology', excerpt: 'Terms for marriage, divorce, custody, and common vs. separate property.' },
     outline: [
-      { vi: 'Kết hôn và ly hôn', en: 'Marriage and divorce' },
+      {
+        vi: 'Kết hôn và ly hôn',
+        en: 'Marriage and divorce',
+        viItems: [
+          'Kết hôn — sự xác lập quan hệ vợ chồng theo quy định pháp luật, được đăng ký tại cơ quan có thẩm quyền',
+          'Đăng ký kết hôn — thủ tục công nhận hôn nhân hợp pháp tại Ủy ban nhân dân cấp xã hoặc cơ quan đại diện ngoại giao',
+          'Ly hôn — chấm dứt quan hệ hôn nhân trước pháp luật theo quyết định của Tòa án',
+          'Ly hôn thuận tình — khi cả hai bên cùng đồng ý chấm dứt hôn nhân',
+          'Ly hôn theo yêu cầu một bên — khi chỉ một bên yêu cầu ly hôn, đòi hỏi căn cứ pháp lý cụ thể',
+        ],
+        enItems: [
+          'Marriage — formation of a spousal relationship under law, registered with the competent authority',
+          'Marriage registration — legal-recognition procedure performed at the commune-level People\'s Committee or a Vietnamese diplomatic mission abroad',
+          'Divorce — judicial termination of a marriage by court decision',
+          'Mutual-consent divorce — when both spouses agree to end the marriage',
+          'Unilateral divorce — when only one spouse petitions for divorce, requiring specific legal grounds',
+        ],
+      },
       { vi: 'Nuôi con và cấp dưỡng', en: 'Custody and support' },
       { vi: 'Tài sản chung, riêng', en: 'Common and separate property' },
     ],

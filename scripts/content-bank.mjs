@@ -10,37 +10,30 @@
  *   (2) the CATEGORY_FRAMES intro line (hand-written per cluster, generic)
  * Pull quotes are now editorial paraphrases attributed to Apolo Editorial, not the
  * Constitution. Specific article-and-instrument citations are added later by lawyers.
+ *
+ * F-015 (2026-05-18) — content QA from subagent audit:
+ *   - DROP `topicTitle.toLowerCase()` — was breaking proper nouns ("việt nam",
+ *     "hiến pháp"). topicTitle never appears mid-sentence in the new templates.
+ *   - Section heading IS lowercased mid-sentence (grammatically natural for both
+ *     locales) but proper-nounish section headings are rare in the outline.
+ *   - "First dimension to clarify" replaced with position-neutral phrasing so
+ *     section 4+ doesn't recycle a "first" claim when its index > 0.
+ *   - Variant count raised from 3 to 5 — cycle becomes invisible to readers.
+ *   - Trailing `?` / `.` on a topic title is stripped by the generator before any
+ *     interpolation so we never produce `…?.` collisions.
  */
 
 /* Pull quotes — editorial paraphrases. NOT verbatim statutory text (per F-007). */
 export const DEFAULT_PULL_QUOTES = {
   vi: [
-    {
-      quote: 'Hiểu pháp luật là điều kiện đầu tiên để vận dụng pháp luật một cách có trách nhiệm.',
-      attribution: 'Apolo Editorial',
-    },
-    {
-      quote: 'Một quy phạm pháp luật chỉ có ý nghĩa khi được đặt trong tổng thể hệ thống mà nó thuộc về.',
-      attribution: 'Apolo Editorial',
-    },
-    {
-      quote: 'Pháp luật là công cụ chứ không phải mục tiêu — mục tiêu cuối cùng là sự công bằng trong quan hệ xã hội.',
-      attribution: 'Apolo Editorial',
-    },
+    { quote: 'Hiểu pháp luật là điều kiện đầu tiên để vận dụng pháp luật một cách có trách nhiệm.', attribution: 'Apolo Editorial' },
+    { quote: 'Một quy phạm pháp luật chỉ có ý nghĩa khi được đặt trong tổng thể hệ thống mà nó thuộc về.', attribution: 'Apolo Editorial' },
+    { quote: 'Pháp luật là công cụ chứ không phải mục tiêu — mục tiêu cuối cùng là sự công bằng trong quan hệ xã hội.', attribution: 'Apolo Editorial' },
   ],
   en: [
-    {
-      quote: 'Understanding the law is the first prerequisite for applying it responsibly.',
-      attribution: 'Apolo Editorial',
-    },
-    {
-      quote: 'A legal norm only becomes meaningful when read within the broader system to which it belongs.',
-      attribution: 'Apolo Editorial',
-    },
-    {
-      quote: 'Law is an instrument, not an end in itself — the ultimate aim is fairness in social relations.',
-      attribution: 'Apolo Editorial',
-    },
+    { quote: 'Understanding the law is the first prerequisite for applying it responsibly.', attribution: 'Apolo Editorial' },
+    { quote: 'A legal norm only becomes meaningful when read within the broader system to which it belongs.', attribution: 'Apolo Editorial' },
+    { quote: 'Law is an instrument, not an end in itself — the ultimate aim is fairness in social relations.', attribution: 'Apolo Editorial' },
   ],
 }
 
@@ -78,21 +71,24 @@ export const CATEGORY_FRAMES = {
   },
 }
 
-/* Section narrative templates — three variants rotated by section index for variety.
- * Templates are TOPIC-AGNOSTIC and use tentative/relative phrasing per F-007. */
+/* Section narrative templates — FIVE variants rotated by section index for variety.
+ * Variants drop the `topicTitle` interpolation entirely (it appears in the H1 already,
+ * and lowercasing it broke proper nouns like "Việt Nam" / "Hiến pháp"). Section
+ * heading IS lowercased mid-sentence (idiomatic for both locales). Position-neutral
+ * phrasing so section 4+ doesn't claim to be the "first" anything. */
 export const SECTION_TEMPLATES = {
   vi: [
     {
-      paraA: ({ section, topicTitle }) =>
-        `${section} thường là khía cạnh đầu tiên cần làm rõ khi tiếp cận ${topicTitle.toLowerCase()}. Phần này tập trung vào nội hàm, phạm vi và các yếu tố cấu thành của ${section.toLowerCase()} — đặt trong tổng thể khung pháp luật Việt Nam đã được nêu ở phần mở đầu. Nội dung mang tính tham khảo, cần đối chiếu với văn bản pháp luật mới nhất trước khi áp dụng.`,
+      paraA: ({ section }) =>
+        `${section} là một khía cạnh quan trọng cần làm rõ trong nội dung này. Phần này tập trung vào nội hàm, phạm vi và các yếu tố cấu thành của ${section.toLowerCase()} — đặt trong tổng thể khung pháp luật Việt Nam đã được nêu ở phần mở đầu. Nội dung mang tính tham khảo, cần đối chiếu với văn bản pháp luật mới nhất trước khi áp dụng.`,
       paraB: ({ section }) =>
         `Về mặt cấu trúc, các quy định liên quan đến ${section.toLowerCase()} thường được sắp xếp thành hai nhóm: nhóm quy phạm chung quy định nguyên tắc và phạm vi áp dụng, và nhóm quy phạm chi tiết quy định trình tự, thủ tục và hậu quả pháp lý. Trong nhiều trường hợp, các văn bản hướng dẫn cấp Bộ giúp cụ thể hóa cách áp dụng cho các tình huống điển hình mà luật chưa thể bao quát hết. Người đọc thường nên đối chiếu giữa quy phạm gốc và văn bản hướng dẫn thay vì chỉ dựa vào một trong hai.`,
       paraC: ({ section }) =>
         `Trong thực tiễn, ${section.toLowerCase()} thường là điểm tham chiếu được các bên nhắc đến — từ luật sư, thẩm phán đến cán bộ hành chính. Những vướng mắc thường xuất phát không phải từ bản thân quy phạm mà từ cách áp dụng quy phạm vào tình huống cụ thể, đặc biệt khi các quy định mới ban hành chưa có án lệ hoặc hướng dẫn nội bộ rõ ràng.`,
     },
     {
-      paraA: ({ section, topicTitle }) =>
-        `Một thành tố thường không thể bỏ qua khi tiếp cận ${topicTitle.toLowerCase()} là ${section.toLowerCase()}. Phần này đề cập đến cấu trúc, chức năng và phạm vi của ${section.toLowerCase()} trong tổng thể hệ thống pháp luật. Cách hiểu phù hợp về phần này có thể giúp người đọc tránh được các nhầm lẫn phổ biến và xây dựng nền tảng kiến thức ổn định cho các vấn đề chuyên sâu hơn.`,
+      paraA: ({ section }) =>
+        `Một thành tố thường không thể bỏ qua khi nghiên cứu nội dung này là ${section.toLowerCase()}. Phần này đề cập đến cấu trúc, chức năng và phạm vi của ${section.toLowerCase()} trong tổng thể hệ thống pháp luật. Cách hiểu phù hợp về phần này có thể giúp người đọc tránh được các nhầm lẫn phổ biến và xây dựng nền tảng kiến thức ổn định cho các vấn đề chuyên sâu hơn.`,
       paraB: ({ section }) =>
         `Khung pháp lý điều chỉnh ${section.toLowerCase()} thường bám sát các nguyên tắc chung của hệ thống dân luật mà Việt Nam theo truyền thống — đề cao tính rõ ràng của quy phạm thành văn, vai trò trung tâm của cơ quan lập pháp và sự bổ trợ có giới hạn của thực tiễn xét xử. Các quy phạm liên quan thường tham chiếu chéo giữa nhiều văn bản, nên việc đọc một quy phạm cô lập có thể dẫn đến hiểu chưa đầy đủ về phạm vi áp dụng thực tế.`,
       paraC: ({ section, related }) =>
@@ -106,19 +102,35 @@ export const SECTION_TEMPLATES = {
       paraC: ({ section }) =>
         `Ý nghĩa thực tiễn của ${section.toLowerCase()} thường thể hiện rõ ở các tình huống có yếu tố tranh chấp hoặc cần xác lập quyền và nghĩa vụ rõ ràng giữa các bên. Người tham gia quan hệ pháp luật thường cần xác định rõ vị thế pháp lý của mình trước khi đưa ra quyết định.`,
     },
+    {
+      paraA: ({ section }) =>
+        `Một điểm then chốt khi nghiên cứu chủ đề này là ${section.toLowerCase()}. Phần này khái quát phạm vi, nguyên tắc áp dụng và những giới hạn cần lưu ý của ${section.toLowerCase()} — để người đọc nhận diện được vấn đề trước khi đi sâu vào trường hợp cụ thể.`,
+      paraB: ({ section }) =>
+        `Trong cách tổ chức của pháp luật Việt Nam, ${section.toLowerCase()} thường được phản ánh ở nhiều cấp văn bản: nguyên tắc gốc nằm ở luật hoặc bộ luật, các điều kiện chi tiết nằm ở nghị định, và quy trình thực hiện nằm ở thông tư. Bạn đọc nên kiểm tra cả ba cấp để có hình dung đầy đủ.`,
+      paraC: ({ section }) =>
+        `Khi áp dụng vào thực tế, ${section.toLowerCase()} thường đòi hỏi sự đối chiếu liên ngành — kết hợp với các quy định về thủ tục hành chính, thẩm quyền cơ quan có liên quan và thực tiễn xét xử tại địa phương.`,
+    },
+    {
+      paraA: ({ section }) =>
+        `${section} là một khái niệm mà bạn đọc nên tiếp cận thận trọng, bởi nội hàm và cách hiểu có thể thay đổi tùy thuộc vào ngữ cảnh sử dụng. Phần này phác họa các đặc điểm phổ biến nhất, giúp người đọc xây dựng một cách hiểu nền tảng trước khi đi vào tình huống chuyên môn.`,
+      paraB: ({ section }) =>
+        `Đặc trưng nổi bật của ${section.toLowerCase()} là tính đa tầng — quy phạm gốc đặt khung, văn bản hướng dẫn cụ thể hóa, và thực tiễn áp dụng định hình ý nghĩa cuối cùng. Trong nhiều trường hợp, cùng một thuật ngữ có thể có nội hàm khác nhau giữa lĩnh vực dân sự và hành chính.`,
+      paraC: ({ section }) =>
+        `Việc xác định đúng phạm vi của ${section.toLowerCase()} trong tình huống cụ thể thường là bước quan trọng để tránh rủi ro pháp lý. Người đọc được khuyến nghị tham vấn ý kiến chuyên gia khi quyết định có liên quan đến trách nhiệm tài sản hoặc tự do cá nhân.`,
+    },
   ],
   en: [
     {
-      paraA: ({ section, topicTitle }) =>
-        `${section} is often the first dimension to clarify when approaching ${topicTitle.toLowerCase()}. This section focuses on the substance, scope, and constituent elements of ${section.toLowerCase()} — read within the wider Vietnamese legal framework introduced above. The material is for reference and should be verified against the latest statutory text before being applied.`,
+      paraA: ({ section }) =>
+        `${section} is an important dimension to clarify within this material. This section focuses on the substance, scope, and constituent elements of ${section.toLowerCase()} — read within the wider Vietnamese legal framework introduced above. The material is for reference and should be verified against the latest statutory text before being applied.`,
       paraB: ({ section }) =>
         `Structurally, the rules touching on ${section.toLowerCase()} typically fall into two groups: general norms that set out principles and scope of application, and detailed norms that prescribe procedure and legal consequences. Ministerial guidance often fills in operational detail for typical fact-patterns the statute itself cannot fully anticipate. Readers should generally cross-read the parent provision and its implementing instruments rather than relying on either in isolation.`,
       paraC: ({ section }) =>
         `In practice, ${section.toLowerCase()} is often a reference point lawyers, judges, and administrative officers return to repeatedly. Difficulties tend to arise not from the norm itself but from how it applies to a specific situation — especially where recently-enacted provisions have not yet generated precedent or internal guidance.`,
     },
     {
-      paraA: ({ section, topicTitle }) =>
-        `An often-inseparable component of ${topicTitle.toLowerCase()} is ${section.toLowerCase()}. This section addresses the structure, function, and scope of ${section.toLowerCase()} within the wider legal system. A suitable reading of this material can help readers avoid common misconceptions and build a stable foundation for the more specialised material that follows.`,
+      paraA: ({ section }) =>
+        `An often-inseparable component of this material is ${section.toLowerCase()}. This section addresses the structure, function, and scope of ${section.toLowerCase()} within the wider legal system. A suitable reading of this material can help readers avoid common misconceptions and build a stable foundation for the more specialised material that follows.`,
       paraB: ({ section }) =>
         `The framework governing ${section.toLowerCase()} generally tracks the broader principles of the civil-law tradition Vietnam follows — privileging the clarity of written norms, the central role of the legislature, and a supplementary role for adjudicative practice. The relevant rules tend to cross-reference multiple instruments, so reading any single provision in isolation may give an incomplete picture of its actual reach.`,
       paraC: ({ section, related }) =>
@@ -131,6 +143,22 @@ export const SECTION_TEMPLATES = {
         `The legal framework relevant to ${section.toLowerCase()} generally sits in specialised statutory instruments, complemented by implementing decrees and circulars. This is a typical normative pattern in the civil-law tradition: abstract principles are operationalised through multiple successive instruments below the statute. Specific article numbers and named instruments are added in the qualified-lawyer review pass.`,
       paraC: ({ section }) =>
         `The practical importance of ${section.toLowerCase()} often comes through clearly when there is a dispute or where rights and obligations between parties need to be made determinate. Participants in the legal relationship generally need to clarify their own legal position before making decisions.`,
+    },
+    {
+      paraA: ({ section }) =>
+        `A pivotal element when studying this material is ${section.toLowerCase()}. This section outlines the scope, governing principles, and notable limits of ${section.toLowerCase()} so that readers can recognise the issue before drilling into any specific case.`,
+      paraB: ({ section }) =>
+        `In the organisation of Vietnamese law, ${section.toLowerCase()} is generally reflected at multiple textual levels: foundational principles sit in a statute or code, detailed conditions live in a decree, and implementing procedure is set out in a circular. Readers should consult all three tiers to obtain a complete picture.`,
+      paraC: ({ section }) =>
+        `In practice, ${section.toLowerCase()} typically calls for cross-disciplinary reconciliation — combining administrative-procedure rules, the powers of the relevant authority, and local adjudicative practice.`,
+    },
+    {
+      paraA: ({ section }) =>
+        `${section} is a concept that readers should approach carefully, because its substantive meaning can shift with context. This section sketches the most common features so readers can build a baseline understanding before turning to professional fact-patterns.`,
+      paraB: ({ section }) =>
+        `A defining characteristic of ${section.toLowerCase()} is its multi-tier nature — the parent norm sets the frame, implementing instruments operationalise it, and adjudicative practice shapes its final meaning. The same term may take on different content across civil and administrative subject areas.`,
+      paraC: ({ section }) =>
+        `Determining the proper scope of ${section.toLowerCase()} in a concrete situation is often a critical step in avoiding legal risk. Readers are encouraged to consult a qualified specialist when a decision touches on property or personal-liberty exposure.`,
     },
   ],
 }

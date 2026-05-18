@@ -36,16 +36,22 @@ function pickTemplate(locale, sectionIdx) {
   return variants[sectionIdx % variants.length]
 }
 
+/* Strip trailing terminal punctuation from a title/heading before mid-sentence
+ * interpolation, so we never produce `…?.` or `…!.` collisions. */
+function stripTrailingPunct(s) {
+  return s.replace(/[.?!,;:]+\s*$/u, '').trim()
+}
+
 function buildSectionBlock(locale, topic, section, sectionIdx, allSections) {
-  const heading = locale === 'vi' ? section.vi : section.en
-  const topicTitle = locale === 'vi' ? topic.vi.title : topic.en.title
+  const heading = stripTrailingPunct(locale === 'vi' ? section.vi : section.en)
+  const topicTitle = stripTrailingPunct(locale === 'vi' ? topic.vi.title : topic.en.title)
   const tpl = pickTemplate(locale, sectionIdx)
 
   // For paraC's "related" reference, pick a different section's heading from the same article.
   const otherIdx = (sectionIdx + 1) % allSections.length
-  const related = locale === 'vi'
-    ? allSections[otherIdx].vi.toLowerCase()
-    : allSections[otherIdx].en.toLowerCase()
+  const related = stripTrailingPunct(
+    (locale === 'vi' ? allSections[otherIdx].vi : allSections[otherIdx].en).toLowerCase(),
+  )
 
   const paragraphs = [
     tpl.paraA({ section: heading, topicTitle }),
@@ -53,7 +59,17 @@ function buildSectionBlock(locale, topic, section, sectionIdx, allSections) {
     tpl.paraC({ section: heading, related, topicTitle }),
   ]
 
-  return `## ${heading}\n\n${paragraphs.join('\n\n')}\n`
+  // Optional `items` array on the outline entry renders as a bullet list inside the
+  // section (handles list-promising headings like "Categories of evidence",
+  // "Loại hình doanh nghiệp", "Ví dụ minh hoạ" — F-015).
+  const items = locale === 'vi' ? section.viItems : section.enItems
+  let itemsBlock = ''
+  if (Array.isArray(items) && items.length > 0) {
+    const intro = locale === 'vi' ? 'Cụ thể, nội dung phổ biến gồm:' : 'In particular, the common content includes:'
+    itemsBlock = `\n\n${intro}\n\n${items.map((i) => `- ${i}`).join('\n')}\n`
+  }
+
+  return `## ${heading}\n\n${paragraphs.join('\n\n')}${itemsBlock}\n`
 }
 
 /* Per-article siblings derived from the same category — used in the See-also block. */

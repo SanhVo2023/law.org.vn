@@ -11,7 +11,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: '/', changeFrequency: 'weekly' as const, priority: 1.0 },
     { path: '/blog', changeFrequency: 'daily' as const, priority: 0.9 },
     { path: '/updates', changeFrequency: 'daily' as const, priority: 0.9 },
-    { path: '/glossary', changeFrequency: 'weekly' as const, priority: 0.7 },
+    // /glossary is a 308 redirect → /updates; excluded from sitemap so crawlers
+    // don't waste budget chasing the bounce.
     ...CATEGORIES.map((c) => ({
       path: `/${c.slug}`,
       changeFrequency: 'weekly' as const,
