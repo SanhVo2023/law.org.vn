@@ -44,7 +44,7 @@ export function TrustedSources({ caption, subcaption, locale }: TrustedSourcesPr
             return (
               <li key={s.id} className="flex flex-col items-center text-center">
                 <figure
-                  className="group flex flex-col items-center gap-3 opacity-70 transition hover:opacity-100"
+                  className="group flex flex-col items-center gap-3 opacity-85 transition hover:opacity-100"
                   aria-label={label}
                   title={label}
                 >

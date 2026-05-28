@@ -1,13 +1,12 @@
 import { Link } from '@/i18n/navigation'
-import Image from 'next/image'
 import { SectionHeading } from '@/components/ui/SectionHeading'
+import { CLUSTER_GLYPHS } from './ClusterGlyphs'
 
 export interface ClusterEntry {
   slug: string
   label: string
   description: string
   count: number
-  glyph?: { src: string; alt: string }
 }
 
 export function ClustersGrid({
@@ -38,9 +37,9 @@ export function ClustersGrid({
               <span className="font-mono text-xs text-[var(--fg-muted)]">
                 {String(idx + 1).padStart(2, '0')}
               </span>
-              {cluster.glyph && (
-                <div className="relative h-12 w-12 rounded-lg bg-[var(--color-paper-deep)]/60 p-1.5 opacity-90 mix-blend-multiply dark:bg-white/[0.04] dark:mix-blend-screen transition group-hover:opacity-100 group-hover:scale-105">
-                  <Image src={cluster.glyph.src} alt={cluster.glyph.alt} fill className="object-contain" />
+              {CLUSTER_GLYPHS[cluster.slug] && (
+                <div className="h-11 w-11 text-[var(--color-gold-500)] opacity-90 transition group-hover:opacity-100 group-hover:scale-105">
+                  {CLUSTER_GLYPHS[cluster.slug]}
                 </div>
               )}
             </div>

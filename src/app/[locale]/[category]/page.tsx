@@ -9,7 +9,8 @@ import { JsonLd } from '@/components/JsonLd'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 import { Eyebrow } from '@/components/ui/Eyebrow'
 import { Ornament } from '@/components/ui/Ornament'
-import { CLUSTER_HERO, CLUSTER_GLYPH } from '@/lib/images'
+import { CLUSTER_HERO } from '@/lib/images'
+import { CLUSTER_GLYPHS } from '@/components/home/ClusterGlyphs'
 import Image from 'next/image'
 import type { Locale } from '@/i18n/routing'
 
@@ -132,15 +133,10 @@ export default async function CategoryPage({ params }: { params: Params }) {
               <p className="mt-6 max-w-3xl text-lg leading-relaxed text-[var(--fg-muted)]">{intro}</p>
               <div aria-hidden className="mt-8 h-[2px] w-16 bg-[var(--color-gold-500)]" />
             </div>
-            {CLUSTER_GLYPH[category] && (
+            {CLUSTER_GLYPHS[category] && (
               <div className="hidden lg:block lg:col-span-3 justify-self-end">
-                <div className="relative h-32 w-32 opacity-80">
-                  <Image
-                    src={CLUSTER_GLYPH[category].src}
-                    alt={CLUSTER_GLYPH[category].alt}
-                    fill
-                    className="object-contain"
-                  />
+                <div className="h-32 w-32 text-[var(--color-gold-500)] opacity-80">
+                  {CLUSTER_GLYPHS[category]}
                 </div>
               </div>
             )}

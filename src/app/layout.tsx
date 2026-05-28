@@ -12,9 +12,7 @@ export const metadata: Metadata = {
   },
   description:
     'law.org.vn — an encyclopedic, non-commercial knowledge portal explaining Vietnam\'s legal system, courts, and procedures.',
-  icons: {
-    icon: '/favicon.ico',
-  },
+  // Favicon is provided by the app/icon.svg file convention (auto-injected by Next).
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

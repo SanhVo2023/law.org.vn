@@ -123,43 +123,8 @@ export const images = {
     alt: 'Hand-bound legal codex — FAQ cluster',
   },
 
-  // Cluster glyphs (6)
-  glyphLegalSystem: {
-    src: 'https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/glyph-legal-system-d304b7b7.webp',
-    width: 1024,
-    height: 1024,
-    alt: 'Legal system glyph — column with codex',
-  },
-  glyphCourtSystem: {
-    src: 'https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/glyph-court-system-c2193d42.webp',
-    width: 1024,
-    height: 1024,
-    alt: 'Court system glyph — courthouse silhouette',
-  },
-  glyphLitigation: {
-    src: 'https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/glyph-litigation-9a37cdd4.webp',
-    width: 1024,
-    height: 1024,
-    alt: 'Litigation glyph — briefcase with dossier',
-  },
-  glyphRights: {
-    src: 'https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/glyph-rights-135a83a0.webp',
-    width: 1024,
-    height: 1024,
-    alt: 'Rights glyph — shield with hand',
-  },
-  glyphTerminology: {
-    src: 'https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/glyph-terminology-2fc16898.webp',
-    width: 1024,
-    height: 1024,
-    alt: 'Terminology glyph — open dictionary',
-  },
-  glyphFaq: {
-    src: 'https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/glyph-faq-f46397e4.webp',
-    width: 1024,
-    height: 1024,
-    alt: 'FAQ glyph — question mark in laurel wreath',
-  },
+  // (Cluster glyphs removed 2026-05-19 — replaced by inline SVG glyphs in
+  //  src/components/home/ClusterGlyphs.tsx for true transparency.)
 
   // Article featured images (8)
   articleConstitution2013: {
@@ -303,14 +268,7 @@ export const CLUSTER_HERO: Record<string, ImageEntry> = {
   faq: images.heroClusterFaq,
 }
 
-export const CLUSTER_GLYPH: Record<string, ImageEntry> = {
-  'legal-system': images.glyphLegalSystem,
-  'court-system': images.glyphCourtSystem,
-  litigation: images.glyphLitigation,
-  rights: images.glyphRights,
-  terminology: images.glyphTerminology,
-  faq: images.glyphFaq,
-}
+// Cluster glyphs now use inline SVG (src/components/home/ClusterGlyphs.tsx).
 
 // Per-article featured-image lookup (only for cornerstone topics)
 export const ARTICLE_IMAGE: Record<string, ImageEntry> = {

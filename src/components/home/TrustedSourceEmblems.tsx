@@ -20,7 +20,7 @@ const common = {
   'aria-hidden': true,
 }
 
-const Ring = () => <circle cx="32" cy="32" r="29" strokeWidth={1.5} opacity={0.55} />
+const Ring = () => <circle cx="32" cy="32" r="29" strokeWidth={1.5} opacity={0.7} />
 
 export const TRUSTED_SOURCE_EMBLEMS: Record<string, ReactNode> = {
   // National Assembly — five-pointed star above a horizontal rule

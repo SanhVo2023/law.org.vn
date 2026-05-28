@@ -8,7 +8,6 @@ import { JsonLd } from '@/components/JsonLd'
 import { HomeHero } from '@/components/home/HomeHero'
 import { EncyclopediaStats } from '@/components/home/EncyclopediaStats'
 import { ClustersGrid, type ClusterEntry } from '@/components/home/ClustersGrid'
-import { CLUSTER_GLYPH } from '@/lib/images'
 import { FeaturedEntries, type FeaturedEntryItem } from '@/components/home/FeaturedEntries'
 import { HowToUse } from '@/components/home/HowToUse'
 import { HistoryTimeline } from '@/components/home/HistoryTimeline'
@@ -108,16 +107,12 @@ export default async function HomePage({ params }: { params: Params }) {
   })
   featured.sort((a, b) => FEATURED_SLUGS.indexOf(a.slug) - FEATURED_SLUGS.indexOf(b.slug))
 
-  const clusters: ClusterEntry[] = CATEGORIES.map((c) => {
-    const glyph = CLUSTER_GLYPH[c.slug]
-    return {
-      slug: c.slug,
-      label: t(`nav.${c.nameKey}`),
-      description: CLUSTER_DESCRIPTIONS[c.slug][lng],
-      count: CLUSTER_COUNTS[c.slug] ?? 0,
-      glyph: glyph ? { src: glyph.src, alt: glyph.alt } : undefined,
-    }
-  })
+  const clusters: ClusterEntry[] = CATEGORIES.map((c) => ({
+    slug: c.slug,
+    label: t(`nav.${c.nameKey}`),
+    description: CLUSTER_DESCRIPTIONS[c.slug][lng],
+    count: CLUSTER_COUNTS[c.slug] ?? 0,
+  }))
 
   return (
     <>

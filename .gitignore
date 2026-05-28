@@ -58,3 +58,6 @@ content/drafts/
 # editor
 .vscode/
 .idea/
+
+# playwright mcp screenshot/snapshot artifacts
+.playwright-mcp/

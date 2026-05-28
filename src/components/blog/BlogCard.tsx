@@ -19,9 +19,11 @@ interface BlogCardProps {
   post: BlogCardItem
   locale: 'vi' | 'en'
   readingMinLabel: string
+  // Eagerly load the first row of cards (above the fold) to improve LCP.
+  priority?: boolean
 }
 
-export function BlogCard({ post, locale, readingMinLabel }: BlogCardProps) {
+export function BlogCard({ post, locale, readingMinLabel, priority = false }: BlogCardProps) {
   const date = post.publishedAt
     ? new Date(post.publishedAt).toLocaleDateString(locale === 'vi' ? 'vi-VN' : 'en-US', {
         year: 'numeric',
@@ -39,6 +41,7 @@ export function BlogCard({ post, locale, readingMinLabel }: BlogCardProps) {
               src={post.featuredImage.url}
               alt={post.featuredImage.alt ?? post.title}
               fill
+              priority={priority}
               sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
               className="object-cover transition duration-700 group-hover:scale-[1.03]"
             />

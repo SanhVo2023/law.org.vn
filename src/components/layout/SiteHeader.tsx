@@ -4,6 +4,7 @@ import { LocaleSwitcher } from '@/components/LocaleSwitcher'
 import { DarkModeToggle } from '@/components/DarkModeToggle'
 import { CATEGORIES } from '@/lib/site'
 import { TopicsMenu } from './TopicsMenu'
+import { MobileMenu } from './MobileMenu'
 
 export async function SiteHeader() {
   const t = await getTranslations()
@@ -12,6 +13,12 @@ export async function SiteHeader() {
     href: `/${c.slug}`,
     label: t(`nav.${c.nameKey}`),
   }))
+  const topicsLabel = t('nav.legalSystem').split(' ')[0] === 'Hệ' ? 'Cụm chủ đề' : 'Topics'
+  const navLinks = [
+    { href: '/blog', label: t('nav.blog') },
+    { href: '/updates', label: t('nav.updates') },
+    { href: '/faq', label: t('nav.faq') },
+  ]
 
   return (
     <header className="sticky top-0 z-40 border-b border-[var(--rule)] bg-[var(--bg)]/90 backdrop-blur-md no-print">
@@ -26,30 +33,22 @@ export async function SiteHeader() {
         </Link>
 
         <nav className="hidden lg:flex items-center gap-7 text-sm">
-          <TopicsMenu label={`${t('nav.legalSystem').split(' ')[0] === 'Hệ' ? 'Cụm chủ đề' : 'Topics'}`} items={topics} />
-          <Link
-            href="/blog"
-            className="text-[var(--fg-muted)] hover:text-[var(--fg)] transition uppercase tracking-[0.14em] text-xs"
-          >
-            {t('nav.blog')}
-          </Link>
-          <Link
-            href="/updates"
-            className="text-[var(--fg-muted)] hover:text-[var(--fg)] transition uppercase tracking-[0.14em] text-xs"
-          >
-            {t('nav.updates')}
-          </Link>
-          <Link
-            href="/faq"
-            className="text-[var(--fg-muted)] hover:text-[var(--fg)] transition uppercase tracking-[0.14em] text-xs"
-          >
-            {t('nav.faq')}
-          </Link>
+          <TopicsMenu label={topicsLabel} items={topics} />
+          {navLinks.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              className="text-[var(--fg-muted)] hover:text-[var(--fg)] transition uppercase tracking-[0.14em] text-xs"
+            >
+              {l.label}
+            </Link>
+          ))}
         </nav>
 
         <div className="flex items-center gap-2">
           <LocaleSwitcher />
           <DarkModeToggle />
+          <MobileMenu topicsLabel={topicsLabel} topics={topics} links={navLinks} />
         </div>
       </div>
     </header>

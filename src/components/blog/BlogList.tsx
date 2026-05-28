@@ -63,12 +63,13 @@ export function BlogList({ posts, locale, labels }: BlogListProps) {
         </p>
       ) : (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((post) => (
+          {filtered.map((post, idx) => (
             <BlogCard
               key={post.id}
               post={post}
               locale={locale}
               readingMinLabel={labels.readingMin}
+              priority={idx < 3}
             />
           ))}
         </div>
