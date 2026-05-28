@@ -237,55 +237,8 @@ export const images = {
     alt: 'law.org.vn English social card',
   },
 
-  // Trusted-source crests (8 — engraved monogram on transparent)
-  crestQuocHoi: {
-    src: 'https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/crest-quoc-hoi-4637e185.webp',
-    width: 256,
-    height: 256,
-    alt: 'National Assembly of Vietnam crest',
-  },
-  crestChinhPhu: {
-    src: 'https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/crest-chinh-phu-a755e3bc.webp',
-    width: 256,
-    height: 256,
-    alt: 'Vietnam Government Portal crest',
-  },
-  crestTandtc: {
-    src: 'https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/crest-tandtc-110091a8.webp',
-    width: 256,
-    height: 256,
-    alt: "Supreme People's Court of Vietnam crest",
-  },
-  crestVksndtc: {
-    src: 'https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/crest-vksndtc-52640177.webp',
-    width: 256,
-    height: 256,
-    alt: "Supreme People's Procuracy of Vietnam crest",
-  },
-  crestBoTuPhap: {
-    src: 'https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/crest-bo-tu-phap-045ef851.webp',
-    width: 256,
-    height: 256,
-    alt: 'Ministry of Justice of Vietnam crest',
-  },
-  crestVbpl: {
-    src: 'https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/crest-vbpl-59dd2d31.webp',
-    width: 256,
-    height: 256,
-    alt: 'Legal Documents Portal (vbpl.vn) crest',
-  },
-  crestThuVienPhapLuat: {
-    src: 'https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/crest-thuvienphapluat-460cab8f.webp',
-    width: 256,
-    height: 256,
-    alt: 'thuvienphapluat.vn crest',
-  },
-  crestViac: {
-    src: 'https://pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev/law.org.vn/icon/crest-viac-d4e26dc7.webp',
-    width: 256,
-    height: 256,
-    alt: 'Vietnam International Arbitration Centre (VIAC) crest',
-  },
+  // (Trusted-source crests removed 2026-05-19 — replaced by inline SVG emblems
+  //  in src/components/home/TrustedSourceEmblems.tsx for true transparency.)
 
   // Blog featured photographs (8 — editorial-photo, 16:9)
   blogReadingDecree: {
@@ -371,16 +324,8 @@ export const ARTICLE_IMAGE: Record<string, ImageEntry> = {
   notarization: images.articleNotarization,
 }
 
-// Trusted Sources rail — short-id → crest (used in TrustedSources.tsx)
-export const TRUSTED_SOURCE_CREST: Record<string, ImageEntry> = {
-  'quoc-hoi': images.crestQuocHoi,
-  'chinh-phu': images.crestChinhPhu,
-  tandtc: images.crestTandtc,
-  vksndtc: images.crestVksndtc,
-  'bo-tu-phap': images.crestBoTuPhap,
-  vbpl: images.crestVbpl,
-  viac: images.crestViac,
-}
+// Trusted Sources rail now uses inline SVG emblems
+// (src/components/home/TrustedSourceEmblems.tsx) — no raster crest map needed.
 
 // Blog featured-image lookup by post slug
 export const BLOG_IMAGE: Record<string, ImageEntry> = {

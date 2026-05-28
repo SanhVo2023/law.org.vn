@@ -1,5 +1,4 @@
-import Image from 'next/image'
-import { TRUSTED_SOURCE_CREST } from '@/lib/images'
+import { TRUSTED_SOURCE_EMBLEMS } from './TrustedSourceEmblems'
 
 interface TrustedSourcesProps {
   caption: string
@@ -11,52 +10,20 @@ interface Source {
   id: string
   fullVi: string
   fullEn: string
-  url: string
 }
 
+// Official institutions referenced by the encyclopedia. Non-clickable visual
+// marks (no outbound links per Mr Hien 2026-05-19). Emblems are inline SVG —
+// truly transparent, theme-adaptive gold.
 const SOURCES: Source[] = [
-  {
-    id: 'quoc-hoi',
-    fullVi: 'Quốc Hội Việt Nam',
-    fullEn: 'National Assembly',
-    url: 'https://quochoi.vn',
-  },
-  {
-    id: 'chinh-phu',
-    fullVi: 'Cổng Thông tin Chính phủ',
-    fullEn: 'Government Portal',
-    url: 'https://chinhphu.vn',
-  },
-  {
-    id: 'tandtc',
-    fullVi: 'Tòa án Nhân dân Tối cao',
-    fullEn: "Supreme People's Court",
-    url: 'https://toaan.gov.vn',
-  },
-  {
-    id: 'vksndtc',
-    fullVi: 'Viện Kiểm sát Nhân dân Tối cao',
-    fullEn: "Supreme People's Procuracy",
-    url: 'https://vksndtc.gov.vn',
-  },
-  {
-    id: 'bo-tu-phap',
-    fullVi: 'Bộ Tư pháp',
-    fullEn: 'Ministry of Justice',
-    url: 'https://moj.gov.vn',
-  },
-  {
-    id: 'vbpl',
-    fullVi: 'Cổng Văn bản Quy phạm Pháp luật',
-    fullEn: 'Legal Documents Portal',
-    url: 'https://vbpl.vn',
-  },
-  {
-    id: 'viac',
-    fullVi: 'Trung tâm Trọng tài Quốc tế Việt Nam',
-    fullEn: 'Vietnam International Arbitration Centre',
-    url: 'https://viac.vn',
-  },
+  { id: 'quoc-hoi', fullVi: 'Quốc Hội Việt Nam', fullEn: 'National Assembly' },
+  { id: 'chinh-phu', fullVi: 'Cổng Thông tin Chính phủ', fullEn: 'Government Portal' },
+  { id: 'tandtc', fullVi: 'Tòa án Nhân dân Tối cao', fullEn: "Supreme People's Court" },
+  { id: 'vksndtc', fullVi: 'Viện Kiểm sát Nhân dân Tối cao', fullEn: "Supreme People's Procuracy" },
+  { id: 'bo-tu-phap', fullVi: 'Bộ Tư pháp', fullEn: 'Ministry of Justice' },
+  { id: 'bo-cong-an', fullVi: 'Bộ Công an', fullEn: 'Ministry of Public Security' },
+  { id: 'vbpl', fullVi: 'Cổng Văn bản Quy phạm Pháp luật', fullEn: 'Legal Documents Portal' },
+  { id: 'viac', fullVi: 'Trung tâm Trọng tài Quốc tế Việt Nam', fullEn: 'Vietnam International Arbitration Centre' },
 ]
 
 export function TrustedSources({ caption, subcaption, locale }: TrustedSourcesProps) {
@@ -70,35 +37,24 @@ export function TrustedSources({ caption, subcaption, locale }: TrustedSourcesPr
           <p className="mt-3 text-sm leading-relaxed text-[var(--fg-muted)]">{subcaption}</p>
         </div>
 
-        <ul className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-x-6 gap-y-10">
+        <ul className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-x-6 gap-y-10">
           {SOURCES.map((s) => {
-            const crest = TRUSTED_SOURCE_CREST[s.id]
+            const label = locale === 'vi' ? s.fullVi : s.fullEn
+            const emblem = TRUSTED_SOURCE_EMBLEMS[s.id]
             return (
               <li key={s.id} className="flex flex-col items-center text-center">
-                <a
-                  href={s.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex flex-col items-center gap-3 opacity-70 hover:opacity-100 transition"
-                  aria-label={locale === 'vi' ? s.fullVi : s.fullEn}
+                <figure
+                  className="group flex flex-col items-center gap-3 opacity-70 transition hover:opacity-100"
+                  aria-label={label}
+                  title={label}
                 >
-                  <div className="relative h-16 w-16 transition group-hover:scale-105">
-                    {crest ? (
-                      <Image
-                        src={crest.src}
-                        alt={crest.alt}
-                        fill
-                        sizes="64px"
-                        className="object-contain"
-                      />
-                    ) : (
-                      <div className="h-full w-full rounded-full border border-[var(--rule)]" />
-                    )}
+                  <div className="h-16 w-16 text-[var(--color-gold-500)] transition group-hover:scale-105">
+                    {emblem ?? <div className="h-full w-full rounded-full border border-[var(--rule)]" />}
                   </div>
-                  <span className="font-mono text-[0.6rem] uppercase tracking-[0.14em] text-[var(--fg-muted)] leading-tight">
-                    {locale === 'vi' ? s.fullVi : s.fullEn}
-                  </span>
-                </a>
+                  <figcaption className="font-mono text-[0.6rem] uppercase tracking-[0.14em] text-[var(--fg-muted)] leading-tight">
+                    {label}
+                  </figcaption>
+                </figure>
               </li>
             )
           })}

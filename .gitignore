@@ -35,6 +35,8 @@ yarn-error.log*
 .env*.local
 .env.netlify
 .env.netlify.txt
+.env.vercel
+.env.vercel.txt
 .env.production
 !.env.example
 
