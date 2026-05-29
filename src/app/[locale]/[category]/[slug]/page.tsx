@@ -158,6 +158,7 @@ export default async function ArticlePage({ params }: { params: Params }) {
             src={CLUSTER_HERO[category].src}
             alt={CLUSTER_HERO[category].alt}
             fill
+            priority
             sizes="100vw"
             className="object-cover opacity-[0.10] mix-blend-multiply dark:opacity-[0.06] dark:mix-blend-screen"
           />

@@ -29,10 +29,16 @@
   font-family: var(--font-mono), 'SF Mono', Menlo, monospace;
 }
 
-.public-site a {
-  color: var(--link);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
+/* Default link colour lives in @layer base so it does NOT override Tailwind
+   colour utilities (e.g. text-white on a navy button). Without the layer, the
+   bare `.public-site a` selector (specificity 0,1,1) beat `.text-white`
+   (0,1,0) and turned every navy <a> button's label navy-on-navy (invisible). */
+@layer base {
+  .public-site a {
+    color: var(--link);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
 }
 
 .public-site a:hover {
