@@ -18,6 +18,10 @@ export function makeRevalidateHook({ pathsFromDoc }: RevalidateOptions) {
     const paths = pathsFromDoc(doc).filter(Boolean)
     if (paths.length === 0) return
 
+    // Hard 5s timeout so a slow/unreachable revalidate endpoint (e.g. during a
+    // DNS cut-over, or a stale REVALIDATE_URL) can never HANG the editor's save.
+    const controller = new AbortController()
+    const timer = setTimeout(() => controller.abort(), 5000)
     try {
       await fetch(url, {
         method: 'POST',
@@ -26,11 +30,14 @@ export function makeRevalidateHook({ pathsFromDoc }: RevalidateOptions) {
           'x-revalidate-token': token,
         },
         body: JSON.stringify({ paths }),
+        signal: controller.signal,
       })
     } catch (err) {
-      // Don't block the save if the revalidate endpoint is unreachable.
+      // Don't block the save if the revalidate endpoint is unreachable/slow.
       // eslint-disable-next-line no-console
-      console.warn('[revalidate-hook] failed to call revalidate:', (err as Error).message)
+      console.warn('[revalidate-hook] revalidate call failed/timed out:', (err as Error).message)
+    } finally {
+      clearTimeout(timer)
     }
   }
 }

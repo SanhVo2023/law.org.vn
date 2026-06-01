@@ -15,7 +15,9 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'pub-ebe397ad6fc946888f5c9aacc3cc48bb.r2.dev',
-        pathname: '/law.org.vn/**',
+        // '/**' — Payload media now lands at the bucket root (no prefix), and the
+        // existing site assets live under /law.org.vn/*; both are on this host.
+        pathname: '/**',
       },
     ],
   },
