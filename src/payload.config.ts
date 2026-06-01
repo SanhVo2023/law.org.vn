@@ -71,9 +71,39 @@ if (process.env.NODE_ENV === 'production' && !hasR2) {
   )
 }
 
+// Origins allowed to make authenticated, cookie-based mutations from the admin
+// panel (CSRF) and cross-origin API reads (CORS). The admin UI authenticates with
+// the `payload-token` COOKIE, which IS subject to CSRF — so Payload checks the
+// request Origin against `csrf`. If the custom domain (or www variant) is missing,
+// the admin loads and reads work but EVERY Save returns 403. (Bearer-token API
+// calls skip CSRF, which is why scripts worked while the browser admin didn't.)
+// VERCEL_URL / VERCEL_PROJECT_PRODUCTION_URL are auto-added so the *.vercel.app
+// preview/prod URLs also work without manual config.
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+const adminOrigins = Array.from(
+  new Set(
+    [
+      SITE_URL,
+      'https://law.org.vn',
+      'https://www.law.org.vn',
+      'http://localhost:3000',
+      'http://localhost:3010',
+      process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null,
+      process.env.VERCEL_PROJECT_PRODUCTION_URL
+        ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+        : null,
+    ].filter((v): v is string => Boolean(v)),
+  ),
+)
+
 export default buildConfig({
-  serverURL: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+  serverURL: SITE_URL,
   secret: process.env.PAYLOAD_SECRET,
+
+  // Allow the admin's custom domain (+ www, + localhost, + vercel.app) to read
+  // cross-origin and to pass CSRF on Save.
+  cors: adminOrigins,
+  csrf: adminOrigins,
 
   admin: {
     user: Users.slug,
