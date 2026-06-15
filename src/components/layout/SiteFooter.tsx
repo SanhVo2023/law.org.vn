@@ -6,6 +6,35 @@ import { LEGAL_UPDATES, getTypeLabel } from '@/lib/updates'
 import { getPayload } from '@/lib/payload'
 import type { Locale } from '@/i18n/routing'
 
+// Small inline icons (gold via parent text color) — footer accents.
+const ico = {
+  viewBox: '0 0 24 24',
+  fill: 'none',
+  stroke: 'currentColor',
+  strokeWidth: 1.7,
+  strokeLinecap: 'round' as const,
+  strokeLinejoin: 'round' as const,
+  'aria-hidden': true,
+}
+const BookIcon = () => (
+  <svg {...ico} width="13" height="13"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H12v15H5.5A1.5 1.5 0 0 0 4 20.5z" /><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H12v15h6.5a1.5 1.5 0 0 1 1.5 1.5z" /></svg>
+)
+const BellIcon = () => (
+  <svg {...ico} width="13" height="13"><path d="M6 9a6 6 0 1 1 12 0c0 4.5 2 5.5 2 5.5H4S6 13.5 6 9Z" /><path d="M10 19a2 2 0 0 0 4 0" /></svg>
+)
+const NetIcon = () => (
+  <svg {...ico} width="13" height="13"><circle cx="6" cy="12" r="2.3" /><circle cx="18" cy="6" r="2.3" /><circle cx="18" cy="18" r="2.3" /><path d="M8 11l7.5-3.6M8 13l7.5 3.6" /></svg>
+)
+const PinIcon = () => (
+  <svg {...ico} width="15" height="15"><path d="M12 21s-6-5.4-6-10a6 6 0 1 1 12 0c0 4.6-6 10-6 10Z" /><circle cx="12" cy="11" r="2.2" /></svg>
+)
+const PhoneIcon = () => (
+  <svg {...ico} width="15" height="15"><path d="M5 4h3.2l1.4 4-2 1.4a11 11 0 0 0 5 5l1.4-2 4 1.4V19a2 2 0 0 1-2.1 2A16 16 0 0 1 3.9 6.1 2 2 0 0 1 5 4Z" /></svg>
+)
+const MailIcon = () => (
+  <svg {...ico} width="15" height="15"><rect x="3" y="5" width="18" height="14" rx="2.5" /><path d="m4 7.5 8 5 8-5" /></svg>
+)
+
 export async function SiteFooter() {
   const t = await getTranslations()
   const locale = await getLocale()
@@ -31,6 +60,11 @@ export async function SiteFooter() {
 
   const disclaimer = str(g?.description) || t('footer.disclaimer')
   const orgName = str(cb.organizationName) || contact.shortName
+  // Descriptor = the full legal name minus the org-name prefix, so the heading
+  // and the line below don't repeat "Công ty Luật Apolo Lawyers" verbatim.
+  const descriptor = contact.companyName.startsWith(orgName)
+    ? contact.companyName.slice(orgName.length).replace(/^[\s,–—-]+/, '')
+    : contact.companyName
   const addressLine = str(cb.address1) || contact.addressLine
   const addressLine2 = str(cb.address2)
   const email = str(cb.email) || contact.email
@@ -73,7 +107,8 @@ export async function SiteFooter() {
           </section>
 
           <section className="md:col-span-3">
-            <h4 className="text-[0.65rem] uppercase tracking-[0.18em] text-[var(--color-gold-500)] font-semibold">
+            <h4 className="flex items-center gap-2 text-[0.65rem] uppercase tracking-[0.18em] text-[var(--color-gold-500)] font-semibold">
+              <BookIcon />
               {isEn ? 'Topics' : 'Cụm chủ đề'}
             </h4>
             <ul className="mt-4 space-y-2.5 text-sm">
@@ -88,7 +123,8 @@ export async function SiteFooter() {
           </section>
 
           <section className="md:col-span-3">
-            <h4 className="text-[0.65rem] uppercase tracking-[0.18em] text-[var(--color-gold-500)] font-semibold">
+            <h4 className="flex items-center gap-2 text-[0.65rem] uppercase tracking-[0.18em] text-[var(--color-gold-500)] font-semibold">
+              <BellIcon />
               {t('nav.updates')}
             </h4>
             <ul className="mt-4 space-y-2.5 text-sm">
@@ -127,7 +163,8 @@ export async function SiteFooter() {
           </section>
 
           <section className="md:col-span-2">
-            <h4 className="text-[0.65rem] uppercase tracking-[0.18em] text-[var(--color-gold-500)] font-semibold">
+            <h4 className="flex items-center gap-2 text-[0.65rem] uppercase tracking-[0.18em] text-[var(--color-gold-500)] font-semibold">
+              <NetIcon />
               {t('footer.ecosystemTitle')}
             </h4>
             <ul className="mt-4 space-y-2.5 text-sm">
@@ -147,34 +184,60 @@ export async function SiteFooter() {
           </section>
         </div>
 
-        <div className="mt-14 pt-8 border-t border-[var(--rule)]">
-          <h4 className="text-[0.65rem] uppercase tracking-[0.18em] text-[var(--fg-muted)] font-semibold">
-            {orgName}
-          </h4>
-          <p className="mt-3 text-xs leading-relaxed text-[var(--fg-muted)] max-w-2xl">
-            {contact.companyName}
-          </p>
-          <address className="mt-3 not-italic text-sm leading-relaxed text-[var(--fg)] max-w-md">
-            {addressLine}
-            {addressLine2 ? (
-              <>
-                <br />
-                {addressLine2}
-              </>
+        <div className="mt-14 pt-8 border-t border-[var(--rule)] grid gap-8 md:grid-cols-12 md:gap-12">
+          {/* Identity — name once, then the affiliation descriptor (no repeat) */}
+          <div className="md:col-span-5">
+            <h4 className="font-heading text-base font-bold leading-snug text-[var(--fg)]">
+              {orgName}
+            </h4>
+            {descriptor ? (
+              <p className="mt-2 text-xs leading-relaxed text-[var(--fg-muted)] max-w-sm">
+                {descriptor}
+              </p>
             ) : null}
-            <br />
-            {phoneItems.map((p, i) => (
-              <span key={p.tel || p.label}>
-                <a href={`tel:${p.tel}`} className="text-[var(--fg-muted)] hover:text-[var(--fg)]">
-                  {p.label}
-                </a>
-                {i < phoneItems.length - 1 ? <span className="mx-2 text-[var(--fg-muted)]">·</span> : null}
+          </div>
+
+          {/* Contact details — each line led by a gold icon */}
+          <address className="md:col-span-7 not-italic grid gap-3.5 text-sm sm:grid-cols-2">
+            <div className="flex items-start gap-2.5">
+              <span className="mt-0.5 text-[var(--color-gold-500)] shrink-0">
+                <PinIcon />
               </span>
-            ))}
-            <br />
-            <a href={`mailto:${email}`} className="text-[var(--fg-muted)] hover:text-[var(--fg)]">
-              {email}
-            </a>
+              <span className="leading-relaxed text-[var(--fg)]">
+                {addressLine}
+                {addressLine2 ? (
+                  <>
+                    <br />
+                    {addressLine2}
+                  </>
+                ) : null}
+              </span>
+            </div>
+            <div className="flex items-start gap-2.5">
+              <span className="mt-0.5 text-[var(--color-gold-500)] shrink-0">
+                <PhoneIcon />
+              </span>
+              <span className="leading-relaxed">
+                {phoneItems.map((p, i) => (
+                  <span key={p.tel || p.label}>
+                    <a href={`tel:${p.tel}`} className="text-[var(--fg)] hover:text-[var(--color-gold-500)] transition">
+                      {p.label}
+                    </a>
+                    {i < phoneItems.length - 1 ? (
+                      <span className="mx-1.5 text-[var(--fg-muted)]">·</span>
+                    ) : null}
+                  </span>
+                ))}
+              </span>
+            </div>
+            <div className="flex items-start gap-2.5">
+              <span className="mt-0.5 text-[var(--color-gold-500)] shrink-0">
+                <MailIcon />
+              </span>
+              <a href={`mailto:${email}`} className="text-[var(--fg)] hover:text-[var(--color-gold-500)] transition">
+                {email}
+              </a>
+            </div>
           </address>
         </div>
       </div>
