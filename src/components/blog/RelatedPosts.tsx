@@ -1,5 +1,6 @@
 import { Link } from '@/i18n/navigation'
 import type { BlogCardItem } from './BlogCard'
+import { formatEntryDate } from '@/lib/format'
 
 interface RelatedPostsProps {
   posts: BlogCardItem[]
@@ -17,12 +18,7 @@ export function RelatedPosts({ posts, title, locale }: RelatedPostsProps) {
       </p>
       <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {posts.slice(0, 3).map((p) => {
-          const date = p.publishedAt
-            ? new Date(p.publishedAt).toLocaleDateString(locale === 'vi' ? 'vi-VN' : 'en-US', {
-                year: 'numeric',
-                month: 'short',
-              })
-            : null
+          const date = formatEntryDate(p.publishedAt, locale) || null
           return (
             <Link
               key={p.id}

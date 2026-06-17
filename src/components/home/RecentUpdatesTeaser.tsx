@@ -1,6 +1,7 @@
 import { Link } from '@/i18n/navigation'
 import { LEGAL_UPDATES, getTypeLabel } from '@/lib/updates'
 import { Eyebrow } from '@/components/ui/Eyebrow'
+import { formatEntryDate } from '@/lib/format'
 
 interface RecentUpdatesTeaserProps {
   locale: 'vi' | 'en'
@@ -19,12 +20,7 @@ export function RecentUpdatesTeaser({ locale, labels }: RecentUpdatesTeaserProps
     .sort((a, b) => (a.issuedDate < b.issuedDate ? 1 : -1))
     .slice(0, 5)
 
-  const formatDate = (date: string) =>
-    new Date(date).toLocaleDateString(locale === 'vi' ? 'vi-VN' : 'en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    })
+  const formatDate = (date: string) => formatEntryDate(date, locale, { withDay: true })
 
   return (
     <section className="mx-auto max-w-7xl px-4 md:px-6 py-14 md:py-20">

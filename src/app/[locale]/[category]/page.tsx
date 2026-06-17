@@ -4,6 +4,7 @@ import { Link } from '@/i18n/navigation'
 import { getPayload } from '@/lib/payload'
 import { assertDb } from '@/lib/db-check'
 import { CATEGORIES } from '@/lib/site'
+import { formatEntryDate, draftLabel } from '@/lib/format'
 import { buildPageMetadata, buildBreadcrumbJsonLd } from '@/lib/metadata'
 import { JsonLd } from '@/components/JsonLd'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
@@ -174,14 +175,11 @@ export default async function CategoryPage({ params }: { params: Params }) {
                         </p>
                       )}
                       <div className="mt-3 flex items-center gap-3 text-xs font-mono uppercase tracking-wider text-[var(--fg-muted)]">
-                        {a.status === 'draft' && <span className="badge-draft">Draft</span>}
+                        {a.status === 'draft' && <span className="badge-draft">{draftLabel(lng)}</span>}
                         {a.updatedDate && (
                           <span>
                             {lng === 'vi' ? 'Cập nhật ' : 'Updated '}
-                            {new Date(a.updatedDate).toLocaleDateString(lng === 'vi' ? 'vi-VN' : 'en-US', {
-                              year: 'numeric',
-                              month: 'short',
-                            })}
+                            {formatEntryDate(a.updatedDate, lng)}
                           </span>
                         )}
                       </div>

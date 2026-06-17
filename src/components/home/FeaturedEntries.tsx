@@ -1,6 +1,6 @@
 import { Link } from '@/i18n/navigation'
 import { SectionHeading } from '@/components/ui/SectionHeading'
-import { EntryCard } from '@/components/ui/EntryCard'
+import { formatEntryDate, draftLabel } from '@/lib/format'
 
 export interface FeaturedEntryItem {
   id: string | number
@@ -44,7 +44,7 @@ export function FeaturedEntries({
                     <span className="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-[var(--color-gold-500)]">
                       {e.clusterLabel}
                     </span>
-                    {e.isDraft && <span className="badge-draft">Draft</span>}
+                    {e.isDraft && <span className="badge-draft">{draftLabel(locale)}</span>}
                   </div>
                   <h3 className="mt-4 font-heading text-lg md:text-xl font-semibold leading-snug">
                     {e.title}
@@ -55,14 +55,7 @@ export function FeaturedEntries({
                     </p>
                   )}
                   <div className="mt-5 flex items-center justify-between border-t border-[var(--rule)] pt-4 font-mono text-xs uppercase tracking-wider text-[var(--fg-muted)]">
-                    <span>
-                      {e.updatedDate
-                        ? new Date(e.updatedDate).toLocaleDateString(locale === 'vi' ? 'vi-VN' : 'en-US', {
-                            year: 'numeric',
-                            month: 'short',
-                          })
-                        : ''}
-                    </span>
+                    <span>{formatEntryDate(e.updatedDate, locale)}</span>
                     <span className="text-[var(--color-gold-500)] opacity-0 group-hover:opacity-100 transition">
                       →
                     </span>

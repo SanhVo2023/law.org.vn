@@ -1,6 +1,7 @@
 import { Link } from '@/i18n/navigation'
 import Image from 'next/image'
 import { cn } from '@/lib/cn'
+import { formatEntryDate, draftLabel } from '@/lib/format'
 
 interface EntryCardProps {
   href: string
@@ -29,12 +30,7 @@ export function EntryCard({
   locale = 'vi',
   isDraft,
 }: EntryCardProps) {
-  const formattedDate = updatedDate
-    ? new Date(updatedDate).toLocaleDateString(locale === 'vi' ? 'vi-VN' : 'en-US', {
-        year: 'numeric',
-        month: 'short',
-      })
-    : null
+  const formattedDate = formatEntryDate(updatedDate, locale) || null
 
   if (variant === 'feature' && image) {
     return (
@@ -60,7 +56,7 @@ export function EntryCard({
           )}
         </div>
         <div className="p-5 md:p-6">
-          {isDraft && <span className="badge-draft mb-2">Draft</span>}
+          {isDraft && <span className="badge-draft mb-2">{draftLabel(locale)}</span>}
           <h3 className="font-heading text-lg md:text-xl font-semibold leading-snug">{title}</h3>
           {excerpt && (
             <p className="mt-2 text-sm leading-relaxed text-[var(--fg-muted)] line-clamp-3">{excerpt}</p>
@@ -110,7 +106,7 @@ export function EntryCard({
         <p className="mt-2 text-sm leading-relaxed text-[var(--fg-muted)] line-clamp-3">{excerpt}</p>
       )}
       <div className="mt-4 flex items-center gap-3 text-xs font-mono text-[var(--fg-muted)] uppercase tracking-wider">
-        {isDraft && <span className="badge-draft">Draft</span>}
+        {isDraft && <span className="badge-draft">{draftLabel(locale)}</span>}
         {formattedDate && <span>{formattedDate}</span>}
       </div>
     </Link>

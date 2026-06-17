@@ -1,4 +1,5 @@
 import { cn } from '@/lib/cn'
+import { formatEntryDate } from '@/lib/format'
 
 export function UpdatedBadge({
   date,
@@ -12,11 +13,7 @@ export function UpdatedBadge({
   className?: string
 }) {
   if (!date) return null
-  const formatted = new Date(date).toLocaleDateString(locale === 'vi' ? 'vi-VN' : 'en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  })
+  const formatted = formatEntryDate(date, locale, { withDay: true })
   return (
     <span
       className={cn(

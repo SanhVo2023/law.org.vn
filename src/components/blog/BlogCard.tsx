@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
+import { formatEntryDate, draftLabel } from '@/lib/format'
 
 export interface BlogCardItem {
   id: string | number
@@ -24,13 +25,7 @@ interface BlogCardProps {
 }
 
 export function BlogCard({ post, locale, readingMinLabel, priority = false }: BlogCardProps) {
-  const date = post.publishedAt
-    ? new Date(post.publishedAt).toLocaleDateString(locale === 'vi' ? 'vi-VN' : 'en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-      })
-    : null
+  const date = formatEntryDate(post.publishedAt, locale, { withDay: true }) || null
 
   return (
     <article className="group flex flex-col h-full border border-[var(--rule)] bg-[var(--bg)] overflow-hidden hover:border-[var(--color-gold-500)]/40 transition">
@@ -55,7 +50,7 @@ export function BlogCard({ post, locale, readingMinLabel, priority = false }: Bl
           </div>
           {post.isDraft && (
             <div className="absolute top-3 right-3">
-              <span className="badge-draft">Draft</span>
+              <span className="badge-draft">{draftLabel(locale)}</span>
             </div>
           )}
         </div>

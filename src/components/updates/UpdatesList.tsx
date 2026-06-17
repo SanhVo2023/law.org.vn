@@ -1,6 +1,7 @@
 'use client'
 import { useMemo, useState } from 'react'
 import { LEGAL_UPDATES, UPDATE_AREAS, UPDATE_TYPES, getTypeLabel, type LegalUpdate } from '@/lib/updates'
+import { formatEntryDate } from '@/lib/format'
 
 interface UpdatesListProps {
   locale: 'vi' | 'en'
@@ -29,12 +30,7 @@ export function UpdatesList({ locale, labels }: UpdatesListProps) {
     })
   }, [areaFilter, typeFilter])
 
-  const formatDate = (date: string) =>
-    new Date(date).toLocaleDateString(locale === 'vi' ? 'vi-VN' : 'en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    })
+  const formatDate = (date: string) => formatEntryDate(date, locale, { withDay: true })
 
   return (
     <>

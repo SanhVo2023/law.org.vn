@@ -220,12 +220,18 @@ export async function SiteFooter() {
               <span className="leading-relaxed">
                 {phoneItems.map((p, i) => (
                   <span key={p.tel || p.label}>
-                    <a href={`tel:${p.tel}`} className="text-[var(--fg)] hover:text-[var(--color-gold-500)] transition">
-                      {p.label}
-                    </a>
-                    {i < phoneItems.length - 1 ? (
-                      <span className="mx-1.5 text-[var(--fg-muted)]">·</span>
-                    ) : null}
+                    {/* Number + its trailing separator stay glued (whitespace-nowrap)
+                        so a single phone number never splits across two lines; the
+                        break is only allowed at the space between numbers. */}
+                    <span className="whitespace-nowrap">
+                      <a href={`tel:${p.tel}`} className="text-[var(--fg)] hover:text-[var(--color-gold-500)] transition">
+                        {p.label}
+                      </a>
+                      {i < phoneItems.length - 1 ? (
+                        <span className="ml-1.5 text-[var(--fg-muted)]">·</span>
+                      ) : null}
+                    </span>
+                    {i < phoneItems.length - 1 ? ' ' : null}
                   </span>
                 ))}
               </span>
