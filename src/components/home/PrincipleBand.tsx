@@ -1,5 +1,6 @@
 import { ParallaxImage } from '@/components/animation/ParallaxImage'
 import { Container } from '@/components/ui/Container'
+import { Star } from '@/components/icons/VietnamIcons'
 import { images } from '@/lib/images'
 
 interface PrincipleBandProps {
@@ -32,7 +33,7 @@ export function PrincipleBand({ eyebrow, statement, attribution }: PrincipleBand
       <Container width="wide" className="relative py-20 md:py-28">
         <div className="max-w-3xl">
           <p className="inline-flex items-center gap-2.5 text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-[var(--color-gold-400)]">
-            <span aria-hidden className="h-px w-6 bg-[var(--color-gold-400)]" />
+            <Star className="h-3.5 w-3.5" />
             {eyebrow}
           </p>
           <p className="mt-5 font-heading text-2xl font-semibold leading-snug text-white md:text-[2rem]">

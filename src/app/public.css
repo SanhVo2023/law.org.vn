@@ -302,6 +302,41 @@
   }
 }
 
+/* ============================================================
+   Iconic hero — national legal seal + waving flag animations.
+   Continuous effects via CSS; entrances handled by Framer in the hero.
+   SVG groups use transform-box:fill-box so rotation/scale pivots on their
+   own centre (the emblem centre), not the SVG origin.
+   ============================================================ */
+@keyframes sealSpin { to { transform: rotate(360deg); } }
+@keyframes sealSpinRev { to { transform: rotate(-360deg); } }
+@keyframes starPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.045); } }
+@keyframes sealGlow { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+@keyframes shimmerSweep { 0% { transform: translateX(-130%) skewX(-18deg); } 60%, 100% { transform: translateX(230%) skewX(-18deg); } }
+@keyframes flagWave {
+  0%, 100% { transform: perspective(320px) rotateY(0deg) skewY(0deg); }
+  25% { transform: perspective(320px) rotateY(7deg) skewY(-1.3deg); }
+  50% { transform: perspective(320px) rotateY(0deg) skewY(0deg); }
+  75% { transform: perspective(320px) rotateY(-7deg) skewY(1.3deg); }
+}
+@keyframes floatY { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+
+.seal-rays { transform-box: fill-box; transform-origin: center; animation: sealSpin 90s linear infinite; }
+.seal-orbit { transform-box: fill-box; transform-origin: center; animation: sealSpinRev 120s linear infinite; }
+.seal-star { transform-box: fill-box; transform-origin: center; animation: starPulse 5s ease-in-out infinite; }
+.seal-glow { animation: sealGlow 4.5s ease-in-out infinite; }
+.seal-shimmer { animation: shimmerSweep 6s ease-in-out infinite; }
+.flag-wave { transform-origin: left center; animation: flagWave 6s ease-in-out infinite; will-change: transform; }
+.float-a { animation: floatY 6s ease-in-out infinite; }
+.float-b { animation: floatY 7.5s ease-in-out infinite; animation-delay: -2.2s; }
+.float-c { animation: floatY 8.5s ease-in-out infinite; animation-delay: -4.1s; }
+.float-d { animation: floatY 7s ease-in-out infinite; animation-delay: -1.3s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .seal-rays, .seal-orbit, .seal-star, .seal-glow, .seal-shimmer, .flag-wave,
+  .float-a, .float-b, .float-c, .float-d { animation: none !important; }
+}
+
 @media print {
   header, footer, nav, .no-print { display: none !important; }
   body { background: white; color: black; }

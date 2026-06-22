@@ -1,17 +1,18 @@
 import { cn } from '@/lib/cn'
+import { Star } from '@/components/icons/VietnamIcons'
 
-/* Decorative horizontal rule with a small gold diamond center — encyclopedia-style separator. */
+/* Decorative horizontal rule with the national gold star at its centre. */
 export function Ornament({ className }: { className?: string }) {
   return (
     <div
       className={cn('flex items-center justify-center gap-3 text-[var(--color-gold-500)]', className)}
       aria-hidden
     >
-      <span className="h-px w-24 bg-current opacity-40" />
-      <span className="h-1.5 w-1.5 rotate-45 bg-current" />
+      <span className="h-px w-20 bg-current opacity-40" />
       <span className="h-1.5 w-1.5 rotate-45 bg-current opacity-60" />
-      <span className="h-1.5 w-1.5 rotate-45 bg-current" />
-      <span className="h-px w-24 bg-current opacity-40" />
+      <Star className="h-4 w-4" />
+      <span className="h-1.5 w-1.5 rotate-45 bg-current opacity-60" />
+      <span className="h-px w-20 bg-current opacity-40" />
     </div>
   )
 }

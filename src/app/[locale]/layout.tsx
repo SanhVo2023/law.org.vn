@@ -31,6 +31,12 @@ export default async function LocaleLayout({
     <NextIntlClientProvider locale={locale} messages={messages}>
       <ThemeScript />
       <div className="public-site">
+        {/* National accent — cờ đỏ sao vàng colours */}
+        <div
+          aria-hidden
+          className="no-print h-1 w-full"
+          style={{ background: 'linear-gradient(90deg, var(--color-flag-red), var(--color-gold-500) 50%, var(--color-flag-red))' }}
+        />
         <SiteHeader />
         <main id="main">{children}</main>
         <SiteFooter />

@@ -6,6 +6,7 @@ import { CATEGORIES, CLUSTER_HINTS } from '@/lib/site'
 import { TopicsMenu } from './TopicsMenu'
 import { HeaderNavLinks } from './HeaderNavLinks'
 import { MobileMenu } from './MobileMenu'
+import { WavingFlag } from '@/components/home/WavingFlag'
 
 export async function SiteHeader() {
   const t = await getTranslations()
@@ -28,7 +29,8 @@ export async function SiteHeader() {
   return (
     <header className="no-print sticky top-0 z-40 border-b border-[var(--rule)] bg-[var(--bg)]/90 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-6 px-4 md:px-6">
-        <Link href="/" className="group flex items-baseline gap-3">
+        <Link href="/" className="group flex items-center gap-2.5">
+          <WavingFlag className="w-6 shrink-0" />
           <span className="font-heading text-xl font-bold tracking-tight">
             law<span className="text-[var(--color-gold-500)]">.</span>org<span className="text-[var(--color-gold-500)]">.</span>vn
           </span>

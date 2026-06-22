@@ -25,6 +25,12 @@
   --color-gold-500: #B8860B;
   --color-gold-600: #936b08;
 
+  /* Vietnamese flag — cờ đỏ sao vàng. Red field + gold star. Used as a national
+     accent (hero seal, top stripe, star motifs); navy+gold stay structural. */
+  --color-flag-red: #DA251D;
+  --color-flag-red-deep: #a4140d;
+  --color-flag-gold: #FFCD00;
+
   --color-paper:    #F8F7F4;
   --color-paper-deep: #eeece7;
 
