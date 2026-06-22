@@ -87,7 +87,7 @@ export async function SiteFooter() {
     : contact.phones
 
   return (
-    <footer className="mt-20 border-t border-[var(--rule)] bg-[var(--color-paper-deep)]/40 dark:bg-transparent no-print">
+    <footer className="no-print mt-20 border-t border-[var(--rule)] bg-[var(--surface-deep)]">
       <div className="mx-auto max-w-7xl px-4 md:px-6 py-16">
         <div className="py-2">
           <Ornament />

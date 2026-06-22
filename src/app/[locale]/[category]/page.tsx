@@ -39,30 +39,32 @@ export async function generateMetadata({ params }: { params: Params }) {
   })
 }
 
+// One concise sentence per cluster. The global "reference only, not legal
+// advice" caveat lives in the footer — not repeated per cluster.
 const CLUSTER_INTROS: Record<string, { vi: string; en: string }> = {
   'legal-system': {
-    vi: 'Hệ thống hóa các nguồn pháp luật Việt Nam, từ Hiến pháp đến luật, bộ luật, nghị định, thông tư và nghị quyết, cùng cách các văn bản này vận hành trong hệ thống pháp luật. Nội dung chỉ có giá trị tham khảo và cần đối chiếu với nguồn chính thức.',
-    en: 'An overview of Vietnamese legal sources, from the Constitution to laws, codes, decrees and circulars. For reference only; please verify against official sources in Vietnam.',
+    vi: 'Hiến pháp, luật, bộ luật, nghị định và thông tư — và cách các nguồn luật này vận hành cùng nhau.',
+    en: 'The Constitution, laws, codes, decrees and circulars — and how these sources of law work together.',
   },
   'court-system': {
-    vi: 'Tổng quan về hệ thống tòa án Việt Nam, cơ cấu tổ chức, thẩm quyền xét xử và vai trò của các cấp tòa án trong hoạt động tư pháp.',
-    en: "An overview of Vietnam's court system, including its organizational structure, jurisdiction and the role of different court levels in judicial proceedings.",
+    vi: 'Cơ cấu, thẩm quyền và vai trò của các cấp tòa án nhân dân theo Luật số 81/2025/QH15.',
+    en: "The structure, jurisdiction and role of the people's courts under Law No. 81/2025/QH15.",
   },
   litigation: {
-    vi: 'Tổng quan về tố tụng tại Tòa án và tố tụng trọng tài tại Việt Nam, bao gồm tố tụng dân sự, hình sự, hành chính, lao động, kinh doanh thương mại và các thủ tục xem xét lại bản án, quyết định theo quy định pháp luật.',
-    en: "An overview of court and arbitration proceedings in Vietnam, including civil, criminal, administrative, labour, business and commercial proceedings, and procedures for reviewing judgments and decisions in accordance with law.",
+    vi: 'Thủ tục dân sự, hình sự, hành chính, lao động và thương mại — từ khởi kiện đến giám đốc thẩm.',
+    en: 'Civil, criminal, administrative, labour and commercial procedure — from filing to supervisory review.',
   },
   rights: {
-    vi: 'Thông tin tham khảo về một số quyền, nghĩa vụ và thủ tục pháp lý phổ biến của công dân theo pháp luật Việt Nam.',
-    en: 'Reference information on selected rights, obligations and common legal procedures for citizens under Vietnamese law.',
+    vi: 'Quyền, nghĩa vụ và thủ tục pháp lý phổ biến của công dân theo pháp luật Việt Nam.',
+    en: 'Common rights, obligations and legal procedures for citizens under Vietnamese law.',
   },
   terminology: {
-    vi: 'Các thuật ngữ pháp lý chuyên ngành và từ vựng cốt lõi giúp người đọc tiếp cận văn bản pháp luật một cách chính xác hơn.',
-    en: 'Specialized legal terminology and core vocabulary for a more accurate understanding of legal documents.',
+    vi: 'Thuật ngữ pháp lý cốt lõi, kèm bản gốc tiếng Việt và phần dịch tiếng Anh.',
+    en: 'Core legal terminology, with the original Vietnamese alongside the English rendering.',
   },
   faq: {
-    vi: 'Các câu hỏi pháp lý thường gặp, được trình bày ngắn gọn, trực tiếp và không thay thế cho ý kiến tư vấn pháp lý trong từng trường hợp cụ thể.',
-    en: 'Frequently asked legal questions, answered briefly and directly, without replacing legal advice for any specific case.',
+    vi: 'Câu hỏi pháp lý thường gặp, trả lời ngắn gọn và trực tiếp.',
+    en: 'Frequently asked legal questions, answered briefly and directly.',
   },
 }
 
@@ -91,8 +93,6 @@ export default async function CategoryPage({ params }: { params: Params }) {
   const articles: Array<any> = result.docs
 
   const totalCount = articles.length
-  const draftCount = articles.filter((a) => a.status === 'draft').length
-
   const sisterClusters = CATEGORIES.filter((c) => c.slug !== category)
 
   const crumbs = [
@@ -154,19 +154,19 @@ export default async function CategoryPage({ params }: { params: Params }) {
                 : 'No entries have been published in this cluster yet. Content is under review.'}
             </div>
           ) : (
-            <div className="grid gap-px bg-[var(--rule)] border border-[var(--rule)] overflow-hidden rounded-lg">
+            <div className="grid gap-px overflow-hidden rounded-xl border border-[var(--rule)] bg-[var(--rule)] shadow-[var(--shadow-sm)]">
               {articles.map((a, idx) => (
                 <Link
                   key={a.id}
                   href={`/${category}/${a.slug}`}
-                  className="group bg-[var(--bg)] p-6 md:p-7 transition hover:bg-[var(--color-paper-deep)]/60 dark:hover:bg-white/[0.03]"
+                  className="group bg-[var(--surface)] p-6 transition hover:bg-[var(--surface-deep)] md:p-7"
                 >
                   <div className="flex items-baseline gap-4">
-                    <span className="font-mono text-xs text-[var(--fg-muted)] tabular-nums">
+                    <span className="font-mono text-xs tabular-nums text-[var(--fg-subtle)]">
                       {String(idx + 1).padStart(2, '0')}
                     </span>
                     <div className="flex-1">
-                      <h3 className="font-heading text-lg md:text-xl font-semibold leading-snug">
+                      <h3 className="font-heading text-lg font-semibold leading-snug text-[var(--fg)] md:text-xl">
                         {a.title}
                       </h3>
                       {a.excerpt && (
@@ -174,7 +174,7 @@ export default async function CategoryPage({ params }: { params: Params }) {
                           {a.excerpt}
                         </p>
                       )}
-                      <div className="mt-3 flex items-center gap-3 text-xs font-mono uppercase tracking-wider text-[var(--fg-muted)]">
+                      <div className="mt-3 flex items-center gap-3 font-mono text-xs uppercase tracking-wider text-[var(--fg-subtle)]">
                         {a.status === 'draft' && <span className="badge-draft">{draftLabel(lng)}</span>}
                         {a.updatedDate && (
                           <span>
@@ -184,7 +184,7 @@ export default async function CategoryPage({ params }: { params: Params }) {
                         )}
                       </div>
                     </div>
-                    <span className="text-[var(--color-gold-500)] opacity-0 transition group-hover:opacity-100">→</span>
+                    <span className="text-[var(--color-gold-500)] transition-transform group-hover:translate-x-1">→</span>
                   </div>
                 </Link>
               ))}
@@ -193,35 +193,29 @@ export default async function CategoryPage({ params }: { params: Params }) {
         </div>
 
         <aside className="lg:col-span-4 xl:col-span-3">
-          <div className="sticky top-24 space-y-8">
-            <div className="border border-[var(--rule)] p-6">
-              <p className="text-xs uppercase tracking-[0.16em] text-[var(--color-gold-500)] font-semibold">
+          <div className="sticky top-24 space-y-6">
+            <div className="rounded-xl border border-[var(--rule)] bg-[var(--surface)] p-6 shadow-[var(--shadow-sm)]">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--fg-muted)]">
                 {lng === 'vi' ? 'Tổng quan cụm' : 'Cluster overview'}
               </p>
-              <dl className="mt-4 space-y-3 text-sm font-mono">
+              <dl className="mt-4 space-y-3 font-mono text-sm">
                 <div className="flex justify-between">
-                  <dt className="text-[var(--fg-muted)] uppercase tracking-wider text-xs">
+                  <dt className="text-xs uppercase tracking-wider text-[var(--fg-muted)]">
                     {lng === 'vi' ? 'Mục' : 'Entries'}
                   </dt>
-                  <dd className="text-[var(--fg)] tabular-nums">{totalCount}</dd>
+                  <dd className="tabular-nums text-[var(--fg)]">{totalCount}</dd>
                 </div>
                 <div className="flex justify-between">
-                  <dt className="text-[var(--fg-muted)] uppercase tracking-wider text-xs">
-                    {lng === 'vi' ? 'Bản thảo' : 'Drafts'}
-                  </dt>
-                  <dd className="text-[var(--color-gold-500)] tabular-nums">{draftCount}</dd>
-                </div>
-                <div className="flex justify-between">
-                  <dt className="text-[var(--fg-muted)] uppercase tracking-wider text-xs">
+                  <dt className="text-xs uppercase tracking-wider text-[var(--fg-muted)]">
                     {lng === 'vi' ? 'Ngôn ngữ' : 'Languages'}
                   </dt>
-                  <dd className="text-[var(--fg)] tabular-nums">vi · en</dd>
+                  <dd className="tabular-nums text-[var(--fg)]">vi · en</dd>
                 </div>
               </dl>
             </div>
 
-            <div className="border border-[var(--rule)] p-6">
-              <p className="text-xs uppercase tracking-[0.16em] text-[var(--color-gold-500)] font-semibold">
+            <div className="rounded-xl border border-[var(--rule)] bg-[var(--surface)] p-6 shadow-[var(--shadow-sm)]">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--fg-muted)]">
                 {lng === 'vi' ? 'Cụm khác' : 'Other clusters'}
               </p>
               <ul className="mt-4 space-y-2 text-sm">
@@ -229,10 +223,10 @@ export default async function CategoryPage({ params }: { params: Params }) {
                   <li key={c.slug}>
                     <Link
                       href={`/${c.slug}`}
-                      className="flex items-center justify-between gap-2 text-[var(--fg)] hover:text-[var(--color-gold-500)] transition"
+                      className="flex items-center justify-between gap-2 text-[var(--fg)] transition hover:text-[var(--color-gold-500)]"
                     >
                       <span>{t(`nav.${c.nameKey}`)}</span>
-                      <span className="text-[var(--fg-muted)]">→</span>
+                      <span className="text-[var(--fg-subtle)]">→</span>
                     </Link>
                   </li>
                 ))}

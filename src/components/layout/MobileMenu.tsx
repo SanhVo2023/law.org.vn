@@ -6,6 +6,7 @@ import { Link } from '@/i18n/navigation'
 interface NavLink {
   href: string
   label: string
+  hint?: string
 }
 
 interface MobileMenuProps {
@@ -83,7 +84,7 @@ export function MobileMenu({ topicsLabel, topics, links }: MobileMenuProps) {
             </div>
 
             <nav className="px-5 py-6">
-              <p className="font-mono text-[0.6rem] uppercase tracking-[0.18em] text-[var(--color-gold-500)] font-semibold">
+              <p className="font-mono text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-[var(--fg-muted)]">
                 {topicsLabel}
               </p>
               <ul className="mt-3 space-y-1">
@@ -92,12 +93,15 @@ export function MobileMenu({ topicsLabel, topics, links }: MobileMenuProps) {
                     <Link
                       href={it.href}
                       onClick={() => setOpen(false)}
-                      className="flex items-baseline gap-3 rounded-md px-3 py-2.5 text-sm hover:bg-[var(--color-paper-deep)]/60 dark:hover:bg-white/[0.04]"
+                      className="flex items-start gap-3 rounded-lg px-3 py-2.5 transition hover:bg-[var(--surface-deep)]"
                     >
-                      <span className="font-mono text-[0.62rem] text-[var(--fg-muted)]">
+                      <span className="pt-0.5 font-mono text-[0.62rem] tabular-nums text-[var(--fg-subtle)]">
                         {String(idx + 1).padStart(2, '0')}
                       </span>
-                      <span className="text-[var(--fg)]">{it.label}</span>
+                      <span className="min-w-0">
+                        <span className="block text-sm font-medium text-[var(--fg)]">{it.label}</span>
+                        {it.hint && <span className="block text-xs text-[var(--fg-muted)]">{it.hint}</span>}
+                      </span>
                     </Link>
                   </li>
                 ))}
@@ -111,7 +115,7 @@ export function MobileMenu({ topicsLabel, topics, links }: MobileMenuProps) {
                     <Link
                       href={it.href}
                       onClick={() => setOpen(false)}
-                      className="block rounded-md px-3 py-2.5 text-sm uppercase tracking-[0.12em] text-[var(--fg)] hover:bg-[var(--color-paper-deep)]/60 dark:hover:bg-white/[0.04]"
+                      className="block rounded-lg px-3 py-2.5 text-sm uppercase tracking-[0.12em] text-[var(--fg)] transition hover:bg-[var(--surface-deep)]"
                     >
                       {it.label}
                     </Link>

@@ -6,11 +6,8 @@ import type { Locale } from '@/i18n/routing'
 import { buildPageMetadata, buildBreadcrumbJsonLd } from '@/lib/metadata'
 import { JsonLd } from '@/components/JsonLd'
 import { HomeHero } from '@/components/home/HomeHero'
-import { EncyclopediaStats } from '@/components/home/EncyclopediaStats'
 import { ClustersGrid, type ClusterEntry } from '@/components/home/ClustersGrid'
 import { FeaturedEntries, type FeaturedEntryItem } from '@/components/home/FeaturedEntries'
-import { HowToUse } from '@/components/home/HowToUse'
-import { HistoryTimeline } from '@/components/home/HistoryTimeline'
 import { TrustedSources } from '@/components/home/TrustedSources'
 import { RecentUpdatesTeaser } from '@/components/home/RecentUpdatesTeaser'
 import { SectionFadeUp } from '@/components/animation/SectionFadeUp'
@@ -37,8 +34,8 @@ const CLUSTER_DESCRIPTIONS: Record<string, { vi: string; en: string }> = {
     en: 'Constitution, laws, codes, decrees, circulars, resolutions — the structural backbone of Vietnamese law.',
   },
   'court-system': {
-    vi: 'Tòa án nhân dân tối cao, tòa án nhân dân cấp tỉnh, tòa án nhân dân khu vực và các tòa chuyên trách theo Luật số 81/2025/QH15.',
-    en: "Supreme People's Court, provincial people's courts, regional people's courts, and specialized courts under Law No. 81/2025/QH15.",
+    vi: 'Tòa án nhân dân tối cao, cấp tỉnh, khu vực và các tòa chuyên trách theo Luật số 81/2025/QH15.',
+    en: "Supreme, provincial, regional and specialized people's courts under Law No. 81/2025/QH15.",
   },
   litigation: {
     vi: 'Tố tụng dân sự, hình sự, hành chính, lao động, thương mại — từ khởi kiện đến phúc thẩm, giám đốc thẩm.',
@@ -67,27 +64,22 @@ const CLUSTER_COUNTS: Record<string, number> = {
   faq: 6,
 } // total 46 (down from 50 after Luật 81/2025/QH15 court restructure + freedom-of-expression removal)
 
+// Three cornerstone entries — "start here" for a newcomer (one structural, one
+// procedural, one rights). Trimmed from six to keep the homepage focused.
+const FEATURED_SLUGS = ['constitution-2013', 'court-system-overview', 'constitutional-rights-overview']
+
 export default async function HomePage({ params }: { params: Params }) {
   const { locale } = await params
   setRequestLocale(locale)
   const t = await getTranslations()
   const lng = locale === 'en' ? 'en' : 'vi'
 
-  // Try to load 6 featured articles (cornerstone topics)
-  const FEATURED_SLUGS = [
-    'constitution-2013',
-    'court-system-overview',
-    'civil-procedure-overview',
-    'constitutional-rights-overview',
-    'when-to-hire-lawyer',
-    'civil-procedure-terminology',
-  ]
   assertDb()
   const payload = await getPayload()
   const featuredResult = await payload.find({
     collection: 'articles',
     locale: locale as Locale,
-    limit: 12,
+    limit: 6,
     where: { slug: { in: FEATURED_SLUGS } },
     depth: 1,
   })
@@ -128,61 +120,41 @@ export default async function HomePage({ params }: { params: Params }) {
         secondaryCta={t('home.glossaryCta')}
         primaryHref="/legal-system"
         secondaryHref="/updates"
-        draftLabel={lng === 'vi' ? 'Phiên bản 1 · Bản thảo' : 'Edition 1 · Draft'}
-        disclaimer={t('footer.disclaimer')}
+        edition={lng === 'vi' ? 'Phiên bản 2026.04 · 46 mục đã rà soát' : 'Edition 2026.04 · 46 reviewed entries'}
+        stats={[
+          { value: 46, label: lng === 'vi' ? 'Mục' : 'Entries' },
+          { value: 6, label: lng === 'vi' ? 'Cụm' : 'Clusters' },
+          { value: 8, label: lng === 'vi' ? 'Lĩnh vực' : 'Areas' },
+          { value: 2, display: 'vi · en', label: lng === 'vi' ? 'Ngôn ngữ' : 'Languages' },
+        ]}
       />
 
       <SectionFadeUp>
-        <EncyclopediaStats
-          labels={{
-            entries: lng === 'vi' ? 'Mục tri thức' : 'Entries',
-            clusters: lng === 'vi' ? 'Cụm chủ đề' : 'Clusters',
-            terminologyAreas: lng === 'vi' ? 'Lĩnh vực thuật ngữ' : 'Terminology areas',
-            languages: lng === 'vi' ? 'Ngôn ngữ' : 'Languages',
-          }}
+        <ClustersGrid
+          eyebrow={lng === 'vi' ? 'Khám phá' : 'Explore'}
+          title={t('home.categoriesTitle')}
+          lead={
+            lng === 'vi'
+              ? 'Sáu cụm cốt lõi, sắp xếp từ kiến trúc thượng tầng (Hiến pháp, luật) xuống thực tiễn (FAQ, thuật ngữ).'
+              : 'Six core clusters, ordered from the top-down (Constitution, statutes) to the practical (FAQ, terminology).'
+          }
+          clusters={clusters}
+          entriesLabel={lng === 'vi' ? 'mục' : 'entries'}
         />
       </SectionFadeUp>
-
-      <SectionFadeUp>
-        <HistoryTimeline
-          locale={lng}
-          labels={{
-            eyebrow: lng === 'vi' ? 'Cột mốc lịch sử' : 'Historical milestones',
-            title: t('timeline.title'),
-            lead: t('timeline.lead'),
-            scrollHint: t('timeline.scrollHint'),
-          }}
-        />
-      </SectionFadeUp>
-
-      <ClustersGrid
-        eyebrow={lng === 'vi' ? 'Bản đồ tri thức' : 'Knowledge map'}
-        title={t('home.categoriesTitle')}
-        lead={
-          lng === 'vi'
-            ? 'Sáu cụm tri thức cốt lõi, sắp xếp từ kiến trúc thượng tầng (Hiến pháp, luật) xuống thực tiễn (FAQ và thuật ngữ).'
-            : 'Six core knowledge clusters, organised from the top-down (Constitution, statutes) to the practical (FAQ and terminology).'
-        }
-        clusters={clusters}
-        entriesLabel={lng === 'vi' ? 'mục' : 'entries'}
-      />
 
       <SectionFadeUp>
         <FeaturedEntries
-          eyebrow={lng === 'vi' ? 'Mục đề xuất' : 'Featured'}
+          eyebrow={lng === 'vi' ? 'Bắt đầu từ đây' : 'Start here'}
           title={t('home.featuredTitle')}
           lead={
             lng === 'vi'
-              ? 'Sáu mục cốt lõi để khởi đầu nếu bạn mới đến với hệ thống pháp luật Việt Nam.'
-              : "Six cornerstone entries to start with if you're new to Vietnam's legal system."
+              ? 'Ba mục nền tảng nếu bạn mới tiếp cận hệ thống pháp luật Việt Nam.'
+              : "Three foundational entries if you're new to Vietnam's legal system."
           }
           entries={featured}
           locale={locale}
-          emptyMessage={
-            lng === 'vi'
-              ? 'Đang chuẩn bị các mục đề xuất.'
-              : 'Featured entries coming soon.'
-          }
+          emptyMessage={lng === 'vi' ? 'Đang chuẩn bị các mục đề xuất.' : 'Featured entries coming soon.'}
         />
       </SectionFadeUp>
 
@@ -196,62 +168,10 @@ export default async function HomePage({ params }: { params: Params }) {
             viewAll: t('recentUpdates.viewAll'),
             issued: lng === 'vi' ? 'Ban hành' : 'Issued',
             issuingBody: lng === 'vi' ? 'Cơ quan ban hành' : 'Issuing body',
+            commentary: lng === 'vi' ? 'Bình luận & phân tích pháp lý' : 'Legal commentary & analysis',
           }}
         />
       </SectionFadeUp>
-
-      <HowToUse
-        eyebrow={lng === 'vi' ? 'Hướng dẫn sử dụng' : 'How to use'}
-        title={lng === 'vi' ? 'Ba cách tiếp cận bộ tri thức này' : 'Three ways to use this encyclopedia'}
-        lead={
-          lng === 'vi'
-            ? 'Bạn có thể đọc theo từng chủ đề, tra cứu thuật ngữ pháp luật hoặc tham khảo cho mục đích nghiên cứu, học thuật và tư vấn.'
-            : 'You may browse the content by topic, look up legal terminology, or use it as a reference for research, academic work and legal advisory purposes.'
-        }
-        steps={
-          lng === 'vi'
-            ? [
-                {
-                  number: '01',
-                  title: 'Duyệt theo cụm',
-                  description:
-                    'Bắt đầu từ một cụm tri thức, ví dụ "Hệ thống pháp luật" để hiểu cấu trúc nguồn luật, hoặc "Tố tụng" để hiểu quy trình.',
-                },
-                {
-                  number: '02',
-                  title: 'Tra cứu thuật ngữ',
-                  description:
-                    'Mục Tra cứu thuật ngữ liệt kê các thuật ngữ pháp lý theo tám lĩnh vực, kèm bản gốc tiếng Việt và phần dịch tiếng Anh.',
-                },
-                {
-                  number: '03',
-                  title: 'Trích dẫn',
-                  description:
-                    'Mỗi mục có khối Trích dẫn (định dạng phổ thông và BibTeX) để bạn dùng trong công việc học thuật hoặc tư vấn.',
-                },
-              ]
-            : [
-                {
-                  number: '01',
-                  title: 'Browse by cluster',
-                  description:
-                    'Start with a knowledge cluster — e.g., Legal System for source-of-law architecture, or Litigation for procedure.',
-                },
-                {
-                  number: '02',
-                  title: 'Look up a term',
-                  description:
-                    'The Glossary indexes legal terminology across eight areas, with original Vietnamese alongside the English rendering.',
-                },
-                {
-                  number: '03',
-                  title: 'Cite an entry',
-                  description:
-                    'Every entry includes a Citation block (plain and BibTeX) so you can reference it in scholarly or advisory work.',
-                },
-              ]
-        }
-      />
 
       <SectionFadeUp>
         <TrustedSources

@@ -11,6 +11,17 @@ export const CATEGORIES = [
 
 export type CategorySlug = (typeof CATEGORIES)[number]['slug']
 
+// Short menu hints (2–4 words) shown under each cluster in the header mega-menu.
+// Distinct from the longer homepage cluster descriptions; these orient, not explain.
+export const CLUSTER_HINTS: Record<string, { vi: string; en: string }> = {
+  'legal-system': { vi: 'Nguồn luật & văn bản', en: 'Sources of law' },
+  'court-system': { vi: 'Tòa án & thẩm quyền', en: 'Courts & jurisdiction' },
+  litigation: { vi: 'Thủ tục tố tụng', en: 'Procedure' },
+  rights: { vi: 'Quyền & nghĩa vụ', en: 'Rights & duties' },
+  terminology: { vi: 'Từ điển song ngữ', en: 'Bilingual glossary' },
+  faq: { vi: 'Giải đáp nhanh', en: 'Quick answers' },
+}
+
 // =========================================================================
 // Apolo Lawyers — Official contact (post-2025 administrative-merger SSOT)
 // Source of truth: CSV review row 9 (Mr Hien 2026-05-17). Verbatim.

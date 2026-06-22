@@ -1,7 +1,7 @@
 {
   "site": {
     "name": "law.org.vn",
-    "tagline": "Cổng tri thức pháp luật Việt Nam"
+    "tagline": "Bộ tri thức pháp luật Việt Nam"
   },
   "nav": {
     "home": "Trang chủ",
@@ -11,19 +11,18 @@
     "rights": "Quyền công dân",
     "terminology": "Thuật ngữ pháp lý",
     "updates": "Cập nhật pháp luật",
-    "blog": "Bài viết",
+    "blog": "Bình luận",
     "faq": "Câu hỏi thường gặp",
     "about": "Giới thiệu"
   },
   "home": {
-    "heroEyebrow": "Tri thức pháp luật - minh bạch, có hệ thống",
+    "heroEyebrow": "Song ngữ · Có hệ thống · Phi lợi nhuận",
     "heroTitle": "Hiểu đúng pháp luật Việt Nam",
-    "heroLead": "Bộ tri thức pháp luật song ngữ Việt - Anh, trình bày rõ ràng và có hệ thống về Hiến pháp, tòa án, tố tụng và hệ thống pháp luật Việt Nam.",
-    "exploreCta": "Khám phá bộ tri thức",
+    "heroLead": "Tra cứu Hiến pháp, hệ thống tòa án, tố tụng và quyền công dân — trình bày để hiểu, không thay cho ý kiến tư vấn pháp lý.",
+    "exploreCta": "Duyệt bộ tri thức",
     "categoriesTitle": "Bản đồ tri thức",
-    "featuredTitle": "Mục đề xuất khởi đầu",
-    "glossaryCta": "Cập nhật pháp luật",
-    "browseCta": "Duyệt bộ bách khoa"
+    "featuredTitle": "Mục nền tảng",
+    "glossaryCta": "Cập nhật pháp luật"
   },
   "article": {
     "updatedOn": "Cập nhật ngày",
@@ -69,7 +68,7 @@
   },
   "trustedSources": {
     "caption": "Theo nguồn chính thức",
-    "subcaption": "Mỗi mục đều dẫn về một cổng thông tin nhà nước có thẩm quyền."
+    "subcaption": "Nội dung tổng hợp từ các cổng thông tin và cơ quan nhà nước có thẩm quyền."
   },
   "recentUpdates": {
     "eyebrow": "Văn bản pháp luật mới",

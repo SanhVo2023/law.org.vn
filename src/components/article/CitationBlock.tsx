@@ -56,9 +56,9 @@ export function CitationBlock(props: CitationBlockProps) {
   }
 
   return (
-    <section className="no-print mt-12 border border-[var(--rule)] bg-[var(--color-paper-deep)]/30 p-5 dark:bg-white/[0.03]">
+    <section className="no-print mt-12 rounded-xl border border-[var(--rule)] bg-[var(--surface)] p-5 shadow-[var(--shadow-sm)]">
       <header className="flex flex-wrap items-center justify-between gap-2">
-        <p className="text-xs uppercase tracking-[0.18em] font-semibold text-[var(--color-gold-500)]">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--fg-muted)]">
           {props.labels.citeAs}
         </p>
         <div className="flex gap-1 text-xs">

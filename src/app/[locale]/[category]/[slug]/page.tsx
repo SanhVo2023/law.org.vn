@@ -220,7 +220,7 @@ export default async function ArticlePage({ params }: { params: Params }) {
 
           {siblings.length > 0 && (
             <section className="mt-12 border-t border-[var(--rule)] pt-10">
-              <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-gold-500)] font-semibold">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--fg-muted)]">
                 {lng === 'vi' ? 'Mục cùng cụm' : 'Sister entries'}
               </p>
               <div className="mt-5 grid gap-4 sm:grid-cols-2">
@@ -228,15 +228,15 @@ export default async function ArticlePage({ params }: { params: Params }) {
                   <Link
                     key={s.id}
                     href={`/${category}/${s.slug}`}
-                    className="group block border border-[var(--rule)] p-5 transition hover:border-[var(--color-gold-500)]/50"
+                    className="group block rounded-xl border border-[var(--rule)] bg-[var(--surface)] p-5 shadow-[var(--shadow-sm)] transition duration-300 hover:-translate-y-0.5 hover:border-[var(--color-gold-500)]/40 hover:shadow-[var(--shadow-md)]"
                   >
-                    <p className="font-heading font-semibold leading-snug">{s.title}</p>
+                    <p className="font-heading font-semibold leading-snug text-[var(--fg)]">{s.title}</p>
                     {s.excerpt && (
                       <p className="mt-2 text-xs leading-relaxed text-[var(--fg-muted)] line-clamp-2">
                         {s.excerpt}
                       </p>
                     )}
-                    <span className="mt-3 inline-block font-mono text-[0.6rem] uppercase tracking-wider text-[var(--color-gold-500)] opacity-60 group-hover:opacity-100">
+                    <span className="mt-3 inline-block font-mono text-[0.6rem] uppercase tracking-wider text-[var(--color-gold-500)]">
                       {lng === 'vi' ? 'đọc tiếp' : 'continue'} →
                     </span>
                   </Link>

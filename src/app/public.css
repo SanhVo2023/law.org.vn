@@ -52,21 +52,22 @@
 /* Encyclopedia prose style */
 .prose-encyclopedia {
   font-family: var(--font-body), system-ui, sans-serif;
-  font-size: 1.075rem;
+  font-size: 1.05rem;
   line-height: 1.78;
   color: var(--fg);
   counter-reset: section subsection;
+  max-width: var(--measure); /* optimal reading line-length on desktop */
 }
 
 .prose-encyclopedia > p:first-of-type::first-letter,
 .prose-encyclopedia .has-dropcap::first-letter {
   font-family: var(--font-heading), Georgia, serif;
   float: left;
-  font-size: 4.6em;
-  line-height: 0.85;
-  padding-top: 0.06em;
-  padding-right: 0.12em;
-  margin-bottom: -0.05em;
+  font-size: 3.2em;
+  line-height: 0.82;
+  padding-top: 0.04em;
+  padding-right: 0.1em;
+  margin-bottom: -0.04em;
   color: var(--color-navy-700);
   font-weight: 700;
 }

@@ -1,4 +1,5 @@
 import { TRUSTED_SOURCE_EMBLEMS } from './TrustedSourceEmblems'
+import { Section } from '@/components/ui/Section'
 
 interface TrustedSourcesProps {
   caption: string
@@ -28,38 +29,36 @@ const SOURCES: Source[] = [
 
 export function TrustedSources({ caption, subcaption, locale }: TrustedSourcesProps) {
   return (
-    <section className="border-y border-[var(--rule)]">
-      <div className="mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-16">
-        <div className="text-center max-w-2xl mx-auto mb-10">
-          <p className="font-mono text-[0.62rem] uppercase tracking-[0.22em] text-[var(--color-gold-500)] font-semibold">
-            {caption}
-          </p>
-          <p className="mt-3 text-sm leading-relaxed text-[var(--fg-muted)]">{subcaption}</p>
-        </div>
-
-        <ul className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-x-6 gap-y-10">
-          {SOURCES.map((s) => {
-            const label = locale === 'vi' ? s.fullVi : s.fullEn
-            const emblem = TRUSTED_SOURCE_EMBLEMS[s.id]
-            return (
-              <li key={s.id} className="flex flex-col items-center text-center">
-                <figure
-                  className="group flex flex-col items-center gap-3 opacity-85 transition hover:opacity-100"
-                  aria-label={label}
-                  title={label}
-                >
-                  <div className="h-16 w-16 text-[var(--color-gold-500)] transition group-hover:scale-105">
-                    {emblem ?? <div className="h-full w-full rounded-full border border-[var(--rule)]" />}
-                  </div>
-                  <figcaption className="font-mono text-[0.6rem] uppercase tracking-[0.14em] text-[var(--fg-muted)] leading-tight">
-                    {label}
-                  </figcaption>
-                </figure>
-              </li>
-            )
-          })}
-        </ul>
+    <Section tone="deep" bordered spacing="tight" width="wide">
+      <div className="mx-auto mb-10 max-w-2xl text-center">
+        <p className="font-mono text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-[var(--fg-muted)]">
+          {caption}
+        </p>
+        <p className="mt-3 text-sm leading-relaxed text-[var(--fg-muted)]">{subcaption}</p>
       </div>
-    </section>
+
+      <ul className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4 lg:grid-cols-8">
+        {SOURCES.map((s) => {
+          const label = locale === 'vi' ? s.fullVi : s.fullEn
+          const emblem = TRUSTED_SOURCE_EMBLEMS[s.id]
+          return (
+            <li key={s.id} className="flex flex-col items-center text-center">
+              <figure
+                className="group flex flex-col items-center gap-3 opacity-85 transition hover:opacity-100"
+                aria-label={label}
+                title={label}
+              >
+                <div className="h-14 w-14 text-[var(--color-gold-500)] transition group-hover:scale-105">
+                  {emblem ?? <div className="h-full w-full rounded-full border border-[var(--rule)]" />}
+                </div>
+                <figcaption className="font-mono text-[0.6rem] uppercase tracking-[0.14em] leading-tight text-[var(--fg-muted)]">
+                  {label}
+                </figcaption>
+              </figure>
+            </li>
+          )
+        })}
+      </ul>
+    </Section>
   )
 }

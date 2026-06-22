@@ -1,7 +1,7 @@
 {
   "site": {
     "name": "law.org.vn",
-    "tagline": "Vietnam Legal Knowledge Portal"
+    "tagline": "Vietnam legal knowledge base"
   },
   "nav": {
     "home": "Home",
@@ -11,19 +11,18 @@
     "rights": "Rights",
     "terminology": "Terminology",
     "updates": "Legal updates",
-    "blog": "Blog",
+    "blog": "Commentary",
     "faq": "FAQ",
     "about": "About"
   },
   "home": {
-    "heroEyebrow": "Legal knowledge — transparent, systematic",
-    "heroTitle": "Understand Vietnamese Law Accurately",
-    "heroLead": "A bilingual Vietnamese English legal knowledge base, providing a clear and systematic overview of Vietnam's Constitution, courts, litigation procedures and legal system.",
-    "exploreCta": "Explore the encyclopedia",
+    "heroEyebrow": "Bilingual · Systematic · Non-profit",
+    "heroTitle": "Understand Vietnamese law accurately",
+    "heroLead": "Look up Vietnam's Constitution, courts, litigation and citizen rights — written to be understood, not a substitute for legal advice.",
+    "exploreCta": "Browse the knowledge base",
     "categoriesTitle": "Knowledge map",
-    "featuredTitle": "Cornerstone entries",
-    "glossaryCta": "Recent legal updates",
-    "browseCta": "Browse the encyclopedia"
+    "featuredTitle": "Foundational entries",
+    "glossaryCta": "Legal updates"
   },
   "article": {
     "updatedOn": "Updated",
@@ -69,7 +68,7 @@
   },
   "trustedSources": {
     "caption": "Drawn from primary sources",
-    "subcaption": "Every entry traces back to an authoritative state portal."
+    "subcaption": "Compiled from authoritative Vietnamese state portals and institutions."
   },
   "recentUpdates": {
     "eyebrow": "Recent legal instruments",
