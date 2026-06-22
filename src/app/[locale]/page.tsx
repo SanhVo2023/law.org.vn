@@ -10,8 +10,10 @@ import { ClustersGrid, type ClusterEntry } from '@/components/home/ClustersGrid'
 import { FeaturedEntries, type FeaturedEntryItem } from '@/components/home/FeaturedEntries'
 import { TrustedSources } from '@/components/home/TrustedSources'
 import { RecentUpdatesTeaser } from '@/components/home/RecentUpdatesTeaser'
+import { PrincipleBand } from '@/components/home/PrincipleBand'
 import { SectionFadeUp } from '@/components/animation/SectionFadeUp'
 import { Ornament } from '@/components/ui/Ornament'
+import { CLUSTER_HERO, ARTICLE_IMAGE } from '@/lib/images'
 
 type Params = Promise<{ locale: string }>
 
@@ -86,6 +88,7 @@ export default async function HomePage({ params }: { params: Params }) {
   const featured: FeaturedEntryItem[] = featuredResult.docs.map((d: any) => {
     const cat = typeof d.category === 'object' ? d.category?.slug : d.category
     const catKey = (CATEGORIES.find((c) => c.slug === cat)?.nameKey ?? 'legalSystem') as string
+    const img = ARTICLE_IMAGE[d.slug] ?? CLUSTER_HERO[cat]
     return {
       id: d.id,
       slug: d.slug,
@@ -95,16 +98,21 @@ export default async function HomePage({ params }: { params: Params }) {
       clusterLabel: t(`nav.${catKey}`),
       updatedDate: d.updatedDate,
       isDraft: d.status === 'draft',
+      image: img ? { src: img.src, alt: img.alt } : undefined,
     }
   })
   featured.sort((a, b) => FEATURED_SLUGS.indexOf(a.slug) - FEATURED_SLUGS.indexOf(b.slug))
 
-  const clusters: ClusterEntry[] = CATEGORIES.map((c) => ({
-    slug: c.slug,
-    label: t(`nav.${c.nameKey}`),
-    description: CLUSTER_DESCRIPTIONS[c.slug][lng],
-    count: CLUSTER_COUNTS[c.slug] ?? 0,
-  }))
+  const clusters: ClusterEntry[] = CATEGORIES.map((c) => {
+    const img = CLUSTER_HERO[c.slug]
+    return {
+      slug: c.slug,
+      label: t(`nav.${c.nameKey}`),
+      description: CLUSTER_DESCRIPTIONS[c.slug][lng],
+      count: CLUSTER_COUNTS[c.slug] ?? 0,
+      image: img ? { src: img.src, alt: img.alt } : undefined,
+    }
+  })
 
   return (
     <>
@@ -129,34 +137,30 @@ export default async function HomePage({ params }: { params: Params }) {
         ]}
       />
 
-      <SectionFadeUp>
-        <ClustersGrid
-          eyebrow={lng === 'vi' ? 'Khám phá' : 'Explore'}
-          title={t('home.categoriesTitle')}
-          lead={
-            lng === 'vi'
-              ? 'Sáu cụm cốt lõi, sắp xếp từ kiến trúc thượng tầng (Hiến pháp, luật) xuống thực tiễn (FAQ, thuật ngữ).'
-              : 'Six core clusters, ordered from the top-down (Constitution, statutes) to the practical (FAQ, terminology).'
-          }
-          clusters={clusters}
-          entriesLabel={lng === 'vi' ? 'mục' : 'entries'}
-        />
-      </SectionFadeUp>
+      <ClustersGrid
+        eyebrow={lng === 'vi' ? 'Khám phá' : 'Explore'}
+        title={t('home.categoriesTitle')}
+        lead={
+          lng === 'vi'
+            ? 'Sáu cụm cốt lõi, sắp xếp từ kiến trúc thượng tầng (Hiến pháp, luật) xuống thực tiễn (FAQ, thuật ngữ).'
+            : 'Six core clusters, ordered from the top-down (Constitution, statutes) to the practical (FAQ, terminology).'
+        }
+        clusters={clusters}
+        entriesLabel={lng === 'vi' ? 'mục' : 'entries'}
+      />
 
-      <SectionFadeUp>
-        <FeaturedEntries
-          eyebrow={lng === 'vi' ? 'Bắt đầu từ đây' : 'Start here'}
-          title={t('home.featuredTitle')}
-          lead={
-            lng === 'vi'
-              ? 'Ba mục nền tảng nếu bạn mới tiếp cận hệ thống pháp luật Việt Nam.'
-              : "Three foundational entries if you're new to Vietnam's legal system."
-          }
-          entries={featured}
-          locale={locale}
-          emptyMessage={lng === 'vi' ? 'Đang chuẩn bị các mục đề xuất.' : 'Featured entries coming soon.'}
-        />
-      </SectionFadeUp>
+      <FeaturedEntries
+        eyebrow={lng === 'vi' ? 'Bắt đầu từ đây' : 'Start here'}
+        title={t('home.featuredTitle')}
+        lead={
+          lng === 'vi'
+            ? 'Ba mục nền tảng nếu bạn mới tiếp cận hệ thống pháp luật Việt Nam.'
+            : "Three foundational entries if you're new to Vietnam's legal system."
+        }
+        entries={featured}
+        locale={locale}
+        emptyMessage={lng === 'vi' ? 'Đang chuẩn bị các mục đề xuất.' : 'Featured entries coming soon.'}
+      />
 
       <SectionFadeUp>
         <RecentUpdatesTeaser
@@ -173,13 +177,25 @@ export default async function HomePage({ params }: { params: Params }) {
         />
       </SectionFadeUp>
 
-      <SectionFadeUp>
-        <TrustedSources
-          caption={t('trustedSources.caption')}
-          subcaption={t('trustedSources.subcaption')}
-          locale={lng}
-        />
-      </SectionFadeUp>
+      <PrincipleBand
+        eyebrow={lng === 'vi' ? 'Nguyên tắc biên soạn' : 'Editorial principle'}
+        statement={
+          lng === 'vi'
+            ? 'Mọi nội dung đều dựa trên văn bản pháp luật và nguồn chính thức của Nhà nước.'
+            : 'Every entry is grounded in statutory text and official state sources.'
+        }
+        attribution={
+          lng === 'vi'
+            ? 'Mỗi mục được rà soát, dẫn chiếu điều luật và ghi rõ ngày cập nhật — để tra cứu và hiểu, không thay cho tư vấn pháp lý.'
+            : 'Each entry is reviewed, cites the governing provisions, and is dated — for look-up and understanding, not as legal advice.'
+        }
+      />
+
+      <TrustedSources
+        caption={t('trustedSources.caption')}
+        subcaption={t('trustedSources.subcaption')}
+        locale={lng}
+      />
 
       <div className="py-12">
         <Ornament />
