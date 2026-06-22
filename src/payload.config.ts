@@ -174,10 +174,16 @@ export default buildConfig({
     transactionOptions: false,
     pool: {
       connectionString: process.env.DATABASE_URI,
-      // Cap pool per process so Next's parallel build workers + Supabase Session Pooler
-      // (max 15 clients per user) don't deadlock at build time.
+      // max:2 — NOT 1. A single `payload.find(... depth:1 ...)` (e.g. the category
+      // page) issues concurrent relationship sub-queries that need TWO connections at
+      // once; max:1 self-deadlocks ("timeout exceeded when trying to connect"). Two is
+      // the floor. The build's total footprint on the SHARED Supabase Session Pooler
+      // (max 15 clients) is kept small by forcing ONE build worker via
+      // `experimental.cpus:1` in next.config (1 worker × 2 = 2 connections), instead of
+      // Next's default (cores−1) workers × 2 that overran the pool on Vercel.
       max: 2,
-      idleTimeoutMillis: 5000,
+      idleTimeoutMillis: 3000,
+      connectionTimeoutMillis: 15000,
     },
   }),
 

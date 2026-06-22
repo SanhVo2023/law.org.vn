@@ -21,6 +21,20 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Build-time DB-connection budget. Every SSG page (home, 6 categories, about…)
+  // opens a Payload→Postgres connection at build. Vercel build machines have many
+  // cores, so Next's default worker count (= cores − 1) spawns several build
+  // workers, each with its OWN pg pool → connections multiply and blow past the
+  // SHARED Supabase Session Pooler limit (15 clients), especially while the live
+  // site is also using slots: "(EMAXCONNSESSION) max clients reached in session mode".
+  // Force a single build worker generating pages serially, with retries, so the
+  // build holds ≈1 connection regardless of core count.
+  experimental: {
+    cpus: 1,
+    staticGenerationMinPagesPerWorker: 1000,
+    staticGenerationMaxConcurrency: 1,
+    staticGenerationRetryCount: 3,
+  },
 }
 
 export default withNextIntl(withPayload(nextConfig))
