@@ -20,7 +20,6 @@
   font-family: var(--font-heading), Georgia, 'Times New Roman', serif;
   font-weight: 600;
   letter-spacing: -0.015em;
-  color: var(--fg);
 }
 
 .public-site code,
@@ -34,6 +33,16 @@
    bare `.public-site a` selector (specificity 0,1,1) beat `.text-white`
    (0,1,0) and turned every navy <a> button's label navy-on-navy (invisible). */
 @layer base {
+  /* Heading colour lives in @layer base so Tailwind text-* utilities win.
+     The bare `.public-site h1` selector (0,1,1) otherwise beats `.text-white`
+     (0,1,0) and turned the dark-hero H1 navy-on-navy in light mode. */
+  .public-site h1,
+  .public-site h2,
+  .public-site h3,
+  .public-site h4 {
+    color: var(--fg);
+  }
+
   .public-site a {
     color: var(--link);
     text-decoration-thickness: 1px;
