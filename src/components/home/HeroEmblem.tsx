@@ -1,5 +1,4 @@
 import { STAR_PATH, IconScales, IconColumn, IconConstitution, IconGavel } from '@/components/icons/VietnamIcons'
-import { WavingFlag } from './WavingFlag'
 
 /** Point on a circle, 0° = top (12 o'clock). Centre fixed at (110,110). */
 function pt(r: number, deg: number): [number, number] {
@@ -13,20 +12,20 @@ const TICKS = Array.from({ length: 72 }, (_, i) => i * 5)
 /**
  * The hero's iconic visual: a circular Vietnamese legal seal.
  * Rotating gold sunburst + a ticked ring + circular gold text, a flag-red inner
- * disc carrying the iconic gold five-pointed star (pulse + shimmer + glow), and
+ * disc carrying a restrained gold five-pointed star (pulse + shimmer + glow), and
  * gold line-icons of the law (scales, column, Constitution, gavel) floating on an
- * orbit, with a small waving flag. All continuous motion lives in public.css and
- * is disabled under prefers-reduced-motion.
+ * orbit. All continuous motion lives in public.css and is disabled under
+ * prefers-reduced-motion.
  */
 export function HeroEmblem() {
   return (
     <div className="relative mx-auto aspect-square w-full max-w-[300px] sm:max-w-[360px] lg:max-w-[420px]">
       <svg viewBox="0 0 220 220" className="h-full w-full overflow-visible">
         <defs>
-          <radialGradient id="redDisc" cx="42%" cy="38%" r="70%">
-            <stop offset="0" stopColor="#e6342b" />
-            <stop offset="0.6" stopColor="#DA251D" />
-            <stop offset="1" stopColor="#a4140d" />
+          <radialGradient id="redDisc" cx="42%" cy="38%" r="72%">
+            <stop offset="0" stopColor="#d22f26" />
+            <stop offset="0.6" stopColor="#b21f18" />
+            <stop offset="1" stopColor="#8a140d" />
           </radialGradient>
           <linearGradient id="shimmer" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0" stopColor="#fff" stopOpacity="0" />
@@ -87,15 +86,15 @@ export function HeroEmblem() {
           opacity="0.5"
         />
 
-        {/* red disc + gold rim */}
+        {/* deep crimson disc + restrained gold rim (low-key, reads as the seal core not a flag) */}
         <circle cx="110" cy="110" r="58" fill="url(#redDisc)" />
-        <circle cx="110" cy="110" r="58" fill="none" stroke="#FFCD00" strokeWidth="1.6" opacity="0.85" />
-        <circle cx="110" cy="110" r="53" fill="none" stroke="#fff" strokeWidth="0.6" opacity="0.18" />
+        <circle cx="110" cy="110" r="58" fill="none" stroke="#d4a43c" strokeWidth="1" opacity="0.5" />
+        <circle cx="110" cy="110" r="53" fill="none" stroke="#fff" strokeWidth="0.5" opacity="0.08" />
 
-        {/* gold star: glow + body + shimmer sweep */}
-        <g transform="translate(110,110) scale(0.94) translate(-50,-50)">
-          <path className="seal-glow" d={STAR_PATH} fill="#FFCD00" filter="url(#softGlow)" />
-          <path className="seal-star" d={STAR_PATH} fill="#FFCD00" />
+        {/* gold star: smaller (low-key) but clean gold, soft glow + gentle shimmer */}
+        <g transform="translate(110,110) scale(0.7) translate(-50,-50)">
+          <path className="seal-glow" d={STAR_PATH} fill="#FFCD00" filter="url(#softGlow)" opacity="0.75" />
+          <path className="seal-star" d={STAR_PATH} fill="#F2C231" />
           <clipPath id="starClip">
             <path d={STAR_PATH} />
           </clipPath>
@@ -118,9 +117,6 @@ export function HeroEmblem() {
       <span className="float-d absolute left-[-5%] top-[26%] flex h-12 w-12 items-center justify-center rounded-full border border-[var(--color-gold-500)]/45 bg-[var(--color-navy-800)]/85 p-2.5 text-[var(--color-gold-400)] shadow-lg backdrop-blur">
         <IconGavel />
       </span>
-
-      {/* Waving flag, lower-left of the scene */}
-      <WavingFlag className="absolute bottom-[2%] left-[-6%] w-16 sm:w-20" />
     </div>
   )
 }
